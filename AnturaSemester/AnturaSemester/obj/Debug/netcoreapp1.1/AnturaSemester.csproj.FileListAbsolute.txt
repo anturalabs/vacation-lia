@@ -1,0 +1,9 @@
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.deps.json
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.runtimeconfig.json
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.runtimeconfig.dev.json
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.dll
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.pdb
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.csprojResolveAssemblyReference.cache
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.AssemblyInfo.cs
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.dll
+c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.pdb
