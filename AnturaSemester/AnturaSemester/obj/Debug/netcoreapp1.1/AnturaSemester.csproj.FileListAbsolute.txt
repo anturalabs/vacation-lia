@@ -7,3 +7,12 @@ c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemest
 c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.AssemblyInfo.cs
 c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.dll
 c:\users\sofie\documents\visual studio 2017\Projects\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.pdb
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.deps.json
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.runtimeconfig.json
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.runtimeconfig.dev.json
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.dll
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.pdb
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.csprojResolveAssemblyReference.cache
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.AssemblyInfo.cs
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.dll
+C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.pdb

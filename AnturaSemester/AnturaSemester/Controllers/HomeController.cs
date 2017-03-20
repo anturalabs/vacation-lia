@@ -14,7 +14,7 @@ namespace AnturaSemester.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Users()
         {
             ViewData["Message"] = "Your application description page.";
 
