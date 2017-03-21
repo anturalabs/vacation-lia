@@ -2,22 +2,6 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "jQuery/1.11.3": {
-        "type": "package"
-      },
-      "jQuery.Fullcalendar/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "jQuery": "1.11.3",
-          "jQuery.UI.Combined": "(, )"
-        }
-      },
-      "jQuery.UI.Combined/1.8.9": {
-        "type": "package",
-        "dependencies": {
-          "jQuery": "[1.4.4, 1.6.0)"
-        }
-      },
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -4169,140 +4153,6 @@
     }
   },
   "libraries": {
-    "jQuery/1.11.3": {
-      "sha512": "ymvj+/1xi/6zWPhJxZOPoPTunO6/ONr34BzLdwIR4Wjkfz2lmtmVRt/Nqnw7hp+u4JiF/gF0Hwi8al2tNaIrrg==",
-      "type": "package",
-      "path": "jquery/1.11.3",
-      "files": [
-        "Content/Scripts/jquery-1.11.3-vsdoc.js",
-        "Content/Scripts/jquery-1.11.3.js",
-        "Content/Scripts/jquery-1.11.3.min.js",
-        "Content/Scripts/jquery-1.11.3.min.map",
-        "Tools/common.ps1",
-        "Tools/install.ps1",
-        "Tools/jquery-1.11.3.intellisense.js",
-        "Tools/uninstall.ps1",
-        "jquery.1.11.3.nupkg.sha512",
-        "jquery.nuspec"
-      ]
-    },
-    "jQuery.Fullcalendar/3.0.0": {
-      "sha512": "sc63zZfJdmY9K1RwQd2mRmmJvJX1mKFHvfdtMeOIctim+txapK8Zqu9CMoChXqdal4HB8cPo6bXbZ8B0YRoLCA==",
-      "type": "package",
-      "path": "jquery.fullcalendar/3.0.0",
-      "files": [
-        "content/Content/fullcalendar.css",
-        "content/Content/fullcalendar.min.css",
-        "content/Content/fullcalendar.print.css",
-        "content/Scripts/fullcalendar.js",
-        "content/Scripts/fullcalendar.min.js",
-        "content/Scripts/gcal.js",
-        "content/Scripts/lib/cupertino/images/ui-bg_diagonals-thick_90_eeeeee_40x40.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_glass_100_e4f1fb_1x400.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_glass_50_3baae3_1x400.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_glass_80_d7ebf9_1x400.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_highlight-hard_70_000000_1x100.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_highlight-soft_100_deedf7_1x100.png",
-        "content/Scripts/lib/cupertino/images/ui-bg_highlight-soft_25_ffef8f_1x100.png",
-        "content/Scripts/lib/cupertino/images/ui-icons_2694e8_256x240.png",
-        "content/Scripts/lib/cupertino/images/ui-icons_2e83ff_256x240.png",
-        "content/Scripts/lib/cupertino/images/ui-icons_3d80b3_256x240.png",
-        "content/Scripts/lib/cupertino/images/ui-icons_72a7cf_256x240.png",
-        "content/Scripts/lib/cupertino/images/ui-icons_ffffff_256x240.png",
-        "content/Scripts/lib/cupertino/jquery-ui.min.css",
-        "content/Scripts/lib/jquery-ui.min.js",
-        "content/Scripts/lib/jquery.min.js",
-        "content/Scripts/lib/moment.min.js",
-        "content/Scripts/locale-all.js",
-        "content/Scripts/locale/ar-ma.js",
-        "content/Scripts/locale/ar-sa.js",
-        "content/Scripts/locale/ar-tn.js",
-        "content/Scripts/locale/ar.js",
-        "content/Scripts/locale/bg.js",
-        "content/Scripts/locale/ca.js",
-        "content/Scripts/locale/cs.js",
-        "content/Scripts/locale/da.js",
-        "content/Scripts/locale/de-at.js",
-        "content/Scripts/locale/de.js",
-        "content/Scripts/locale/el.js",
-        "content/Scripts/locale/en-au.js",
-        "content/Scripts/locale/en-ca.js",
-        "content/Scripts/locale/en-gb.js",
-        "content/Scripts/locale/en-ie.js",
-        "content/Scripts/locale/en-nz.js",
-        "content/Scripts/locale/es-do.js",
-        "content/Scripts/locale/es.js",
-        "content/Scripts/locale/eu.js",
-        "content/Scripts/locale/fa.js",
-        "content/Scripts/locale/fi.js",
-        "content/Scripts/locale/fr-ca.js",
-        "content/Scripts/locale/fr-ch.js",
-        "content/Scripts/locale/fr.js",
-        "content/Scripts/locale/gl.js",
-        "content/Scripts/locale/he.js",
-        "content/Scripts/locale/hi.js",
-        "content/Scripts/locale/hr.js",
-        "content/Scripts/locale/hu.js",
-        "content/Scripts/locale/id.js",
-        "content/Scripts/locale/is.js",
-        "content/Scripts/locale/it.js",
-        "content/Scripts/locale/ja.js",
-        "content/Scripts/locale/ko.js",
-        "content/Scripts/locale/lb.js",
-        "content/Scripts/locale/lt.js",
-        "content/Scripts/locale/lv.js",
-        "content/Scripts/locale/mk.js",
-        "content/Scripts/locale/ms-my.js",
-        "content/Scripts/locale/ms.js",
-        "content/Scripts/locale/nb.js",
-        "content/Scripts/locale/nl.js",
-        "content/Scripts/locale/nn.js",
-        "content/Scripts/locale/pl.js",
-        "content/Scripts/locale/pt-br.js",
-        "content/Scripts/locale/pt.js",
-        "content/Scripts/locale/ro.js",
-        "content/Scripts/locale/ru.js",
-        "content/Scripts/locale/sk.js",
-        "content/Scripts/locale/sl.js",
-        "content/Scripts/locale/sr-cyrl.js",
-        "content/Scripts/locale/sr.js",
-        "content/Scripts/locale/sv.js",
-        "content/Scripts/locale/th.js",
-        "content/Scripts/locale/tr.js",
-        "content/Scripts/locale/uk.js",
-        "content/Scripts/locale/vi.js",
-        "content/Scripts/locale/zh-cn.js",
-        "content/Scripts/locale/zh-tw.js",
-        "jquery.fullcalendar.3.0.0.nupkg.sha512",
-        "jquery.fullcalendar.nuspec"
-      ]
-    },
-    "jQuery.UI.Combined/1.8.9": {
-      "sha512": "QfO5AYjtOGoL3B5NOeXqAz3iaylURncIfNUn1YSMzDdStw3o173rYIJ26nchnYF7sznDOmeTOr2Ll8+Op3e2MQ==",
-      "type": "package",
-      "path": "jquery.ui.combined/1.8.9",
-      "files": [
-        "Content/Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png",
-        "Content/Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png",
-        "Content/Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png",
-        "Content/Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png",
-        "Content/Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png",
-        "Content/Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png",
-        "Content/Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png",
-        "Content/Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png",
-        "Content/Content/themes/base/images/ui-icons_222222_256x240.png",
-        "Content/Content/themes/base/images/ui-icons_2e83ff_256x240.png",
-        "Content/Content/themes/base/images/ui-icons_454545_256x240.png",
-        "Content/Content/themes/base/images/ui-icons_888888_256x240.png",
-        "Content/Content/themes/base/images/ui-icons_cd0a0a_256x240.png",
-        "Content/Content/themes/base/jquery-ui.css",
-        "Content/Scripts/jquery-ui-1.8.9.js",
-        "Content/Scripts/jquery-ui-1.8.9.min.js",
-        "jquery.ui.combined.1.8.9.nupkg.sha512",
-        "jquery.ui.combined.nuspec"
-      ]
-    },
     "Libuv/1.9.1": {
       "sha512": "uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA==",
       "type": "package",
@@ -10956,8 +10806,7 @@
       "Microsoft.NETCore.App >= 1.1.1",
       "Microsoft.VisualStudio.Web.BrowserLink >= 1.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 1.1.0",
-      "Moment.js >= 2.18.0",
-      "jQuery.Fullcalendar >= 3.0.0"
+      "Moment.js >= 2.18.0"
     ]
   },
   "packageFolders": {
@@ -11002,10 +10851,6 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
             "version": "1.1.1"
-          },
-          "jQuery.Fullcalendar": {
-            "target": "Package",
-            "version": "3.0.0"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",

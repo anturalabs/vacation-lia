@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "4b648a52be92652984b540ffb7ab06b25738cddf"
+    "signature": "2e25a362af32411f0199d669383fc8f823203951"
   },
   "compilationOptions": {
     "defines": [
@@ -35,26 +35,13 @@
           "Microsoft.NETCore.App": "1.1.1",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.0",
-          "Moment.js": "2.18.0",
-          "jQuery.Fullcalendar": "3.0.0"
+          "Moment.js": "2.18.0"
         },
         "runtime": {
           "AnturaSemester.dll": {}
         },
         "compile": {
           "AnturaSemester.dll": {}
-        }
-      },
-      "jquery/1.11.3": {},
-      "jquery.fullcalendar/3.0.0": {
-        "dependencies": {
-          "jQuery": "1.11.3",
-          "jQuery.UI.Combined": "1.8.9"
-        }
-      },
-      "jquery.ui.combined/1.8.9": {
-        "dependencies": {
-          "jQuery": "1.11.3"
         }
       },
       "microsoft.applicationinsights/2.2.0": {
@@ -3468,27 +3455,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "jquery/1.11.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ymvj+/1xi/6zWPhJxZOPoPTunO6/ONr34BzLdwIR4Wjkfz2lmtmVRt/Nqnw7hp+u4JiF/gF0Hwi8al2tNaIrrg==",
-      "path": "jquery/1.11.3",
-      "hashPath": "jquery.1.11.3.nupkg.sha512"
-    },
-    "jquery.fullcalendar/3.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-sc63zZfJdmY9K1RwQd2mRmmJvJX1mKFHvfdtMeOIctim+txapK8Zqu9CMoChXqdal4HB8cPo6bXbZ8B0YRoLCA==",
-      "path": "jquery.fullcalendar/3.0.0",
-      "hashPath": "jquery.fullcalendar.3.0.0.nupkg.sha512"
-    },
-    "jquery.ui.combined/1.8.9": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-QfO5AYjtOGoL3B5NOeXqAz3iaylURncIfNUn1YSMzDdStw3o173rYIJ26nchnYF7sznDOmeTOr2Ll8+Op3e2MQ==",
-      "path": "jquery.ui.combined/1.8.9",
-      "hashPath": "jquery.ui.combined.1.8.9.nupkg.sha512"
     },
     "microsoft.applicationinsights/2.2.0": {
       "type": "package",
