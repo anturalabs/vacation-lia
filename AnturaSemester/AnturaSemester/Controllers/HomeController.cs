@@ -33,10 +33,7 @@ namespace AnturaSemester.Controllers
             return View();
         }
 
-        public IActionResult Calendar()
-        {
-            return View();
-        }
+       
 
         public IActionResult Error()
         {
