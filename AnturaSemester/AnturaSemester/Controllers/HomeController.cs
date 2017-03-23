@@ -9,17 +9,38 @@ namespace AnturaSemester.Controllers
 {
     public class HomeController : Controller
     {
-        
-            [HttpGet]
-            public ActionResult Index()
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            //today
+            DateTime Today = DateTime.Today;
+
+
+            //days this month
+            int days = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+
+            //creates List for days in the current month
+            List<int> Darray = new List<int>();
+            int i = 0;
+            while (i < days)
             {
-                return View();
+                i++;
+                Darray.Add(i);
             }
 
-           
-        
-    
-    public IActionResult Users()
+            ViewBag.Column = Darray;
+
+            //test message remove later
+            ViewBag.Message = (days) + " days this month. I am a ViewBag practice message.";
+
+            return View(i);
+        }
+
+
+
+
+        public IActionResult Users()
         {
             ViewData["Message"] = "Your application description page.";
 
@@ -33,14 +54,14 @@ namespace AnturaSemester.Controllers
             return View();
         }
 
-       
+
 
         public IActionResult Error()
         {
             return View();
         }
-        
 
-       
+
+
     }
 }

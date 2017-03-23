@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -17,7 +19,7 @@
             </a>
         </li>
         <li><a href="#">MARS 2017</a></li>
-      
+
         <li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -27,17 +29,39 @@
         <li><a href="#">2</a></li>
         <li><a href="#">3</a></li>
         <li><a href="#">4</a></li>
-        <li><a href="#">Placeholder dagar</a></li>
-        
-    </ul>
-   
+        <li><a href="#">meep</a></li>
 
+    </ul>
 </nav>
 
 
 
+@{
+    for (int x = 0; x < ViewBag.Column.Count; x++)
+    {
+        @ViewBag.Column[x];
+    }
+
+    <table class="table">
+        <tbody>
+            <tr>
+                @foreach (int x in ViewBag.Column)
+                {
+                    <td>@x</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+
+}
+
+@ViewBag.Message
 
 
-  
-    
+
+
+
+
+
+
 
