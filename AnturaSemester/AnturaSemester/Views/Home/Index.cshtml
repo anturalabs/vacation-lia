@@ -6,17 +6,31 @@
 
 
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">A-Team</a></li>
-    <li role="presentation"><a href="#">PD</a></li>
-    <li role="presentation"><a href="#">Poäng</a></li>
+    <li role="presentation" class="active"><a class="navbar-link active" data-toggle="tab" href="#home">A-Team</a></li>
+    <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu1">PD</a></li>
+    <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu2">Poäng</a></li>
 </ul>
 
-@await Component.InvokeAsync("Calendar")
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <h3>A-Team</h3>
+        @await Component.InvokeAsync("Calendar")
+    </div>
+    <div id="menu1" class="tab-pane fade in">
+        <h3>Product Development</h3>
+        <p>drvfgtsbhy</p>
+    </div>
+    <div id="menu2" class="tab-pane fade in">
+        <h3>Poäng</h3>
+        <p>hfghyngnj</p>
+    </div>
+</div>
 
 
 
 
-@ViewBag.Message
+
+
 
 
 
