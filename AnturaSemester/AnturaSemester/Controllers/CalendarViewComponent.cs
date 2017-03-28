@@ -1,14 +1,11 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AnturaSemester.Controllers
 {
     public class CalendarViewComponent : ViewComponent
     {
-
 
         public IViewComponentResult Invoke()
         {
@@ -32,13 +29,55 @@ namespace AnturaSemester.Controllers
                 ViewBag.Column = Darray;
 
                 //test message remove later
-                ViewBag.Message = (days) + " days this month. I am a ViewBag practice message.";
+                /*ViewBag.Message = (days) + " days this month. I am a ViewBag practice message.";*/
+
+                InitMonths();
+                IncrMonth();
+
 
                 return View(i);
+            }
+        }
 
-                //GetDays()
-                //CurrentMonth
+        //GetDays()
+
+
+        public IViewComponentResult Months;
+
+        public void InitMonths()
+        {
+            List<DateTime> dateTimeMonths = new List<DateTime>
+                    {
+                        new DateTime(),
+                    };
+
+            DateTime currentDate = DateTime.Now;
+            int currentMonth = currentDate.Month;
+
+
+            {
+                ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
+
+            }
+
+        }
+
+        public IViewComponentResult AddMonth;
+        public void IncrMonth()
+        {
+            List<DateTime> timeMonths = new List<DateTime>
+            {
+                        new DateTime(),
+                    };
+
+            {
+                ViewBag.timeMonths = System.DateTime.Now.AddMonths(+1).ToString("MMMM yyyy");
+
+
             }
         }
     }
 }
+
+
+/* return date.AddDays(1).AddMonths(1).AddDays(-1);*/
