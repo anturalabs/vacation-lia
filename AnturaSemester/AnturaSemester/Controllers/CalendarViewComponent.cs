@@ -1,15 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using AnturaSemester.Data;
 
 namespace AnturaSemester.Controllers
 {
     public class CalendarViewComponent : ViewComponent
     {
+        private readonly UsersContext _context;
 
+        public CalendarViewComponent(UsersContext context)
+        {
+            _context = context;
+        }
         public IViewComponentResult Invoke()
         {
             {
+                var users = _context.Users;
+                ViewBag.caltest = users;
                 //today
                 DateTime Today = DateTime.Today;
 
