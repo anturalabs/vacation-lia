@@ -44,7 +44,7 @@ namespace AnturaSemester.Controllers
                     users = users.OrderByDescending(s => s.UsersRole);
                     break;
                 case "Department":
-                    users = users.OrderByDescending(s => s.UsersDepartment);
+                   // users = users.OrderByDescending(s => s.UsersDepartment);
                     break;
                 default:
                     users = users.OrderBy(s => s.LastName);
@@ -67,7 +67,8 @@ namespace AnturaSemester.Controllers
 
             var users = await _context.Users
                 .Include(r => r.UsersRole)
-                .Include(d => d.UsersDepartment)
+                 .ThenInclude(e => e.Role)
+                // .Include(d => d.UsersDepartment)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
 
@@ -145,7 +146,7 @@ namespace AnturaSemester.Controllers
             if (await TryUpdateModelAsync<Users>(
                 userToUpdate,
                 "",
-                s => s.FirstName, s => s.LastName, s => s.UsersRole, s => s.UsersDepartment))
+                s => s.FirstName, s => s.LastName, s => s.UsersRole)) //, s => s.UsersDepartment
             {
                 try
                 {

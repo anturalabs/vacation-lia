@@ -35,33 +35,46 @@ namespace AnturaSemester.Data
             {
                 context.Users.Add(s);
             }
-            context.SaveChanges();
-
-            
+            context.SaveChanges();                  
 
             var roles = new Roles[]
             {
-            new Roles{UserID=1,UserRole=Roles.Role.Developer},
-            new Roles{ID=1,UserRole=Roles.Role.ProjectManager},
-            new Roles{ID=2,UserRole=Roles.Role.Tester },
-            new Roles{ID=3,UserRole=Roles.Role.Tester },
-            new Roles{ID=4,UserRole=Roles.Role.Admin },
-            new Roles{ID=5,UserRole=Roles.Role.Developer },
-            new Roles{ID=6,UserRole=Roles.Role.Developer },
-            new Roles{ID=7,UserRole=Roles.Role.Admin },
-            new Roles{ID=7,UserRole=Roles.Role.Tester },
-            new Roles{ID=7,UserRole=Roles.Role.Developer },
-            new Roles{ID=8,UserRole=Roles.Role.Developer},
-            new Roles{ID=9,UserRole=Roles.Role.Developer},
-            new Roles{ID=10,UserRole=Roles.Role.Developer},
-            new Roles{ID=10,UserRole=Roles.Role.Tester },
+            new Roles{RoleName="Developer" },
+            new Roles{RoleName="ProjectManager"},
+            new Roles{RoleName="Tester" },           
+            new Roles{RoleName="Admin" },          
             };
             foreach (Roles r in roles)
             {
-                context.UserRole.Add(r);
+                context.Roles.Add(r);
             }
             context.SaveChanges();
 
+            var userRoles = new UserRoles[]
+         {
+            new UserRoles{RolesID=1,UsersID=1},
+            new UserRoles{RolesID=2,UsersID=2},
+            new UserRoles{RolesID=4,UsersID=3},
+            new UserRoles{RolesID=3,UsersID=3},
+         };
+            foreach (UserRoles ur in userRoles)
+            {
+                var userRolesInDataBase = context.UserRole.Where(
+                    s =>
+                            s.User.ID == ur.UsersID &&
+                            s.Role.ID == ur.RolesID).SingleOrDefault();
+                if (userRolesInDataBase == null)
+                {
+                    context.UserRole.Add(ur);
+                }
+            }
+            /*
+            foreach (UserRoles r in userRoles)
+            {
+                context.UserRole.Add(r);
+            }*/
+            context.SaveChanges();
+            /*
             var team = new Team[]
             {
             new Team{ID=1,UsersTeams=Team.TeamEnum.ATeam},
@@ -84,7 +97,7 @@ namespace AnturaSemester.Data
                 context.UsersTeam.Add(t);
             }
             context.SaveChanges();
-
+            */
             var department = new Department[]
            {
             new Department{UserID=1,UserDepartment=Department.Departments.Consulting},

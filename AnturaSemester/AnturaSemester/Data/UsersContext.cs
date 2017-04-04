@@ -12,8 +12,9 @@ namespace AnturaSemester.Data
         public UsersContext(DbContextOptions<UsersContext> options) : base(options)
         {
         }
-        
-        public DbSet<Roles> UserRole { get; set; }
+
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<UserRoles> UserRole { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<Team> UsersTeam { get; set; }
@@ -25,6 +26,9 @@ namespace AnturaSemester.Data
             modelBuilder.Entity<UserRoles>().ToTable("UserRoles");
             modelBuilder.Entity<Department>().ToTable("Department");
             modelBuilder.Entity<Team>().ToTable("Team");
+
+            modelBuilder.Entity<UserRoles>()
+              .HasKey(c => new { c.UsersID, c.RolesID });
         }
     }
 }

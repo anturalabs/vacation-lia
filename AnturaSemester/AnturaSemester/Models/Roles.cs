@@ -13,16 +13,16 @@ namespace AnturaSemester.Models
 
     {
         [Key]
-        public int RoleID { get; set; }
-        public Role? UserRole { get; set; }
+        public int ID { get; set; }
+        public string RoleName { get; set; }
         //public ICollection<Roles> UsersRole { get; set; }
-        public enum Role { Tester, Admin, Developer, ProjectManager };
+      //  public enum Role { Tester = "Tester", Admin, Developer, ProjectManager };
         
        // public int UserID { get; set; }
        // [ForeignKey("UserID")]
        // public Users Users { get; set; }
 
-        public ICollection<UserRoles> UserRoles { get; set; }
+        public ICollection<UserRoles> UsersRoles { get; set; }
 
     }
     

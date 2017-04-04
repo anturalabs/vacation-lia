@@ -8,7 +8,7 @@ namespace AnturaSemester.Models
     public class Users
     {
         [Key]
-        public int UserID { get; set; }
+        public int ID { get; set; }
 
 
         [Required]

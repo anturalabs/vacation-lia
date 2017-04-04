@@ -27,26 +27,20 @@
         <dt>
             @Html.DisplayNameFor(model => model.UsersRole)
         </dt>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Role</th>
+            @foreach (var item in Model.UsersRole)
+            {
 
-                </tr>
-                @foreach (var item in Model.UsersRole)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserRole)
-                        </td>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                        </dd>
 
-                    </tr>
+                   
                 }
-            </table>
-        </dd>
-
+      
+        
+        <!--
         <dt>
-            @Html.DisplayNameFor(model => model.UsersDepartment)
+            Html.DisplayNameFor(model => model.UsersDepartment)
         </dt>
         <dd>
             <table class="table">
@@ -54,18 +48,18 @@
                     <th>Department</th>
 
                 </tr>
-                @foreach (var item in Model.UsersDepartment)
+                foreach (var item in Model.UsersDepartment)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Users.UsersDepartment)
+                            Html.DisplayFor(modelItem => item.Users.UsersDepartment)
                         </td>
 
                     </tr>
                 }
             </table>
         </dd>
-
+-->
     </dl>
 </div>
 <div>

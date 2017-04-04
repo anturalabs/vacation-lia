@@ -16,19 +16,43 @@ namespace AnturaSemester.Controllers
 
         public RolesController(UsersContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
-        // GET: Roles
-        public async Task<IActionResult> Index()
+
+
+        // GET: Users
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            int? page)
         {
-            var usersContext = _context.UserRole
-                .Include(r => r.Users);
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["RoleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Role" : "";
+            ViewData["DepartmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Department" : "";
 
-            return View(await usersContext.ToListAsync());
+
+
+            var roles = from s in _context.Roles
+                        select s;
+            switch (sortOrder)
+            {               
+                case "Role":
+                    roles = roles.OrderByDescending(s => s.RoleName);
+                    break;
+               
+                default:
+                    roles = roles.OrderBy(s => s.RoleName);
+                    break;
+            }
+            int pageSize = 9;
+            return View(await PaginatedList<Roles>.CreateAsync(roles.AsNoTracking(), page ?? 1, pageSize));
+
         }
 
-        // GET: Roles/Details/5
+
+
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,42 +60,56 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var roles = await _context.UserRole
-                .Include(r => r.Users)
+            var users = await _context.Users
+                .Include(r => r.UsersRole)
+                 .ThenInclude(e => e.Role)
+                // .Include(d => d.UsersDepartment)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (roles == null)
+
+
+
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(roles);
+            return View(users);
         }
 
-        // GET: Roles/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "FirstName");
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserRole,UserID")] Roles roles)
+        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department")] Users users)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(roles);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _context.Add(users);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
             }
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "FirstName", roles.UserID);
-            return View(roles);
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+            }
+            return View(users);
         }
 
-        // GET: Roles/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,84 +117,111 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var roles = await _context.UserRole.SingleOrDefaultAsync(m => m.ID == id);
-            if (roles == null)
+            var users = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
+            if (users == null)
             {
                 return NotFound();
             }
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "FirstName", roles.UserID);
-            return View(roles);
+            return View(users);
         }
 
-        // POST: Roles/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserRole,UserID")] Roles roles)
-        {
-            if (id != roles.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(roles);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RolesExists(roles.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "FirstName", roles.UserID);
-            return View(roles);
-        }
-
-        // GET: Roles/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> EditPost(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.UserRole
-                .Include(r => r.Users)
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (roles == null)
+            var userToUpdate = await _context.Users.SingleOrDefaultAsync(s => s.ID == id);
+            if (await TryUpdateModelAsync<Users>(
+                userToUpdate,
+                "",
+                s => s.FirstName, s => s.LastName, s => s.UsersRole)) //, s => s.UsersDepartment
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
+            }
+            return View(userToUpdate);
+        }
+
+
+
+
+
+
+
+        // GET: Users/Delete/5
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(roles);
+            var users = await _context.Users
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
+            }
+
+            return View(users);
         }
 
-        // POST: Roles/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var roles = await _context.UserRole.SingleOrDefaultAsync(m => m.ID == id);
-            _context.UserRole.Remove(roles);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            var users = await _context.Users
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (users == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                _context.Users.Remove(users);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
         }
 
-        private bool RolesExists(int id)
+
+
+        private bool UsersExists(int id)
         {
-            return _context.UserRole.Any(e => e.ID == id);
+            return _context.Users.Any(e => e.ID == id);
         }
     }
 }

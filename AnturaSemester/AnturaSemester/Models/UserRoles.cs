@@ -7,10 +7,10 @@ namespace AnturaSemester.Models
 {
     public class UserRoles
     {
-        public int UserRoleID { get; set; }
-        public int RoleID { get; set; }
-        public int UserID { get; set; }
-       
+        public int UserRolesID { get; set; }
+        public int UsersID { get; set; }
+        public int RolesID { get; set; }
+
         public Users User { get; set; }
         public Roles Role { get; set; }
 

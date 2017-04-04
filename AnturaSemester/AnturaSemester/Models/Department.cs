@@ -9,13 +9,14 @@ namespace AnturaSemester.Models
 {
     public class Department
     {
-        [Key]
-        //public int ID { get; set; }
+        public int ID { get; set; }
         public int UserID { get; set; }
-        public Users Users { get; set; }
-                
-        public Departments? UserDepartment { get; set; }    
-        
+        //public Users Users { get; set; }
+
+        public Departments? UserDepartment { get; set; }
+
+        public ICollection<Users> Users { get; set; }
+
         public enum Departments { ProductDevelopment, Marketing, Consulting };
         
     }
