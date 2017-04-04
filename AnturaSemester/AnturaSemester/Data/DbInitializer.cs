@@ -41,26 +41,71 @@ namespace AnturaSemester.Data
 
             var roles = new Roles[]
             {
-            new Roles{UserID=1,UserRole=Roles.Role.Programmer},
-            new Roles{UserID=1,UserRole=Roles.Role.ProjectManager},
-            new Roles{UserID=2,UserRole=Roles.Role.Tester },
-            new Roles{UserID=3,UserRole=Roles.Role.Tester },
-            new Roles{UserID=4,UserRole=Roles.Role.Admin },
-            new Roles{UserID=5,UserRole=Roles.Role.Programmer },
-            new Roles{UserID=6,UserRole=Roles.Role.Programmer },
-            new Roles{UserID=7,UserRole=Roles.Role.Admin },
-            new Roles{UserID=7,UserRole=Roles.Role.Tester },
-            new Roles{UserID=7,UserRole=Roles.Role.Admin },
-            new Roles{UserID=8,UserRole=Roles.Role.Programmer},
-            new Roles{UserID=9,UserRole=Roles.Role.Programmer},
-            new Roles{UserID=10,UserRole=Roles.Role.Programmer},
-            new Roles{UserID=10,UserRole=Roles.Role.Tester },
+            new Roles{UserID=1,UserRole=Roles.Role.Developer},
+            new Roles{ID=1,UserRole=Roles.Role.ProjectManager},
+            new Roles{ID=2,UserRole=Roles.Role.Tester },
+            new Roles{ID=3,UserRole=Roles.Role.Tester },
+            new Roles{ID=4,UserRole=Roles.Role.Admin },
+            new Roles{ID=5,UserRole=Roles.Role.Developer },
+            new Roles{ID=6,UserRole=Roles.Role.Developer },
+            new Roles{ID=7,UserRole=Roles.Role.Admin },
+            new Roles{ID=7,UserRole=Roles.Role.Tester },
+            new Roles{ID=7,UserRole=Roles.Role.Developer },
+            new Roles{ID=8,UserRole=Roles.Role.Developer},
+            new Roles{ID=9,UserRole=Roles.Role.Developer},
+            new Roles{ID=10,UserRole=Roles.Role.Developer},
+            new Roles{ID=10,UserRole=Roles.Role.Tester },
             };
             foreach (Roles r in roles)
             {
                 context.UserRole.Add(r);
             }
             context.SaveChanges();
+
+            var team = new Team[]
+            {
+            new Team{ID=1,UsersTeams=Team.TeamEnum.ATeam},
+            new Team{ID=1,UsersTeams=Team.TeamEnum.GoldTeam},
+            new Team{ID=2,UsersTeams=Team.TeamEnum.Wombats},
+            new Team{ID=3,UsersTeams=Team.TeamEnum.ATeam},
+            new Team{ID=4,UsersTeams=Team.TeamEnum.GoldTeam},
+            new Team{ID=5,UsersTeams=Team.TeamEnum.Wombats},
+            new Team{ID=6,UsersTeams=Team.TeamEnum.ATeam},
+            new Team{ID=7,UsersTeams=Team.TeamEnum.GoldTeam},
+            new Team{ID=7,UsersTeams=Team.TeamEnum.Wombats},
+            new Team{ID=7,UsersTeams=Team.TeamEnum.ATeam},
+            new Team{ID=8,UsersTeams=Team.TeamEnum.ATeam},
+            new Team{ID=9,UsersTeams=Team.TeamEnum.ATeam},
+            new Team{ID=10,UsersTeams=Team.TeamEnum.Wombats},
+            new Team{ID=10,UsersTeams=Team.TeamEnum.GoldTeam},
+            };
+            foreach (Team t in team)
+            {
+                context.UsersTeam.Add(t);
+            }
+            context.SaveChanges();
+
+            var department = new Department[]
+           {
+            new Department{UserID=1,UserDepartment=Department.Departments.Consulting},
+            new Department{UserID=2,UserDepartment=Department.Departments.ProductDevelopment },
+            new Department{UserID=3,UserDepartment=Department.Departments.Marketing },
+            new Department{UserID=4,UserDepartment=Department.Departments.Marketing },
+            new Department{UserID=5,UserDepartment=Department.Departments.ProductDevelopment },
+            new Department{UserID=6,UserDepartment=Department.Departments.Marketing },
+            new Department{UserID=7,UserDepartment=Department.Departments.ProductDevelopment },
+            new Department{UserID=8,UserDepartment=Department.Departments.Consulting},
+            new Department{UserID=9,UserDepartment=Department.Departments.Consulting},
+            new Department{UserID=10,UserDepartment=Department.Departments.Consulting},
+            
+           };
+            foreach (Department d in department)
+            {
+                context.Department.Add(d);
+            }
+            context.SaveChanges();
+
+
         }
 }
 

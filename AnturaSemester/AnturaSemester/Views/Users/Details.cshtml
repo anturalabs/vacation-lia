@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-   
+
 }
 
 <h2>Details</h2>
@@ -23,6 +23,49 @@
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersRole)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Role</th>
+
+                </tr>
+                @foreach (var item in Model.UsersRole)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserRole)
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersDepartment)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Department</th>
+
+                </tr>
+                @foreach (var item in Model.UsersDepartment)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Users.UsersDepartment)
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </dd>
+
     </dl>
 </div>
 <div>

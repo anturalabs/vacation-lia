@@ -1,31 +1,28 @@
-@model AnturaSemester.Models.Users
+@model AnturaSemester.Models.Roles
 
 @{
     ViewData["Title"] = "Delete";
-    
 }
 
-
 <h2>Delete</h2>
-<p class="text-danger">@ViewData["ErrorMessage"]</p>
-<h3>Are you sure you want to delete this?</h3>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Users</h4>
+    <h4>Roles</h4>
     <hr />
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="ID" />
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.UserRole)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.UserRole)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Users)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.Users.FirstName)
         </dd>
     </dl>
     
@@ -33,7 +30,6 @@
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             <a asp-action="Index">Back to List</a>
-
         </div>
     </form>
 </div>

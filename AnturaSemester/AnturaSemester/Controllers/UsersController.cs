@@ -16,14 +16,46 @@ namespace AnturaSemester.Controllers
 
         public UsersController(UsersContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
+
+
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            int? page)
         {
-            return View(await _context.Users.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["RoleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Role" : "";
+            ViewData["DepartmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Department" : "";
+
+
+
+            var users = from s in _context.Users
+                        select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    users = users.OrderByDescending(s => s.LastName);
+                    break;
+                case "Role":
+                    users = users.OrderByDescending(s => s.UsersRole);
+                    break;
+                case "Department":
+                    users = users.OrderByDescending(s => s.UsersDepartment);
+                    break;
+                default:
+                    users = users.OrderBy(s => s.LastName);
+                    break;
+            }
+            int pageSize = 9;
+            return View(await PaginatedList<Users>.CreateAsync(users.AsNoTracking(), page ?? 1, pageSize));
+
         }
+
+
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -34,7 +66,13 @@ namespace AnturaSemester.Controllers
             }
 
             var users = await _context.Users
+                .Include(r => r.UsersRole)
+                .Include(d => d.UsersDepartment)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
+
+
+
             if (users == null)
             {
                 return NotFound();
@@ -54,13 +92,23 @@ namespace AnturaSemester.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,LastName,FirstName")] Users users)
+        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department")] Users users)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(users);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _context.Add(users);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
             return View(users);
         }
@@ -84,40 +132,45 @@ namespace AnturaSemester.Controllers
         // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstName")] Users users)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != users.ID)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var userToUpdate = await _context.Users.SingleOrDefaultAsync(s => s.ID == id);
+            if (await TryUpdateModelAsync<Users>(
+                userToUpdate,
+                "",
+                s => s.FirstName, s => s.LastName, s => s.UsersRole, s => s.UsersDepartment))
             {
                 try
                 {
-                    _context.Update(users);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException /* ex */)
                 {
-                    if (!UsersExists(users.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
-                return RedirectToAction("Index");
             }
-            return View(users);
+            return View(userToUpdate);
         }
 
+
+
+
+
+
+
         // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -125,10 +178,18 @@ namespace AnturaSemester.Controllers
             }
 
             var users = await _context.Users
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (users == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
             }
 
             return View(users);
@@ -139,11 +200,28 @@ namespace AnturaSemester.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var users = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Users.Remove(users);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            var users = await _context.Users
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (users == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                _context.Users.Remove(users);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
         }
+
+
 
         private bool UsersExists(int id)
         {
