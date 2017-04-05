@@ -35,24 +35,34 @@ namespace AnturaSemester.Controllers
 
             var users = from s in _context.Users
                         select s;
+            var roles = from rs in _context.Users
+                        select rs;
+
+
+
             switch (sortOrder)
             {
                 case "name_desc":
                     users = users.OrderByDescending(s => s.LastName);
                     break;
                 case "Role":
-                    users = users.OrderByDescending(s => s.UsersRole);
+                    roles = roles.OrderByDescending(s => s.UsersRole);
                     break;
-                case "Department":
+                //case "Department":
                    // users = users.OrderByDescending(s => s.UsersDepartment);
-                    break;
+                   // break;
                 default:
                     users = users.OrderBy(s => s.LastName);
                     break;
             }
-            int pageSize = 9;
-            return View(await PaginatedList<Users>.CreateAsync(users.AsNoTracking(), page ?? 1, pageSize));
-
+            int pageSize = 5;
+            return View(await PaginatedList<Users>.CreateAsync(users.Include(r => r.UsersRole).ThenInclude(e => e.Role).AsNoTracking(), page ?? 1, pageSize));
+            //var users = await _context.Users
+            // .Include(r => r.UsersRole)
+            // .ThenInclude(e => e.Role)
+            //     // .Include(d => d.UsersDepartment)
+            //  .AsNoTracking()
+            //  .SingleOrDefaultAsync(m => m.ID == id);
         }
 
 

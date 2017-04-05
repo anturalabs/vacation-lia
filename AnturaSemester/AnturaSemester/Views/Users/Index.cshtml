@@ -32,6 +32,7 @@
         </tr>
     </thead>
     <tbody>
+        
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -41,8 +42,30 @@
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td> 
             <td>
-                @Html.DisplayFor(modelItem => item.UsersRole)
+                @foreach (var role in item.UsersRole)
+                {
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => role.Role.RoleName)
+                    </dd>
+                }
             </td> 
+           
+            
+           <!-- <dt>
+                Html.DisplayNameFor(model => model.UsersRole)
+            </dt>
+            foreach (var item in Model.UsersRole)
+            {
+
+                <dd>
+                    Html.DisplayFor(modelItem => item.Role.RoleName)
+                </dd>
+
+
+            }
+-->
+
             <td>
                 <!--Html.DisplayFor(modelItem => item.UsersDepartment)-->
             </td>
