@@ -1,4 +1,4 @@
-﻿
+﻿@model List<AnturaSemester.Models.Users>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -13,10 +13,28 @@
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-        <h3>A-Team</h3>
-        @await Component.InvokeAsync("Calendar")
+    <h3>A-Team</h3>
 
+        <table>
+            <tr>
+                <th>
+                    @await Component.InvokeAsync("Calendar")
+                </th>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.FullName)
+                    </td></tr>
+                }
+        </table>   
+            
+        
     </div>
+
+
+
     <div id="menu1" class="tab-pane fade in">
         <h3>Product Development</h3>
         <p>drvfgtsbhy</p>
