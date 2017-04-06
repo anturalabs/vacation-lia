@@ -15,18 +15,36 @@
     <div id="home" class="tab-pane fade in active">
     <h3>A-Team</h3>
 
-        <table>
+        <table class="table-bordered table-hover table-condensed">
             <tr>
                 <th>
-                    @await Component.InvokeAsync("Calendar")
+
                 </th>
+                
+                @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+                {
+                <th width="30px">
+                    @i
+                 <!--   await Component.InvokeAsync("Calendar")-->
+                </th>
+                }
 
                 @foreach (var item in Model)
             {
                     <tr>
                     <td>
                         @Html.DisplayFor(model => item.FullName)
-                    </td></tr>
+                    </td>
+
+                        @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+                        {
+                            <td>
+                                
+                                
+                            </td>
+                        }
+
+                    </tr>
                 }
         </table>   
             
