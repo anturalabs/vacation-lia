@@ -105,8 +105,8 @@ namespace AnturaSemester.Controllers
 
         public String GetMonthName(int Month, int MonthFormat)
         {
-            //Delcaring MonthNames in the Array
-            String[] MonthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+           x //Delcaring MonthNames in the Array
+         x   String[] MonthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
             if (MonthFormat == 0)
             {
