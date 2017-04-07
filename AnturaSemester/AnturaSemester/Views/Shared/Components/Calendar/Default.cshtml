@@ -1,4 +1,3 @@
-
 @{
     ViewData["Title"] = "Calendar";
 }
@@ -14,7 +13,7 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li><a href="#">@ViewBag.currentMonth </></a></li>
+        <li><a href="#">@ViewBag.currentMonth</></a></li>
         <li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -23,23 +22,21 @@
     </ul>
 </nav>
 
+<div>holiday</div>    
 
-@{
-    for (int x = 0; x < ViewBag.Column.Count; x++)
-    {
-
-    }
-
-    <table class="table">
-        <tbody>
-            <tr>
-                @foreach (int x in ViewBag.Column)
-                {
-                    <td>@x</td>
-                }
-            </tr>
-
-        </tbody>
-    </table>
-
+@if (ViewBag.Today = DayOfWeek.Saturday)
+{
+    <h3>@ViewBag.MessageSaturday</h3>
 }
+
+else if (ViewBag.Today = DayOfWeek.Sunday)
+{
+
+    <h3>@ViewBag.MessageSunday</h3>
+}
+else { ViewBag.Today = DateTime.Today; }
+
+    <h3>@ViewBag.Message + " is weekday."</h3>
+}
+
+

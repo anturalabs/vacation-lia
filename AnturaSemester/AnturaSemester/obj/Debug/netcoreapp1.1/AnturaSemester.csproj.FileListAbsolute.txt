@@ -16,3 +16,12 @@ C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemest
 C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.AssemblyInfo.cs
 C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.dll
 C:\Users\Sofie\Documents\Visual Studio 2017\Projects\AnturaSemester\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.pdb
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.deps.json
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.runtimeconfig.json
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.runtimeconfig.dev.json
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.dll
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\bin\Debug\netcoreapp1.1\AnturaSemester.pdb
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.csprojResolveAssemblyReference.cache
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.AssemblyInfo.cs
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.dll
+C:\Users\Awe\workspace\LiA-kalender\AnturaSemester\AnturaSemester\obj\Debug\netcoreapp1.1\AnturaSemester.pdb
