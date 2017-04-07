@@ -1,0 +1,97 @@
+@model PaginatedList<AnturaSemester.Models.Users>
+
+@{
+    ViewData["Title"] = "Index";
+ 
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Last Name</a>
+
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">First Name</a>
+                </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RoleSortParm"]">Role(s)</a>
+
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DepartmentSortParm"]">Department</a>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td> 
+            <td>
+                @foreach (var role in item.UsersRole)
+                {
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => role.Role.RoleName)
+                    </dd>
+                }
+            </td> 
+           
+            
+           <!-- <dt>
+                Html.DisplayNameFor(model => model.UsersRole)
+            </dt>
+            foreach (var item in Model.UsersRole)
+            {
+
+                <dd>
+                    Html.DisplayFor(modelItem => item.Role.RoleName)
+                </dd>
+
+
+            }
+-->
+
+            <td>
+                <!--Html.DisplayFor(modelItem => item.UsersDepartment)-->
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled btn">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled btn">
+    Next
+</a>

@@ -1,15 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 
+=======
+using AnturaSemester.Data;
+>>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
 
 namespace AnturaSemester.Controllers
 {
     public class CalendarViewComponent : ViewComponent
     {
+<<<<<<< HEAD
         public IViewComponentResult Invoke(int year, int month)
 
         {
@@ -18,6 +23,20 @@ namespace AnturaSemester.Controllers
             }
 
             {
+=======
+        private readonly UsersContext _context;
+
+        public CalendarViewComponent(UsersContext context)
+        {
+            _context = context;
+        }
+        public IViewComponentResult Invoke()
+        {
+            {
+                var users = _context.Users;
+                ViewBag.caltest = users;
+                //today
+>>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
                 DateTime Today = DateTime.Today;
 
 

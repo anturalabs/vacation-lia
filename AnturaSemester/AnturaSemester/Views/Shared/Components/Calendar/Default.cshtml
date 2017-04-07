@@ -2,8 +2,7 @@
     ViewData["Title"] = "Calendar";
 }
 
-<h2>Calendar</h2>
-@DateTime.Now
+
 
 <nav aria-label="Page navigation">
     <ul class="pagination">
@@ -13,7 +12,11 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
+<<<<<<< HEAD
         <li><a href="#">@ViewBag.currentMonth</></a></li>
+=======
+        <li><a href="#">@ViewBag.currentMonth</a></li>
+>>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
         <li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -29,12 +32,30 @@
     <h3>@ViewBag.MessageSaturday</h3>
 }
 
+<<<<<<< HEAD
 else if (ViewBag.Today = DayOfWeek.Sunday)
 {
 
     <h3>@ViewBag.MessageSunday</h3>
 }
 else { ViewBag.Today = DateTime.Today; }
+=======
+    <table class="table">
+        <tbody>
+            <tr>
+                @foreach (int x in ViewBag.Column)
+                {
+                    <td>@x</td>
+                }
+                <th>
+                    
+                </th>
+            </tr>
+
+
+        </tbody>
+    </table>
+>>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
 
     <h3>@ViewBag.Message + " is weekday."</h3>
 }
