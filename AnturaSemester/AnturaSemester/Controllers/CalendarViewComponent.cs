@@ -1,29 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-
-=======
 using AnturaSemester.Data;
->>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
+using AnturaSemester.Models;
 
 namespace AnturaSemester.Controllers
 {
     public class CalendarViewComponent : ViewComponent
     {
-<<<<<<< HEAD
-        public IViewComponentResult Invoke(int year, int month)
+
+       /* public IViewComponentResult Invoke(int year, int month)
 
         {
-            {
 
-            }
+        } */
+            
 
-            {
-=======
+            
         private readonly UsersContext _context;
 
         public CalendarViewComponent(UsersContext context)
@@ -36,7 +32,7 @@ namespace AnturaSemester.Controllers
                 var users = _context.Users;
                 ViewBag.caltest = users;
                 //today
->>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
+
                 DateTime Today = DateTime.Today;
 
 
@@ -48,18 +44,28 @@ namespace AnturaSemester.Controllers
 
 
                 //creates List for days in the current month
-
-                /* List<int> Darray = new List<int>();
-                 int i = 0;
-                 while (i < daysInMonth)
-                 {
-                     i++;
-                     Darray.Add(i);
-                 }
+                
+                 List<CalendarDay> Darray = new List<CalendarDay>();
 
 
-                 ViewBag.Column = Darray; */
+                for (int i = 1; i < daysInMonth; i++)
+                {
+                    CalendarDay Day = new CalendarDay();
+                    
 
+                    DateTime iDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+                    bool result = IsThisWeekend(iDay);
+                    Day.weekDay = result;
+                    Day.Day = i;
+
+
+                    Darray.Add(Day);
+                }
+
+                
+
+                ViewBag.Column = Darray;
+            
 
 
                 /*
@@ -101,17 +107,17 @@ namespace AnturaSemester.Controllers
 
 
                 GetHolidays();
-                
+
 
                 return View();
                 ;
-
+            }
 
             }
             HashSet<DateTime> GetHolidays()
             {
                 HashSet<DateTime> holidays = new HashSet<DateTime>();
-                HashSet<DateTime> weekends = new HashSet<DateTime>();
+                
 
                 DateTime newYearsDate = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
                 holidays.Add(newYearsDate);
@@ -143,7 +149,7 @@ namespace AnturaSemester.Controllers
             }
             DateTime AdjustForWeekendHoliday(DateTime holiday)
 
-            {
+            { 
                 if (holiday.DayOfWeek == DayOfWeek.Saturday)
 
                 {
@@ -154,11 +160,7 @@ namespace AnturaSemester.Controllers
                 {
                     return holiday.AddDays(1);
                 }
-
-                else if (holiday.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    return holiday.AddDays(1);
-                }
+            
                 else
                 {
 
@@ -169,13 +171,23 @@ namespace AnturaSemester.Controllers
 
                      foreach (DateTime DayOfWeek in GetHolidays()) ; */
 
-    
+
 
                     return holiday;
                 }
-
-
             }
+
+            public bool IsThisWeekend(DateTime now)
+            {
+                if (now.DayOfWeek == DayOfWeek.Saturday)
+                    return true;
+                if (now.DayOfWeek == DayOfWeek.Sunday)
+                    return true;
+                return false;
+            }
+           
+            
+        
 
   
 
@@ -224,7 +236,7 @@ namespace AnturaSemester.Controllers
             /*  ModiMonth();*/
 
 
-        }
+        
         }
     }
 

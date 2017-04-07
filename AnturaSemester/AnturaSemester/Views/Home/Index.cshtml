@@ -21,13 +21,9 @@
 
                 </th>
                 
-                @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-                {
-                <th width="30px">
-                    @i
-                 <!--   await Component.InvokeAsync("Calendar")-->
-                </th>
-                }
+                  @await Component.InvokeAsync("Calendar")
+                
+                
 
                 @foreach (var item in Model)
             {
@@ -36,14 +32,7 @@
                         @Html.DisplayFor(model => item.FullName)
                     </td>
 
-                        @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-                        {
-                            <td>
-                                
-                                
-                            </td>
-                        }
-
+                       
                     </tr>
                 }
         </table>   

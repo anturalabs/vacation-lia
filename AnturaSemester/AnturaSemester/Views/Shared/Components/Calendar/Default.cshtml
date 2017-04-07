@@ -12,11 +12,7 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-<<<<<<< HEAD
-        <li><a href="#">@ViewBag.currentMonth</></a></li>
-=======
-        <li><a href="#">@ViewBag.currentMonth</a></li>
->>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
+        <li><a href="#">@ViewBag.currentMonth</></a></li>        
         <li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -24,28 +20,12 @@
         </li>
     </ul>
 </nav>
-
-<div>holiday</div>    
-
-@if (ViewBag.Today = DayOfWeek.Saturday)
-{
-    <h3>@ViewBag.MessageSaturday</h3>
-}
-
-<<<<<<< HEAD
-else if (ViewBag.Today = DayOfWeek.Sunday)
-{
-
-    <h3>@ViewBag.MessageSunday</h3>
-}
-else { ViewBag.Today = DateTime.Today; }
-=======
     <table class="table">
         <tbody>
             <tr>
-                @foreach (int x in ViewBag.Column)
+                @foreach (var x in ViewBag.Column)
                 {
-                    <td>@x</td>
+                    <td>@x.Day</td>
                 }
                 <th>
                     
@@ -55,9 +35,7 @@ else { ViewBag.Today = DateTime.Today; }
 
         </tbody>
     </table>
->>>>>>> 8d06bfe817492bead5fcc1857328503bc78f6160
 
-    <h3>@ViewBag.Message + " is weekday."</h3>
-}
+  
 
 
