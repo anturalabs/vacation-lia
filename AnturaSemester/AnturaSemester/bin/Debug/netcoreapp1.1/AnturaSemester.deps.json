@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "2e25a362af32411f0199d669383fc8f823203951"
+    "signature": "adcd0be84fc90d3b33a8b4ebdb6a4a3170168f75"
   },
   "compilationOptions": {
     "defines": [
@@ -23,6 +23,8 @@
     ".NETCoreApp,Version=v1.1": {
       "anturasemester/1.0.0": {
         "dependencies": {
+          "Bootstrap.v3.Datetimepicker": "4.17.45",
+          "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
           "Microsoft.AspNetCore": "1.1.1",
           "Microsoft.AspNetCore.Mvc": "1.1.2",
@@ -35,7 +37,7 @@
           "Microsoft.NETCore.App": "1.1.1",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.0",
-          "Moment.js": "2.18.0"
+          "Moment.js": "2.18.1"
         },
         "runtime": {
           "AnturaSemester.dll": {}
@@ -44,6 +46,29 @@
           "AnturaSemester.dll": {}
         }
       },
+      "bootstrap/3.3.0": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "bootstrap.less/3.3.5": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "bootstrap.v3.datetimepicker/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.18.1",
+          "bootstrap.less": "3.3.5"
+        }
+      },
+      "bootstrap.v3.datetimepicker.css/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.18.1",
+          "bootstrap": "3.3.0"
+        }
+      },
+      "jquery/1.9.1": {},
       "microsoft.applicationinsights/2.2.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1414,7 +1439,7 @@
           "lib/netstandard1.6/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
         }
       },
-      "moment.js/2.18.0": {},
+      "moment.js/2.18.1": {},
       "newtonsoft.json/9.0.1": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
@@ -3456,6 +3481,41 @@
       "serviceable": false,
       "sha512": ""
     },
+    "bootstrap/3.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8Fn3Tnk23NpT0i1Osj3mydnknbzbFA/rOVk5hoGlqb0XXl/rDn085qanSCcCqsZlIGL2VWSbO4vihOs1hMtZ5A==",
+      "path": "bootstrap/3.3.0",
+      "hashPath": "bootstrap.3.3.0.nupkg.sha512"
+    },
+    "bootstrap.less/3.3.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+xxiEyTJdWwO9G7Ig9gHoXl7grsncyQVy1bhWY9L41fSFUayIZYlziGcwB+ORQDzHAZJrCNa+y1bke11wJy0Ug==",
+      "path": "bootstrap.less/3.3.5",
+      "hashPath": "bootstrap.less.3.3.5.nupkg.sha512"
+    },
+    "bootstrap.v3.datetimepicker/4.17.45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0/m8BCfhDRhWdiXm8RAHS0lVfaE64/93tDyINtrf4/cBpXGnVU7o5pFP6FhGhelTX7eH0hpLc8+j2obumhI9oA==",
+      "path": "bootstrap.v3.datetimepicker/4.17.45",
+      "hashPath": "bootstrap.v3.datetimepicker.4.17.45.nupkg.sha512"
+    },
+    "bootstrap.v3.datetimepicker.css/4.17.45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-O6uUKSMe4KvfSJ1pON8yI8JzTxpf/InaDChbC3kwfUFG7hjysyIpx8fmgEtb8sojMJcfRRO5NFyLsz+rRX3Fdw==",
+      "path": "bootstrap.v3.datetimepicker.css/4.17.45",
+      "hashPath": "bootstrap.v3.datetimepicker.css.4.17.45.nupkg.sha512"
+    },
+    "jquery/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw==",
+      "path": "jquery/1.9.1",
+      "hashPath": "jquery.1.9.1.nupkg.sha512"
+    },
     "microsoft.applicationinsights/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -4107,12 +4167,12 @@
       "path": "microsoft.visualstudio.web.codegenerators.mvc/1.1.0",
       "hashPath": "microsoft.visualstudio.web.codegenerators.mvc.1.1.0.nupkg.sha512"
     },
-    "moment.js/2.18.0": {
+    "moment.js/2.18.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HcAsKwxVnIbcUl9xVl2L+6FRAm6OdMUKnCkh4IOy5O9TP3wcSWKGttPRGudLwUGwhxNY0ornyHYQ+UgYBglr0g==",
-      "path": "moment.js/2.18.0",
-      "hashPath": "moment.js.2.18.0.nupkg.sha512"
+      "sha512": "sha512-R6N7F4stwystDk3/zyCJwlO4WsQ1LciagU4lxoiNTQMOXFi1Q+mSysG0deiADa+1vXZ3H2KK7rRnOr9PpXTbkQ==",
+      "path": "moment.js/2.18.1",
+      "hashPath": "moment.js.2.18.1.nupkg.sha512"
     },
     "newtonsoft.json/9.0.1": {
       "type": "package",

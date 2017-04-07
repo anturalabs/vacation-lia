@@ -16,10 +16,25 @@
     <h3>A-Team</h3>
 
         <table class="table-bordered table-hover table-condensed">
-            <tr>
-                <th>
+            <tr><th>
+    <ul class="pagination">
+        <li class="active">
+        <li>
+            <a href="@DateTime.Now.AddMonths(-1)"  aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#">@DateTime.Now.ToString("MMMM").ToUpper()</a></li>
+        <li>
+            <a href="@DateTime.Now.AddMonths(1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
 
-                </th>
+
+</th>
+
                 
                   @await Component.InvokeAsync("Calendar")
                 
@@ -48,7 +63,32 @@
     </div>
     <div id="menu2" class="tab-pane fade in">
         <h3>Poäng</h3>
-        <p>hfghyngnj</p>
+        <!--DateTimePicker Test-->
+        
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        print("testest");
+                $('#datetimepicker1').datetimepicker();
+            });
+                </script>
+            </div>
+        </div>
+
+        <!--DateTimePicker Test End-->
+
+
     </div>
 </div>
 
