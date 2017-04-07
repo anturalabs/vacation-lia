@@ -10995,15 +10995,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sofie\\.nuget\\packages\\": {}
+    "C:\\Users\\Awe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sofie\\Documents\\Visual Studio 2017\\Projects\\AnturaSemester\\AnturaSemester\\AnturaSemester\\AnturaSemester.csproj",
+      "projectUniqueName": "C:\\Users\\Awe\\workspace\\LiA-kalender\\AnturaSemester\\AnturaSemester\\AnturaSemester.csproj",
       "projectName": "AnturaSemester",
-      "projectPath": "C:\\Users\\Sofie\\Documents\\Visual Studio 2017\\Projects\\AnturaSemester\\AnturaSemester\\AnturaSemester\\AnturaSemester.csproj",
-      "outputPath": "C:\\Users\\Sofie\\Documents\\Visual Studio 2017\\Projects\\AnturaSemester\\AnturaSemester\\AnturaSemester\\obj\\",
+      "projectPath": "C:\\Users\\Awe\\workspace\\LiA-kalender\\AnturaSemester\\AnturaSemester\\AnturaSemester.csproj",
+      "outputPath": "C:\\Users\\Awe\\workspace\\LiA-kalender\\AnturaSemester\\AnturaSemester\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
