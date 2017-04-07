@@ -2,6 +2,35 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
+      "bootstrap/3.3.0": {
+        "type": "package",
+        "dependencies": {
+          "jquery": "1.9.0"
+        }
+      },
+      "bootstrap.less/3.3.5": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker/4.17.45": {
+        "type": "package",
+        "dependencies": {
+          "Moment.js": "2.9.0",
+          "bootstrap.Less": "3.3.0"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+        "type": "package",
+        "dependencies": {
+          "Moment.js": "2.9.0",
+          "bootstrap": "3.3.0"
+        }
+      },
+      "jQuery/1.9.1": {
+        "type": "package"
+      },
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -1810,7 +1839,7 @@
           }
         }
       },
-      "Moment.js/2.18.0": {
+      "Moment.js/2.18.1": {
         "type": "package"
       },
       "NETStandard.Library/1.6.1": {
@@ -4153,6 +4182,160 @@
     }
   },
   "libraries": {
+    "bootstrap/3.3.0": {
+      "sha512": "8Fn3Tnk23NpT0i1Osj3mydnknbzbFA/rOVk5hoGlqb0XXl/rDn085qanSCcCqsZlIGL2VWSbO4vihOs1hMtZ5A==",
+      "type": "package",
+      "path": "bootstrap/3.3.0",
+      "files": [
+        "bootstrap.3.3.0.nupkg.sha512",
+        "bootstrap.nuspec",
+        "content/Content/bootstrap-theme.css",
+        "content/Content/bootstrap-theme.css.map",
+        "content/Content/bootstrap-theme.min.css",
+        "content/Content/bootstrap.css",
+        "content/Content/bootstrap.css.map",
+        "content/Content/bootstrap.min.css",
+        "content/Scripts/bootstrap.js",
+        "content/Scripts/bootstrap.min.js",
+        "content/Scripts/npm.js",
+        "content/fonts/glyphicons-halflings-regular.eot",
+        "content/fonts/glyphicons-halflings-regular.svg",
+        "content/fonts/glyphicons-halflings-regular.ttf",
+        "content/fonts/glyphicons-halflings-regular.woff"
+      ]
+    },
+    "bootstrap.less/3.3.5": {
+      "sha512": "+xxiEyTJdWwO9G7Ig9gHoXl7grsncyQVy1bhWY9L41fSFUayIZYlziGcwB+ORQDzHAZJrCNa+y1bke11wJy0Ug==",
+      "type": "package",
+      "path": "bootstrap.less/3.3.5",
+      "files": [
+        "bootstrap.less.3.3.5.nupkg.sha512",
+        "bootstrap.less.nuspec",
+        "content/Content/bootstrap/alerts.less",
+        "content/Content/bootstrap/badges.less",
+        "content/Content/bootstrap/bootstrap.less",
+        "content/Content/bootstrap/breadcrumbs.less",
+        "content/Content/bootstrap/button-groups.less",
+        "content/Content/bootstrap/buttons.less",
+        "content/Content/bootstrap/carousel.less",
+        "content/Content/bootstrap/close.less",
+        "content/Content/bootstrap/code.less",
+        "content/Content/bootstrap/component-animations.less",
+        "content/Content/bootstrap/dropdowns.less",
+        "content/Content/bootstrap/forms.less",
+        "content/Content/bootstrap/glyphicons.less",
+        "content/Content/bootstrap/grid.less",
+        "content/Content/bootstrap/input-groups.less",
+        "content/Content/bootstrap/jumbotron.less",
+        "content/Content/bootstrap/labels.less",
+        "content/Content/bootstrap/list-group.less",
+        "content/Content/bootstrap/media.less",
+        "content/Content/bootstrap/mixins.less",
+        "content/Content/bootstrap/mixins/alerts.less",
+        "content/Content/bootstrap/mixins/background-variant.less",
+        "content/Content/bootstrap/mixins/border-radius.less",
+        "content/Content/bootstrap/mixins/buttons.less",
+        "content/Content/bootstrap/mixins/center-block.less",
+        "content/Content/bootstrap/mixins/clearfix.less",
+        "content/Content/bootstrap/mixins/forms.less",
+        "content/Content/bootstrap/mixins/gradients.less",
+        "content/Content/bootstrap/mixins/grid-framework.less",
+        "content/Content/bootstrap/mixins/grid.less",
+        "content/Content/bootstrap/mixins/hide-text.less",
+        "content/Content/bootstrap/mixins/image.less",
+        "content/Content/bootstrap/mixins/labels.less",
+        "content/Content/bootstrap/mixins/list-group.less",
+        "content/Content/bootstrap/mixins/nav-divider.less",
+        "content/Content/bootstrap/mixins/nav-vertical-align.less",
+        "content/Content/bootstrap/mixins/opacity.less",
+        "content/Content/bootstrap/mixins/pagination.less",
+        "content/Content/bootstrap/mixins/panels.less",
+        "content/Content/bootstrap/mixins/progress-bar.less",
+        "content/Content/bootstrap/mixins/reset-filter.less",
+        "content/Content/bootstrap/mixins/reset-text.less",
+        "content/Content/bootstrap/mixins/resize.less",
+        "content/Content/bootstrap/mixins/responsive-visibility.less",
+        "content/Content/bootstrap/mixins/size.less",
+        "content/Content/bootstrap/mixins/tab-focus.less",
+        "content/Content/bootstrap/mixins/table-row.less",
+        "content/Content/bootstrap/mixins/text-emphasis.less",
+        "content/Content/bootstrap/mixins/text-overflow.less",
+        "content/Content/bootstrap/mixins/vendor-prefixes.less",
+        "content/Content/bootstrap/modals.less",
+        "content/Content/bootstrap/navbar.less",
+        "content/Content/bootstrap/navs.less",
+        "content/Content/bootstrap/normalize.less",
+        "content/Content/bootstrap/pager.less",
+        "content/Content/bootstrap/pagination.less",
+        "content/Content/bootstrap/panels.less",
+        "content/Content/bootstrap/popovers.less",
+        "content/Content/bootstrap/print.less",
+        "content/Content/bootstrap/progress-bars.less",
+        "content/Content/bootstrap/responsive-embed.less",
+        "content/Content/bootstrap/responsive-utilities.less",
+        "content/Content/bootstrap/scaffolding.less",
+        "content/Content/bootstrap/tables.less",
+        "content/Content/bootstrap/theme.less",
+        "content/Content/bootstrap/thumbnails.less",
+        "content/Content/bootstrap/tooltip.less",
+        "content/Content/bootstrap/type.less",
+        "content/Content/bootstrap/utilities.less",
+        "content/Content/bootstrap/variables.less",
+        "content/Content/bootstrap/wells.less",
+        "content/Content/fonts/glyphicons-halflings-regular.eot",
+        "content/Content/fonts/glyphicons-halflings-regular.svg",
+        "content/Content/fonts/glyphicons-halflings-regular.ttf",
+        "content/Content/fonts/glyphicons-halflings-regular.woff",
+        "content/Content/fonts/glyphicons-halflings-regular.woff2",
+        "content/Scripts/bootstrap.js",
+        "content/Scripts/bootstrap.min.js"
+      ]
+    },
+    "Bootstrap.v3.Datetimepicker/4.17.45": {
+      "sha512": "0/m8BCfhDRhWdiXm8RAHS0lVfaE64/93tDyINtrf4/cBpXGnVU7o5pFP6FhGhelTX7eH0hpLc8+j2obumhI9oA==",
+      "type": "package",
+      "path": "bootstrap.v3.datetimepicker/4.17.45",
+      "files": [
+        "bootstrap.v3.datetimepicker.4.17.45.nupkg.sha512",
+        "bootstrap.v3.datetimepicker.nuspec",
+        "content/Content/_bootstrap-datetimepicker.less",
+        "content/Content/bootstrap-datetimepicker-build.less",
+        "content/Scripts/bootstrap-datetimepicker.js",
+        "content/Scripts/bootstrap-datetimepicker.min.js",
+        "tools/install.ps1"
+      ]
+    },
+    "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+      "sha512": "O6uUKSMe4KvfSJ1pON8yI8JzTxpf/InaDChbC3kwfUFG7hjysyIpx8fmgEtb8sojMJcfRRO5NFyLsz+rRX3Fdw==",
+      "type": "package",
+      "path": "bootstrap.v3.datetimepicker.css/4.17.45",
+      "files": [
+        "bootstrap.v3.datetimepicker.css.4.17.45.nupkg.sha512",
+        "bootstrap.v3.datetimepicker.css.nuspec",
+        "content/Content/bootstrap-datetimepicker.css",
+        "content/Content/bootstrap-datetimepicker.min.css",
+        "content/Scripts/bootstrap-datetimepicker.js",
+        "content/Scripts/bootstrap-datetimepicker.min.js",
+        "tools/install.ps1"
+      ]
+    },
+    "jQuery/1.9.1": {
+      "sha512": "HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw==",
+      "type": "package",
+      "path": "jquery/1.9.1",
+      "files": [
+        "Content/Scripts/jquery-1.9.1-vsdoc.js",
+        "Content/Scripts/jquery-1.9.1.js",
+        "Content/Scripts/jquery-1.9.1.min.js",
+        "Content/Scripts/jquery-1.9.1.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.9.1.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.1.9.1.nupkg.sha512",
+        "jquery.nuspec"
+      ]
+    },
     "Libuv/1.9.1": {
       "sha512": "uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA==",
       "type": "package",
@@ -5763,16 +5946,16 @@
         "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll"
       ]
     },
-    "Moment.js/2.18.0": {
-      "sha512": "HcAsKwxVnIbcUl9xVl2L+6FRAm6OdMUKnCkh4IOy5O9TP3wcSWKGttPRGudLwUGwhxNY0ornyHYQ+UgYBglr0g==",
+    "Moment.js/2.18.1": {
+      "sha512": "R6N7F4stwystDk3/zyCJwlO4WsQ1LciagU4lxoiNTQMOXFi1Q+mSysG0deiADa+1vXZ3H2KK7rRnOr9PpXTbkQ==",
       "type": "package",
-      "path": "moment.js/2.18.0",
+      "path": "moment.js/2.18.1",
       "files": [
         "Content/Scripts/moment-with-locales.js",
         "Content/Scripts/moment-with-locales.min.js",
         "Content/Scripts/moment.js",
         "Content/Scripts/moment.min.js",
-        "moment.js.2.18.0.nupkg.sha512",
+        "moment.js.2.18.1.nupkg.sha512",
         "moment.js.nuspec"
       ]
     },
@@ -10794,6 +10977,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
+      "Bootstrap.v3.Datetimepicker >= 4.17.45",
+      "Bootstrap.v3.Datetimepicker.CSS >= 4.17.45",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.0.0",
       "Microsoft.AspNetCore >= 1.1.1",
       "Microsoft.AspNetCore.Mvc >= 1.1.2",
@@ -10806,7 +10991,7 @@
       "Microsoft.NETCore.App >= 1.1.1",
       "Microsoft.VisualStudio.Web.BrowserLink >= 1.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 1.1.0",
-      "Moment.js >= 2.18.0"
+      "Moment.js >= 2.18.1"
     ]
   },
   "packageFolders": {
@@ -10848,6 +11033,10 @@
             "target": "Package",
             "version": "1.1.0"
           },
+          "Bootstrap.v3.Datetimepicker": {
+            "target": "Package",
+            "version": "4.17.45"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
             "version": "1.1.1"
@@ -10879,11 +11068,15 @@
           },
           "Moment.js": {
             "target": "Package",
-            "version": "2.18.0"
+            "version": "2.18.1"
           },
           "Microsoft.AspNetCore.StaticFiles": {
             "target": "Package",
             "version": "1.1.1"
+          },
+          "Bootstrap.v3.Datetimepicker.CSS": {
+            "target": "Package",
+            "version": "4.17.45"
           }
         },
         "imports": [
