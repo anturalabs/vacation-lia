@@ -8,7 +8,8 @@ namespace AnturaSemester.Models
     public class CalendarDay
     {
          public int Day;
-        public bool weekDay;
+        public bool weekEnd;
+        public bool otherRedDay;
 
     }
 }

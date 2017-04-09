@@ -40,7 +40,7 @@ namespace AnturaSemester.Controllers
                 int daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
 
 
-
+                 
 
 
                 //creates List for days in the current month
@@ -48,25 +48,30 @@ namespace AnturaSemester.Controllers
                  List<CalendarDay> Darray = new List<CalendarDay>();
 
 
-                for (int i = 1; i < daysInMonth; i++)
+                for (int i = 1; i <= daysInMonth; i++)
                 {
                     CalendarDay Day = new CalendarDay();
                     
 
                     DateTime iDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
                     bool result = IsThisWeekend(iDay);
-                    Day.weekDay = result;
+                    Day.weekEnd = result;
                     Day.Day = i;
-
-
-                    Darray.Add(Day);
+                    if (Day.weekEnd == true) // Changed from weekDay to weekEnd
+                    {
+                        
+                    }
+                    
+                    {
+                        Darray.Add(Day);
+                    }
                 }
 
                 
 
                 ViewBag.Column = Darray;
             
-
+                
 
                 /*
                 DateTime currentDate = DateTime.Now;
@@ -117,6 +122,7 @@ namespace AnturaSemester.Controllers
             HashSet<DateTime> GetHolidays()
             {
                 HashSet<DateTime> holidays = new HashSet<DateTime>();
+
                 
 
                 DateTime newYearsDate = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
@@ -147,7 +153,8 @@ namespace AnturaSemester.Controllers
                 return holidays;
 
             }
-            DateTime AdjustForWeekendHoliday(DateTime holiday)
+
+        DateTime AdjustForWeekendHoliday(DateTime holiday)
 
             { 
                 if (holiday.DayOfWeek == DayOfWeek.Saturday)
@@ -172,10 +179,10 @@ namespace AnturaSemester.Controllers
                      foreach (DateTime DayOfWeek in GetHolidays()) ; */
 
 
-
+        
                     return holiday;
                 }
-            }
+            } 
 
             public bool IsThisWeekend(DateTime now)
             {
@@ -183,12 +190,17 @@ namespace AnturaSemester.Controllers
                     return true;
                 if (now.DayOfWeek == DayOfWeek.Sunday)
                     return true;
-                return false;
+               
             }
-           
-            
-        
 
+
+       
+        {
+            if (DateTime.DaysInMonth == GetHolidays.DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month).GetHolidays)
+                return true;
+
+        }
+      
   
 
             /*

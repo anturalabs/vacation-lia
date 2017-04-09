@@ -1,4 +1,4 @@
-@{
+@{ 
     ViewData["Title"] = "Calendar";
 }
 
@@ -22,20 +22,25 @@
 </nav>
     <table class="table">
         <tbody>
-            <tr>
-                @foreach (var x in ViewBag.Column)
+            <tr>               
+                @foreach  (var x in ViewBag.Column) // the box is highlighted red
                 {
-                    <td>@x.Day</td>
+                    if (x.weekEnd == true)
+                    {
+                        <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
+
+                    }
+                    else
+                    {
+                        <td>@x.Day</td>
+                    }
                 }
-                <th>
-                    
-                </th>
-            </tr>
+               
+
+                    </table>
+                  
+              
 
 
-        </tbody>
-    </table>
-
-  
 
 
