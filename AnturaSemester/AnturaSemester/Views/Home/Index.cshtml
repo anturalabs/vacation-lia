@@ -15,31 +15,8 @@
     <div id="home" class="tab-pane fade in active">
     <h3>A-Team</h3>
 
-        <table class="">  // This should be empty
-            <tr><th>
-    <ul class="pagination">
-        <li class="active">
-        <li>
-            <a href="@DateTime.Now.AddMonths(-1)"  aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li><a href="#">@DateTime.Now.ToString("MMMM").ToUpper()</a></li>
-        <li>
-            <a aria-label="Next" onclick="doFunction();">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-
-
-</th>
-
-
-                
-
-
-                
+        <table class="">  
+  
                   @await Component.InvokeAsync("Calendar")
                 
                 

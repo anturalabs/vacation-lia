@@ -1,8 +1,6 @@
-@{ 
+@{
     ViewData["Title"] = "Calendar";
 }
-
-
 
 <nav aria-label="Page navigation">
     <ul class="pagination">
@@ -12,11 +10,7 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li><a href="#">@ViewBag.currentMonth</></a></li>        
-
         <li><a href="#">@ViewBag.currentMonth</></a></li>
-
-        <li><a href="#">@ViewBag.currentMonth</a></li>
         <li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -26,41 +20,35 @@
 </nav>
 
 
-<div>holiday</div>    
+<table class="table">
+    <tbody>
+        <tr>
+            @foreach (var x in ViewBag.Column)
+            {
+               
+           }          
+            <th>
 
-@if (ViewBag.Today = DayOfWeek.Saturday)
-{
-    <h3>@ViewBag.MessageSaturday</h3>
-}
-
-
-else if (ViewBag.Today = DayOfWeek.Sunday)
-{
-
-    <h3>@ViewBag.MessageSunday</h3>
-}
-else { ViewBag.Today = DateTime.Today; }
-
-    <table class="table">
-        <tbody>
-            <tr>               
-                @foreach  (var x in ViewBag.Column) // the box is highlighted red
+                @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
-                    if (x.weekEnd == true)
+                    if (x.weekDay == true)
                     {
-                        <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
-
+                    <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
                     }
                     else
                     {
                         <td>@x.Day</td>
                     }
                 }
-               
+                <th>
 
-                    </table>
-        </tbody>
-    </table>
+                </th>
+            </tr>
+
+    </tbody>
+</table>
 
 
 
+
+<!-- hghgh -->
