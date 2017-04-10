@@ -18,6 +18,8 @@ namespace AnturaSemester.Data
         public DbSet<Users> Users { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<Team> UsersTeam { get; set; }
+        public DbSet<CalendarCell> Calendar { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,9 +28,12 @@ namespace AnturaSemester.Data
             modelBuilder.Entity<UserRoles>().ToTable("UserRoles");
             modelBuilder.Entity<Department>().ToTable("Department");
             modelBuilder.Entity<Team>().ToTable("Team");
+            modelBuilder.Entity<CalendarCell>().ToTable("Calendar");
+            
 
             modelBuilder.Entity<UserRoles>()
               .HasKey(c => new { c.UsersID, c.RolesID });
+            
         }
     }
 }
