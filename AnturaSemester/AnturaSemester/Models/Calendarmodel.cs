@@ -10,7 +10,7 @@ namespace AnturaSemester.Models
     public class Calendarmodel
     {
         public int ID { get; set; }
-        public int Days { get; set; }
+        public int Day { get; set; }
         
        
     }

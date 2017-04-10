@@ -175,9 +175,7 @@ namespace AnturaSemester.Controllers
 
             }
 
-        DateTime AdjustForWeekendHoliday(DateTime holiday)
-
-            { 
+    
 
             DateTime AdjustForWeekendHoliday(DateTime holiday)
 
