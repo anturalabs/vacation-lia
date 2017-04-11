@@ -48,6 +48,10 @@ namespace AnturaSemester.Controllers
                 }
 
                 ViewBag.Column = Darray;
+
+
+
+                
                 /*
                  ViewBag.dateValue = Today;
                  ViewBag.DaysNextMonth = daysInNextMonth;
@@ -57,8 +61,10 @@ namespace AnturaSemester.Controllers
                 ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
 
                 GetHolidays();
-
-                return View();
+                var calendar = new CalendarViewModel { };
+                calendar.users = _context.Users.ToList();
+                calendar.calendar = _context.Calendar.ToList();
+                return View(calendar);
 
             }
 

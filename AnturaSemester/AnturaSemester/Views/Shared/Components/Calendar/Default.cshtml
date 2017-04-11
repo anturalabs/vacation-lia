@@ -1,4 +1,4 @@
-@model List<AnturaSemester.Models.Users>
+@model AnturaSemester.Models.CalendarViewModel
 
 @{
     ViewData["Title"] = "Calendar";
@@ -43,7 +43,7 @@
                     }
                 }
 
-                @foreach (var user in Model)
+                @foreach (var user in Model.users)
                 {
                 <tr>
                     <td>
@@ -52,16 +52,29 @@
 
                     @foreach (var x in ViewBag.Column)
                     {
-                        
+
                         if (x.weekDay == true)
                         {
                             <td bgcolor="#e2dede"></td>
                         }
-                        //else if user id and date of column (x.day, x.month, x.year) is in calendarcell database table
+
                         else
                         {
+                            foreach (var User in Model.calendar)
+                            {
+                                <td> @Html.DisplayFor(modelItem => User.AbsenceName)</td>
+
+                            }
                             <td></td>
                         }
+
+
+                     
+
+
+                        //else if user id and date of column (x.day, x.month, x.year) is in calendarcell database table
+                        
+
 
                     }
 
