@@ -25,10 +25,7 @@
 <table class=" table table-bordered table-hover">
     <tbody>
         <tr>
-            @foreach (var x in ViewBag.Column)
-            {
-
-            }
+           
             <th>
 
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
@@ -60,9 +57,9 @@
 
                         else
                         {
-                            foreach (var User in Model.calendar)
+                            foreach (var cell in Model.calendar.Where(c=>c.UsersID==user.ID && c.Date.Day==x.Day))
                             {
-                                <td> @Html.DisplayFor(modelItem => User.AbsenceName)</td>
+                                <td> @Html.DisplayFor(modelItem => cell.AbsenceName)</td>
 
                             }
                             <td></td>
