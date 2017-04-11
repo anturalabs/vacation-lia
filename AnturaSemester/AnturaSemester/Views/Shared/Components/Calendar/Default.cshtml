@@ -32,13 +32,15 @@
                 {
                     if (x.weekDay == true)
                     {
-                    <td bgcolor="#e2dede" width="32px"><font color="red">@x.Day</font></td>
+                    <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
                     }
                     else
                     {
-                        <td width="32px">@x.Day</td>
+                        <td>@x.Day</td>
                     }
                 }
+
+            </tr>
 
                 @foreach (var user in Model.users)
                 {
@@ -56,21 +58,15 @@
                         }
 
                         else
-                        {
+                        { bool HasAddedCell = false; 
                             foreach (var cell in Model.calendar.Where(c=>c.UsersID==user.ID && c.Date.Day==x.Day))
                             {
-                                <td> @Html.DisplayFor(modelItem => cell.AbsenceName)</td>
-
+                                <td>@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
+                                HasAddedCell = true;
                             }
-                            <td></td>
+                            if (HasAddedCell == false)
+                            {<td></td>}
                         }
-
-
-                     
-
-
-                        //else if user id and date of column (x.day, x.month, x.year) is in calendarcell database table
-                        
 
 
                     }
