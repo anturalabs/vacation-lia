@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Calendar";
 }
 
@@ -12,20 +12,62 @@
         </li>
         <li><a href="#">@ViewBag.currentMonth</></a></li>
         <li>
-            <a href="#" aria-label="Next">
+            <a href="@Url.Action();"aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
     </ul>
 </nav>
 
+<a class="w3-right w3-btn" href="ref_@DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();">Next ❯</a>
+
+
+<script type="text/javascript">
+    @functions {} {
+        //print("Clicked next!");
+        for (int; x = 0; x < ViewBag.currentMonth); x++;
+        {
+
+        }
+        <table class="table">
+            <tbody>
+                <tr>
+                @foreach (int x in ViewBag.nextMonth)
+                {
+                    <td>@x</td>
+                }
+                </tr>
+
+            </tbody>
+        </table>
+
+    } 
+
+</script>
+
+<script type="text/javascript">
+    function doFunction() {
+            //print("Clicked next!");
+            @DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();
+            console.log("Put a message here.")
+        }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.go_back').click(function (e) {
+            e.nextDefault();
+            @DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();
+        });
+    });
+</script>
+
 
 <table class="table">
     <tbody>
         <tr>
             @foreach (var x in ViewBag.Column)
-            {
-               
+            {             
            }          
             <th>
 

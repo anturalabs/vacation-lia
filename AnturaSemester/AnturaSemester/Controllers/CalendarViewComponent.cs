@@ -30,6 +30,7 @@ namespace AnturaSemester.Controllers
 
                 //creates List for days in the current month
                 List<CalendarDay> Darray = new List<CalendarDay>();
+                
                 // Loopar genom hela månad och retunerar helger (lördag & söndag) samt veckodagar.
                 for (int i = 1; i <= daysInMonth; i++)
                 {
@@ -53,9 +54,9 @@ namespace AnturaSemester.Controllers
                  ViewBag.DaysNextMonth = daysInNextMonth;
                  ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
                  ViewBag.prevMonth = DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper();   // Testing different methods for the browsing between months
-                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
+                  */
                 ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
-
+                ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();
                 GetHolidays();
 
                 return View();
