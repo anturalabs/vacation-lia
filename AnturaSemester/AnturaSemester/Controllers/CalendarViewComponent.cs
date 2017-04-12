@@ -24,13 +24,12 @@ namespace AnturaSemester.Controllers
             {
                 DateTime Today = DateTime.Today;
 
-                
+
                 //DAYS; amount of days in this month
-                int daysInMonth = DateTime.DaysInMonth(year, month);
+                int daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
 
                 //creates List for days in the current month
                 List<CalendarDay> Darray = new List<CalendarDay>();
-                
                 // Loopar genom hela månad och retunerar helger (lördag & söndag) samt veckodagar.
                 for (int i = 1; i <= daysInMonth; i++)
                 {
@@ -49,24 +48,38 @@ namespace AnturaSemester.Controllers
                 }
 
                 ViewBag.Column = Darray;
+
+
+
+
                 /*
                  ViewBag.dateValue = Today;
                  ViewBag.DaysNextMonth = daysInNextMonth;
                  ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
                  ViewBag.prevMonth = DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper();   // Testing different methods for the browsing between months
-                  */
+                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
                 ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1);
-                GetHolidays();
                 ViewBag.year = new DateTime(year);
                 ViewBag.month = new DateTime(month);
 
+                GetHolidaysRedDays();
+
+
+
                 return View();
+
+                GetHolidays();
+                var calendar = new CalendarViewModel { };
+                calendar.users = _context.Users.ToList();
+                calendar.calendar = _context.Calendar.ToList();
+                return View(calendar);
+
 
             }
 
             // ÖVRIGA RÖDA DAGAR - Röda dagar som förekommer under ett helt år utöver söndagar 
-            HashSet<DateTime> GetHolidays()
+            HashSet<DateTime> GetHolidaysRedDays()
             {
 
                 HashSet<DateTime> holidays = new HashSet<DateTime>();
@@ -137,8 +150,8 @@ namespace AnturaSemester.Controllers
 
             }
 
-
         }
+
     }
 }         
 
