@@ -57,13 +57,13 @@ namespace AnturaSemester.Controllers
                  ViewBag.DaysNextMonth = daysInNextMonth;
                  ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
                  ViewBag.prevMonth = DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper();   // Testing different methods for the browsing between months
-                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
-                ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
+                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); 
+                ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper(); */
                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1);
                 ViewBag.year = new DateTime(year);
                 ViewBag.month = new DateTime(month);
 
-                GetHolidaysRedDays();
+                GetHolidays();
 
 
 
@@ -79,7 +79,7 @@ namespace AnturaSemester.Controllers
             }
 
             // ÖVRIGA RÖDA DAGAR - Röda dagar som förekommer under ett helt år utöver söndagar 
-            HashSet<DateTime> GetHolidaysRedDays()
+            HashSet<DateTime> GetHolidays()
             {
 
                 HashSet<DateTime> holidays = new HashSet<DateTime>();
