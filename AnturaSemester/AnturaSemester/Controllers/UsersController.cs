@@ -37,6 +37,8 @@ namespace AnturaSemester.Controllers
                         select s;
             var roles = from rs in _context.Users
                         select rs;
+            var departments = from dp in _context.Users
+                              select dp;
 
 
 
@@ -48,21 +50,16 @@ namespace AnturaSemester.Controllers
                 case "Role":
                     roles = roles.OrderByDescending(s => s.UsersRole);
                     break;
-                //case "Department":
-                   // users = users.OrderByDescending(s => s.UsersDepartment);
-                   // break;
+                case "Department":
+                    users = users.OrderByDescending(s => s.UsersDepartment);
+                    break;
                 default:
                     users = users.OrderBy(s => s.LastName);
                     break;
             }
             int pageSize = 5;
-            return View(await PaginatedList<Users>.CreateAsync(users.Include(r => r.UsersRole).ThenInclude(e => e.Role).AsNoTracking(), page ?? 1, pageSize));
-            //var users = await _context.Users
-            // .Include(r => r.UsersRole)
-            // .ThenInclude(e => e.Role)
-            //     // .Include(d => d.UsersDepartment)
-            //  .AsNoTracking()
-            //  .SingleOrDefaultAsync(m => m.ID == id);
+            return View(await PaginatedList<Users>.CreateAsync(users.Include(r => r.UsersRole).ThenInclude(e => e.Role).Include(f => f.UsersDepartment).ThenInclude(d => d.Departments).AsNoTracking(), page ?? 1, pageSize));
+
         }
 
 
@@ -78,7 +75,10 @@ namespace AnturaSemester.Controllers
             var users = await _context.Users
                 .Include(r => r.UsersRole)
                  .ThenInclude(e => e.Role)
-                // .Include(d => d.UsersDepartment)
+                .Include(d => d.UsersDepartment)
+                 .ThenInclude(u => u.Departments)
+                .Include(t => t.UsersTeam)
+                 .ThenInclude(n => n.Teams)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
 
@@ -103,13 +103,22 @@ namespace AnturaSemester.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department,Team")] Users users)
+        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department,Team")] Users users, int id)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(users);
+                    //_context.Add(users);
+                    var user = await _context.Users
+                .Include(r => r.UsersRole)
+                 .ThenInclude(e => e.Role)
+                .Include(d => d.UsersDepartment)
+                 .ThenInclude(u => u.Departments)
+                .Include(t => t.UsersTeam)
+                 .ThenInclude(n => n.Teams)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -132,7 +141,17 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
+
+            var users = await _context.Users
+            .Include(r => r.UsersRole)
+             .ThenInclude(e => e.Role)
+            .Include(d => d.UsersDepartment)
+             .ThenInclude(u => u.Departments)
+            .Include(t => t.UsersTeam)
+             .ThenInclude(n => n.Teams)
+            .AsNoTracking()
+            .SingleOrDefaultAsync(m => m.ID == id);
+
             if (users == null)
             {
                 return NotFound();
@@ -152,11 +171,21 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var userToUpdate = await _context.Users.SingleOrDefaultAsync(s => s.ID == id);
+            var userToUpdate = await _context.Users
+
+                .Include(r => r.UsersRole)
+                 .ThenInclude(e => e.Role)
+                .Include(d => d.UsersDepartment)
+                 .ThenInclude(u => u.Departments)
+                .Include(t => t.UsersTeam)
+                 .ThenInclude(n => n.Teams)
+                .AsNoTracking()
+
+                .SingleOrDefaultAsync(s => s.ID == id);
             if (await TryUpdateModelAsync<Users>(
                 userToUpdate,
                 "",
-                s => s.FirstName, s => s.LastName, s => s.UsersRole)) //, s => s.UsersDepartment
+                s => s.FirstName, s => s.LastName, s => s.UsersRole, s => s.UsersDepartment, s => s.UsersTeam))
             {
                 try
                 {
@@ -189,8 +218,17 @@ namespace AnturaSemester.Controllers
             }
 
             var users = await _context.Users
+
+                .Include(r => r.UsersRole)
+                 .ThenInclude(e => e.Role)
+                .Include(d => d.UsersDepartment)
+                 .ThenInclude(u => u.Departments)
+                .Include(t => t.UsersTeam)
+                 .ThenInclude(n => n.Teams)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
+
+
             if (users == null)
             {
                 return NotFound();
@@ -212,6 +250,12 @@ namespace AnturaSemester.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var users = await _context.Users
+                .Include(r => r.UsersRole)
+                 .ThenInclude(e => e.Role)
+                .Include(d => d.UsersDepartment)
+                 .ThenInclude(u => u.Departments)
+                .Include(t => t.UsersTeam)
+                 .ThenInclude(n => n.Teams)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (users == null)

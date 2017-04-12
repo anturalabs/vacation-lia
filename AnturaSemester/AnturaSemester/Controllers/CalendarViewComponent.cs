@@ -63,6 +63,7 @@ namespace AnturaSemester.Controllers
 
                 //Retrieves saved holidays and returns them in calendar
                 GetHolidays();
+
                 var calendar = new CalendarViewModel { };
                 calendar.users = _context.Users.ToList();
                 calendar.calendar = _context.Calendar.ToList();

@@ -28,6 +28,58 @@
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
         </div>
+
+        <!-- Dropdown with checkbox Roles-->
+            <div class="form-group">
+                <label asp-for="UsersRole" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Role(s) <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;Architect</a></li>
+                            <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Developer</a></li>
+                            <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Product Owner</a></li>
+                            <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox" />&nbsp;Tester</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <!--End Role DropDown-->
+
+        <!-- Dropdown with checkbox Department-->
+        <div class="form-group">
+            <label asp-for="UsersDepartment" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="button-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Department <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;Product Development</a></li>
+                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Sales Department</a></li>
+                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Test test Department</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Department DropDown-->
+
+        <!-- Dropdown with checkbox Team-->
+        <div class="form-group">
+            <label asp-for="UsersTeam" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="button-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Team <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;A-Team</a></li>
+                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Gold Team</a></li>
+                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Wombats</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Team DropDown-->
+
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
