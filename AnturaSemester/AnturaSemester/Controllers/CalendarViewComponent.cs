@@ -17,11 +17,12 @@ namespace AnturaSemester.Controllers
         {
             _context = context;
         }
-        //today
+        
         public IViewComponentResult Invoke(int year, int month)
 
         {
             {
+                //today
                 DateTime Today = DateTime.Today;
 
 
@@ -60,6 +61,7 @@ namespace AnturaSemester.Controllers
                  ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
                 ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
 
+                //Retrieves saved holidays and returns them in calendar
                 GetHolidays();
                 var calendar = new CalendarViewModel { };
                 calendar.users = _context.Users.ToList();

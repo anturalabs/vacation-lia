@@ -58,14 +58,19 @@
                         }
 
                         else
-                        { bool HasAddedCell = false; 
+                        {
+                            bool HasAddedCell = false;
+
                             foreach (var cell in Model.calendar.Where(c=>c.UsersID==user.ID && c.Date.Day==x.Day))
                             {
                                 <td>@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
                                 HasAddedCell = true;
                             }
+
                             if (HasAddedCell == false)
-                            {<td></td>}
+                            {
+                                <td></td>
+                            }
                         }
 
 

@@ -56,9 +56,9 @@ namespace AnturaSemester.Data
             var roles = new Roles[]
             {
             new Roles{RoleName="Developer" },
-            new Roles{RoleName="ProjectManager"},
+            new Roles{RoleName="ProductOwner"},
             new Roles{RoleName="Tester" },
-            new Roles{RoleName="Admin" },
+            new Roles{RoleName="Architect" },
             };
             foreach (Roles r in roles)
             {
