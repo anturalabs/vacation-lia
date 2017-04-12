@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AnturaSemester.Models;
@@ -35,14 +36,14 @@ namespace AnturaSemester.Data
             {
                 context.Users.Add(s);
             }
-            context.SaveChanges();                  
+            context.SaveChanges();
 
             var roles = new Roles[]
             {
             new Roles{RoleName="Developer" },
             new Roles{RoleName="ProjectManager"},
-            new Roles{RoleName="Tester" },           
-            new Roles{RoleName="Admin" },          
+            new Roles{RoleName="Tester" },
+            new Roles{RoleName="Admin" },
             };
             foreach (Roles r in roles)
             {
@@ -67,13 +68,29 @@ namespace AnturaSemester.Data
                 {
                     context.UserRole.Add(ur);
                 }
+
+
+                var calendars = new CalendarCell[]
+            {
+             new CalendarCell {UsersID=1, Date=DateTime.ParseExact("20170412", "yyyyMMdd", CultureInfo.InvariantCulture),AbsenceName="Holiday"},
+             new CalendarCell {UsersID=1, Date=DateTime.ParseExact("20170413", "yyyyMMdd", CultureInfo.InvariantCulture),AbsenceName="VAB"},
+             new CalendarCell {UsersID=1, Date=DateTime.ParseExact("20170414", "yyyyMMdd", CultureInfo.InvariantCulture),AbsenceName="Sickleave"},
+             new CalendarCell {UsersID=1, Date=DateTime.ParseExact("20170411", "yyyyMMdd", CultureInfo.InvariantCulture), AbsenceName="VAB"}
+            }; 
+                foreach (CalendarCell c in calendars)
+                {
+                    context.Calendar.Add(c);
+                }
+                context.SaveChanges();
+
+
             }
             /*
             foreach (UserRoles r in userRoles)
             {
                 context.UserRole.Add(r);
             }*/
-            context.SaveChanges();
+
             /*
             var team = new Team[]
             {
@@ -100,17 +117,17 @@ namespace AnturaSemester.Data
             */
             var department = new Department[]
            {
-            new Department{UserID=1,UserDepartment=Department.Departments.Consulting},
-            new Department{UserID=2,UserDepartment=Department.Departments.ProductDevelopment },
-            new Department{UserID=3,UserDepartment=Department.Departments.Marketing },
-            new Department{UserID=4,UserDepartment=Department.Departments.Marketing },
-            new Department{UserID=5,UserDepartment=Department.Departments.ProductDevelopment },
-            new Department{UserID=6,UserDepartment=Department.Departments.Marketing },
-            new Department{UserID=7,UserDepartment=Department.Departments.ProductDevelopment },
-            new Department{UserID=8,UserDepartment=Department.Departments.Consulting},
-            new Department{UserID=9,UserDepartment=Department.Departments.Consulting},
-            new Department{UserID=10,UserDepartment=Department.Departments.Consulting},
-            
+                new Department{UserID=1,UserDepartment=Department.Departments.Consulting},
+                new Department{UserID=2,UserDepartment=Department.Departments.ProductDevelopment },
+                new Department{UserID=3,UserDepartment=Department.Departments.Marketing },
+                new Department{UserID=4,UserDepartment=Department.Departments.Marketing },
+                new Department{UserID=5,UserDepartment=Department.Departments.ProductDevelopment },
+                new Department{UserID=6,UserDepartment=Department.Departments.Marketing },
+                new Department{UserID=7,UserDepartment=Department.Departments.ProductDevelopment },
+                new Department{UserID=8,UserDepartment=Department.Departments.Consulting},
+                new Department{UserID=9,UserDepartment=Department.Departments.Consulting},
+                new Department{UserID=10,UserDepartment=Department.Departments.Consulting},
+
            };
             foreach (Department d in department)
             {
@@ -120,10 +137,11 @@ namespace AnturaSemester.Data
 
 
         }
+    }
+
+
+
+
 }
 
 
-
-        
-        }
-  

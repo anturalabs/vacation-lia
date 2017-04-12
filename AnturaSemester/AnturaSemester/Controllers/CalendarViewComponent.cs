@@ -24,9 +24,9 @@ namespace AnturaSemester.Controllers
             {
                 DateTime Today = DateTime.Today;
 
-
+                
                 //DAYS; amount of days in this month
-                int daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+                int daysInMonth = DateTime.DaysInMonth(year, month);
 
                 //creates List for days in the current month
                 List<CalendarDay> Darray = new List<CalendarDay>();
@@ -55,9 +55,11 @@ namespace AnturaSemester.Controllers
                  ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
                  ViewBag.prevMonth = DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper();   // Testing different methods for the browsing between months
                   */
-                ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
-                ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();
+                ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
+                ViewBag.nextMonth = DateTime.Now.AddMonths(+1);
                 GetHolidays();
+                ViewBag.year = new DateTime(year);
+                ViewBag.month = new DateTime(month);
 
                 return View();
 
@@ -135,8 +137,8 @@ namespace AnturaSemester.Controllers
 
             }
 
-        }
 
+        }
     }
 }         
 

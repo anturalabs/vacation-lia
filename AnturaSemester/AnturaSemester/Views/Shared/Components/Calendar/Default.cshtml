@@ -1,4 +1,6 @@
-﻿@{
+@model List<AnturaSemester.Models.Users>
+
+@{
     ViewData["Title"] = "Calendar";
 }
 
@@ -12,85 +14,69 @@
         </li>
         <li><a href="#">@ViewBag.currentMonth</></a></li>
         <li>
-            <a href="@Url.Action();"aria-label="Next">
+            <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
     </ul>
 </nav>
 
-<a class="w3-right w3-btn" href="ref_@DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();">Next ❯</a>
 
-
-<script type="text/javascript">
-    @functions {} {
-        //print("Clicked next!");
-        for (int; x = 0; x < ViewBag.currentMonth); x++;
-        {
-
-        }
-        <table class="table">
-            <tbody>
-                <tr>
-                @foreach (int x in ViewBag.nextMonth)
-                {
-                    <td>@x</td>
-                }
-                </tr>
-
-            </tbody>
-        </table>
-
-    } 
-
-</script>
-
-<script type="text/javascript">
-    function doFunction() {
-            //print("Clicked next!");
-            @DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();
-            console.log("Put a message here.")
-        }
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        $('.go_back').click(function (e) {
-            e.nextDefault();
-            @DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper();
-        });
-    });
-</script>
-
-
-<table class="table">
+<table class=" table table-bordered table-hover">
     <tbody>
         <tr>
             @foreach (var x in ViewBag.Column)
-            {             
-           }          
+            {
+
+            }
             <th>
 
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
                     if (x.weekDay == true)
                     {
-                    <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
+                    <td bgcolor="#e2dede" width="32px"><font color="red">@x.Day</font></td>
                     }
                     else
                     {
-                        <td>@x.Day</td>
+                        <td width="32px">@x.Day</td>
                     }
                 }
-                <th>
 
-                </th>
-            </tr>
+                @foreach (var user in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => user.FullName)
+                    </td>
 
-    </tbody>
-</table>
+                    @foreach (var x in ViewBag.Column)
+                    {
+                        
+                        if (x.weekDay == true)
+                        {
+                            <td bgcolor="#e2dede"></td>
+                        }
+                        //else if user id and date of column (x.day, x.month, x.year) is in calendarcell database table
+                        else
+                        {
+                            <td></td>
+                        }
+
+                    }
+
+                    </tr>
+                }
 
 
 
 
-<!-- hghgh -->
+
+            </tbody>
+
+        </table>
+
+
+
+
+        <!-- hghgh -->
