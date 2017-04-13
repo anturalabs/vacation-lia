@@ -23,17 +23,21 @@ namespace AnturaSemester.Controllers
 
         {
             {
-                if (year == 0)
-                    year = DateTime.Now.Year;
-            }
-            if (month == 0)
-                month = DateTime.Now.Month;
-            { 
+                  // IF som sätter år som nuvarande år om det har värde av noll. Samma för månad. 
+                    if (year == 0)
+                        year = DateTime.Now.Year;
+                }
+                if (month == 0)
+                    month = DateTime.Now.Month;
+            {
+                   
+
+
+
 
                 //today
                 DateTime Today = DateTime.Today;
 
-                
 
 
 
@@ -48,7 +52,7 @@ namespace AnturaSemester.Controllers
                     CalendarDay Day = new CalendarDay();
                     Darray.Add(Day);
 
-                    DateTime iDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+                    DateTime iDay = new DateTime(year, month, i);
                     bool result = IsThisWeekend(iDay);
                     Day.weekDay = result;
                     Day.Day = i;
@@ -72,9 +76,9 @@ namespace AnturaSemester.Controllers
                  ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
                 ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1);
-                ViewBag.year = new DateTime(year);
-                ViewBag.month = new DateTime(month);
-
+                ViewBag.year = year;
+                // ViewBag.month = new DateTime(month);
+                ViewBag.month = month;
 
                 GetHolidaysRedDays();
 
@@ -162,9 +166,9 @@ namespace AnturaSemester.Controllers
         }
 
 
-      
-        }
+
     }
+}
 
 
 

@@ -16,8 +16,6 @@ namespace AnturaSemester.Controllers
         public HomeController(UsersContext context)
         {
             _context = context;
-
-
         }
 
         [HttpGet]
@@ -28,14 +26,14 @@ namespace AnturaSemester.Controllers
             return View(_context.Users.ToList());
         }
 
-        [HttpGet]
+       /* [HttpPost]
+        [ActionName("GetMonthAndYear")]
         public ActionResult GetMonthAndYear(int year, int month)
         {
-            ViewBag.Year = year;
-            ViewBag.Month = month;
+            
             return View();
         }
-
+        */
 
             //public IActionResult Users()
             // {

@@ -17,7 +17,8 @@
 
         <table class="">  
   
-                  @await Component.InvokeAsync("Calendar"  , new { year = ViewBag.year, month = ViewBag.month })
+            <!--Fick ändra från ViewBags till DateTime.-->
+               @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
 
                 
                 
