@@ -28,17 +28,23 @@ namespace AnturaSemester.Controllers
             return View(_context.Users.ToList());
         }
 
+        [HttpGet]
+        public ActionResult GetMonthAndYear(int year, int month)
+        {
+            ViewBag.Year = year;
+            ViewBag.Month = month;
+            return View();
+        }
 
 
+            //public IActionResult Users()
+            // {
+            //   ViewData["Message"] = "Your application description page.";
 
-        //public IActionResult Users()
-       // {
-         //   ViewData["Message"] = "Your application description page.";
+            //   return View();
+            //}
 
-         //   return View();
-        //}
-
-        public IActionResult Contact()
+            public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 

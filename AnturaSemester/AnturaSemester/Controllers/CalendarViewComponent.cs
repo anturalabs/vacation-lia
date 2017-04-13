@@ -11,22 +11,34 @@ namespace AnturaSemester.Controllers
 {
     public class CalendarViewComponent : ViewComponent
     {
-     private readonly UsersContext _context;
+        private readonly UsersContext _context;
 
         public CalendarViewComponent(UsersContext context)
         {
             _context = context;
         }
-        //today
+
         public IViewComponentResult Invoke(int year, int month)
+
 
         {
             {
+                if (year == 0)
+                    year = DateTime.Now.Year;
+            }
+            if (month == 0)
+                month = DateTime.Now.Month;
+            { 
+
+                //today
                 DateTime Today = DateTime.Today;
+
+                
+
 
 
                 //DAYS; amount of days in this month
-                int daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+                int daysInMonth = DateTime.DaysInMonth(year, month);
 
                 //creates List for days in the current month
                 List<CalendarDay> Darray = new List<CalendarDay>();
@@ -43,8 +55,8 @@ namespace AnturaSemester.Controllers
                     if (Day.weekDay == true)
 
                     {
-                       
-                    }               
+
+                    }
                 }
 
                 ViewBag.Column = Darray;
@@ -57,29 +69,25 @@ namespace AnturaSemester.Controllers
                  ViewBag.DaysNextMonth = daysInNextMonth;
                  ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
                  ViewBag.prevMonth = DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper();   // Testing different methods for the browsing between months
-                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); 
-                ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper(); */
+                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
+                ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
                 ViewBag.nextMonth = DateTime.Now.AddMonths(+1);
                 ViewBag.year = new DateTime(year);
                 ViewBag.month = new DateTime(month);
 
-                GetHolidays();
 
+                GetHolidaysRedDays();
 
-
-                return View();
-
-                GetHolidays();
+                //Retrieves saved holidays and returns them in calendar SH
                 var calendar = new CalendarViewModel { };
                 calendar.users = _context.Users.ToList();
                 calendar.calendar = _context.Calendar.ToList();
                 return View(calendar);
 
-
             }
 
             // ÖVRIGA RÖDA DAGAR - Röda dagar som förekommer under ett helt år utöver söndagar 
-            HashSet<DateTime> GetHolidays()
+            HashSet<DateTime> GetHolidaysRedDays()
             {
 
                 HashSet<DateTime> holidays = new HashSet<DateTime>();
@@ -140,7 +148,7 @@ namespace AnturaSemester.Controllers
             }
 
             // Retunerar helg (lördag & söndag) om resultat är true
-             bool IsThisWeekend(DateTime now)
+            bool IsThisWeekend(DateTime now)
             {
                 if (now.DayOfWeek == DayOfWeek.Saturday)
                     return true;
@@ -150,18 +158,22 @@ namespace AnturaSemester.Controllers
 
             }
 
-        }
 
-    }
-}         
+        }
 
 
       
+        }
+    }
 
 
 
 
 
-           
-        
+
+
+
+
+
+
 

@@ -103,7 +103,7 @@ namespace AnturaSemester.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department")] Users users)
+        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department,Team")] Users users)
         {
             try
             {
