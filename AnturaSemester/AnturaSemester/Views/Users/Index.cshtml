@@ -18,7 +18,7 @@
 
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">First Name</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FNameSortParm"]">First Name</a>
                 </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["RoleSortParm"]">Role(s)</a>
@@ -50,25 +50,20 @@
                     </dd>
                 }
             </td> 
-           
-            
-           <!-- <dt>
-                Html.DisplayNameFor(model => model.UsersRole)
-            </dt>
-            foreach (var item in Model.UsersRole)
-            {
-
-                <dd>
-                    Html.DisplayFor(modelItem => item.Role.RoleName)
-                </dd>
-
-
-            }
--->
 
             <td>
-                <!--Html.DisplayFor(modelItem => item.UsersDepartment)-->
-            </td>
+                @foreach (var department in item.UsersDepartment)
+                {
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => department.Departments.DepartmentName)
+                    </dd>
+                }
+            </td> 
+           
+            
+          
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |

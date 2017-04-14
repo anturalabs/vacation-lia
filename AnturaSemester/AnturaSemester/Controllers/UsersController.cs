@@ -28,6 +28,7 @@ namespace AnturaSemester.Controllers
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["FNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fname_asc" : "";
             ViewData["RoleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Role" : "";
             ViewData["DepartmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Department" : "";
 
@@ -47,11 +48,14 @@ namespace AnturaSemester.Controllers
                 case "name_desc":
                     users = users.OrderByDescending(s => s.LastName);
                     break;
+                case "fname_asc":
+                    users = users.OrderBy(s => s.FirstName);
+                    break;
                 case "Role":
-                    roles = roles.OrderByDescending(s => s.UsersRole);
+                    roles = roles.OrderBy(s => s.UsersRole);
                     break;
                 case "Department":
-                    users = users.OrderByDescending(s => s.UsersDepartment);
+                    departments = users.OrderBy(s => s.UsersDepartment);
                     break;
                 default:
                     users = users.OrderBy(s => s.LastName);
