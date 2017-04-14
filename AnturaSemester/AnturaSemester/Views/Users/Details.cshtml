@@ -7,7 +7,7 @@
 
 <h2>Details</h2>
 
-<div>
+<div style="display:block;">
     <h4>Users</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -27,47 +27,46 @@
         <dt>
             @Html.DisplayNameFor(model => model.UsersRole)
         </dt>
+        <dd>
             @foreach (var item in Model.UsersRole)
             {
 
-                        <dd>
-                            @Html.DisplayFor(modelItem => item.Role.RoleName)
-                        </dd>
 
-                   
-                }
-      
-        
+                @Html.DisplayFor(modelItem => item.Role.RoleName)
+
+                <br/>
+
+            }
+
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.UsersDepartment)
         </dt>
-        
+        <dd>
                 @foreach (var item in Model.UsersDepartment)
-                {
-                   
-                        <dd>
+                {                   
                             @Html.DisplayFor(modelItem => item.Departments.DepartmentName)
-                        </dd>
-                   
-                }
+                    <br/>
+                 }
            
-        
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.UsersTeam)
         </dt>
-        
+        <dd>
                 @foreach (var item in Model.UsersTeam)
                 {
                     
-                        <dd>
-                            @Html.DisplayFor(modelItem => item.Teams.TeamName)
-                        </dd>
                         
-                    
+                            @Html.DisplayFor(modelItem => item.Teams.TeamName)
+
+                    <br/>
+
                 }
             
-      
+        </dd>
     </dl>
 </div>
 
