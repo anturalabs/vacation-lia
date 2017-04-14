@@ -16,27 +16,33 @@ namespace AnturaSemester.Controllers
         public HomeController(UsersContext context)
         {
             _context = context;
-
-
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index( int year, int month)
         {
+            ViewBag.Year = year;
+            ViewBag.Month = month;
             return View(_context.Users.ToList());
         }
 
+       /* [HttpPost]
+        [ActionName("GetMonthAndYear")]
+        public ActionResult GetMonthAndYear(int year, int month)
+        {
+            
+            return View();
+        }
+        */
 
+            //public IActionResult Users()
+            // {
+            //   ViewData["Message"] = "Your application description page.";
 
+            //   return View();
+            //}
 
-        //public IActionResult Users()
-       // {
-         //   ViewData["Message"] = "Your application description page.";
-
-         //   return View();
-        //}
-
-        public IActionResult Contact()
+            public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 

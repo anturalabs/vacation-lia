@@ -8,19 +8,18 @@
     <ul class="pagination">
         <li class="active">
         <li>
-            <a href="#" aria-label="Previous">
+            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li><a href="#">@ViewBag.currentMonth</></a></li>
         <li>
-            <a href="#" aria-label="Next">
+            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
     </ul>
 </nav>
-
 
 <table class=" table table-bordered table-hover">
     <tbody>
@@ -55,13 +54,13 @@
                         if (x.weekDay == true)
                         {
                             <td bgcolor="#e2dede"></td>
+
                         }
 
                         else
                         {
                             bool HasAddedCell = false;
-
-                            foreach (var cell in Model.calendar.Where(c=>c.UsersID==user.ID && c.Date.Day==x.Day))
+                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day))
                             {
                                 <td>@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
                                 HasAddedCell = true;
