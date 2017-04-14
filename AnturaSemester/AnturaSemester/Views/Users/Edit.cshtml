@@ -75,9 +75,29 @@
                 <div class="button-group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Department <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;Product Development</a></li>
-                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Sales Department</a></li>
-                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Test test Department</a></li>
+                        @{
+
+                            List<AnturaSemester.Models.UserDepartment> department = ViewBag.Department;
+
+
+                            foreach (var departments in department)
+                            {
+                                var assigned = Model.UsersDepartment.Any(x => x.DepartmentID == departments.DepartmentID);
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedDepartment"
+                                               value="@departments.DepartmentID"
+                                               @(Html.Raw(assigned ? "checked=\"checked\"" : "")) />
+                                        @departments.Departments.DepartmentName
+
+                                    </a>
+                                </li>
+
+                            }
+                        } 
                     </ul>
                 </div>
             </div>
@@ -91,10 +111,30 @@
                 <div class="button-group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Team <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;A-Team</a></li>
-                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Gold Team</a></li>
-                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Wombats</a></li>
-                        
+
+                        @{
+
+                            List<AnturaSemester.Models.UserTeam> team = ViewBag.Team;
+
+
+                            foreach (var teams in team)
+                            {
+                                var assigned = Model.UsersTeam.Any(x => x.TeamID == teams.TeamID);
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedTeam"
+                                               value="@teams.TeamID"
+                                               @(Html.Raw(assigned ? "checked=\"checked\"" : "")) />
+                                        @teams.Teams.TeamName
+
+                                    </a>
+                                </li>
+
+                            }
+                        }    
                     </ul>
                 </div>
             </div>

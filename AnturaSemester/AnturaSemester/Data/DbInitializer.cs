@@ -83,62 +83,63 @@ namespace AnturaSemester.Data
                 {
                     context.UserRole.Add(ur);
                 }
+            }
 
-                context.SaveChanges();
-
-
-
+            context.SaveChanges();
 
 
-                var department = new Department[]
-               {
+
+
+
+            var department = new Department[]
+           {
                 new Department{DepartmentName="ProductDevelopment"},
                 new Department{DepartmentName="SalesDepartment"},
                 new Department{DepartmentName="TestDepartment"},
 
-               };
-                foreach (Department d in department)
-                {
-                    context.Department.Add(d);
-                }
-                context.SaveChanges();
+           };
+            foreach (Department d in department)
+            {
+                context.Department.Add(d);
+            }
+            context.SaveChanges();
 
 
-                var userDepartment = new UserDepartment[]
-        {
+            var userDepartment = new UserDepartment[]
+            {
             new UserDepartment{UsersID=1, DepartmentID=2},
             new UserDepartment{UsersID=2, DepartmentID=1},
             new UserDepartment{UsersID=3, DepartmentID=3},
             new UserDepartment{UsersID=4, DepartmentID=1},
-        };
-                foreach (UserDepartment ud in userDepartment)
-                {
-                    var userDepartmentInDataBase = context.UserDepartment.Where(
-                        s =>
-                                s.User.ID == ud.UsersID &&
-                                s.Departments.ID == ud.DepartmentID).SingleOrDefault();
-                    if (userDepartmentInDataBase == null)
-                    {
-                        context.UserDepartment.Add(ud);
-                    }
-
-                    context.SaveChanges();
-
-
-                    var teams = new Team[]
+            };
+            foreach (UserDepartment ud in userDepartment)
             {
+                var userDepartmentInDataBase = context.UserDepartment.Where(
+                    s =>
+                            s.User.ID == ud.UsersID &&
+                            s.Departments.ID == ud.DepartmentID).SingleOrDefault();
+                if (userDepartmentInDataBase == null)
+                {
+                    context.UserDepartment.Add(ud);
+                }
+            }
+            context.SaveChanges();
+
+
+            var teams = new Team[]
+    {
             new Team{TeamName="A-Team"},
             new Team{TeamName="GoldTeam"},
             new Team{TeamName="Wombats"},
-            };
-                    foreach (Team t in teams)
-                    {
-                        context.Team.Add(t);
-                    }
-                    context.SaveChanges();
+    };
+            foreach (Team t in teams)
+            {
+                context.Team.Add(t);
+            }
+            context.SaveChanges();
 
-                    var userTeam = new UserTeam[]
-                 {
+            var userTeam = new UserTeam[]
+         {
             new UserTeam{UsersID=1, TeamID=3},
             new UserTeam{UsersID=2, TeamID=2},
             new UserTeam{UsersID=3, TeamID=1},
@@ -147,31 +148,32 @@ namespace AnturaSemester.Data
             new UserTeam{UsersID=6, TeamID=3},
             new UserTeam{UsersID=7, TeamID=2},
 
-                 };
-                    foreach (UserTeam ut in userTeam)
-                    {
-                        var userTeamInDataBase = context.UserTeam.Where(
-                            s =>
-                                    s.User.ID == ut.UsersID &&
-                                    s.Teams.ID == ut.TeamID).SingleOrDefault();
-                        if (userTeamInDataBase == null)
-                        {
-                            context.UserTeam.Add(ut);
-                        }
-
-                        context.SaveChanges();
-
-
-                    }
+         };
+            foreach (UserTeam ut in userTeam)
+            {
+                var userTeamInDataBase = context.UserTeam.Where(
+                    s =>
+                            s.User.ID == ut.UsersID &&
+                            s.Teams.ID == ut.TeamID).SingleOrDefault();
+                if (userTeamInDataBase == null)
+                {
+                    context.UserTeam.Add(ut);
                 }
-
-
-
-
             }
+
+            context.SaveChanges();
+
+
         }
     }
+
+
+
+
 }
+
+
+
 
 
 

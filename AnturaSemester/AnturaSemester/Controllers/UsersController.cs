@@ -157,6 +157,8 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
             PopulateUsersRoles(users);
+            PopulateUsersDepartment(users);
+            PopulateUsersTeam(users);
 
             return View(users);
         }
@@ -174,11 +176,45 @@ namespace AnturaSemester.Controllers
                     UsersID = users.ID,
                     Role = role,
                     User = users                   
-                    //UserRolesID = userRoles.FirstOrDefault(),
-                   // Assigned = userRoles.Contains(role.RoleName)
                 });
             }
             ViewData["Roles"] = viewModel;
+        }
+
+        private void PopulateUsersDepartment(Users users)
+        {
+            var allDepartment = _context.Department;
+            var userDepartments = new HashSet<int>(users.UsersDepartment.Select(c => c.Departments.ID));
+            var viewModel = new List<UserDepartment>();
+            foreach (var department in allDepartment)
+            {
+                viewModel.Add(new UserDepartment
+                {
+                    DepartmentID = department.ID,
+                    UsersID = users.ID,
+                    Departments = department,
+                    User = users
+                });
+            }
+            ViewData["Department"] = viewModel;
+        }
+
+        private void PopulateUsersTeam(Users users)
+        {
+            var allTeam = _context.Team;
+            var userTeams = new HashSet<int>(users.UsersTeam.Select(c => c.Teams.ID));
+            var viewModel = new List<UserTeam>();
+            foreach (var team in allTeam)
+            {
+                viewModel.Add(new UserTeam
+                {
+                    TeamID = team.ID,
+                    UsersID = users.ID,
+                    Teams = team,
+                    User = users
+                });
+            }
+            ViewData["Team"] = viewModel;
         }
 
         // POST: Users/Edit/5
@@ -186,7 +222,7 @@ namespace AnturaSemester.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, string[] selectedRoles)
+        public async Task<IActionResult> Edit(int? id, string[] selectedRoles, string[] selectedDepartment, string[] selectedTeam)
 
         {
             if (id == null)
@@ -210,6 +246,8 @@ namespace AnturaSemester.Controllers
             {
 
                 UpdateUserRoles(selectedRoles, userToUpdate);
+                UpdateUserDepartment(selectedDepartment, userToUpdate);
+                UpdateUserTeam(selectedTeam, userToUpdate);
 
                 try
                 {
@@ -228,6 +266,7 @@ namespace AnturaSemester.Controllers
         }
 
 
+        //Edit Roles
         private void UpdateUserRoles(string[] selectedRoles, Users userToUpdate)
         {
             if (selectedRoles == null)
@@ -261,6 +300,72 @@ namespace AnturaSemester.Controllers
         }
 
 
+        //Edit Department
+        private void UpdateUserDepartment(string[] selectedDepartment, Users userToUpdate)
+        {
+            if (selectedDepartment == null)
+            {
+                userToUpdate.UsersDepartment = new List<UserDepartment>();
+                return;
+            }
+
+            var selectedDepartmentHS = new HashSet<string>(selectedDepartment);
+            var userDepartment = new HashSet<int>
+                (userToUpdate.UsersDepartment.Select(c => c.Departments.ID));
+            foreach (var department in _context.Department)
+            {
+                if (selectedDepartmentHS.Contains(department.ID.ToString()))
+                {
+                    if (!userDepartment.Contains(department.ID))
+                    {
+                        userToUpdate.UsersDepartment.Add(new UserDepartment { UsersID = userToUpdate.ID, DepartmentID = department.ID });
+                    }
+                }
+                else
+                {
+
+                    if (userDepartment.Contains(department.ID))
+                    {
+                        UserDepartment departmentToRemove = userToUpdate.UsersDepartment.SingleOrDefault(i => i.DepartmentID == department.ID);
+                        _context.Remove(departmentToRemove);
+                    }
+                }
+            }
+        }
+
+
+        //Edit Team
+        private void UpdateUserTeam(string[] selectedTeam, Users userToUpdate)
+        {
+            if (selectedTeam == null)
+            {
+                userToUpdate.UsersTeam = new List<UserTeam>();
+                return;
+            }
+
+            var selectedTeamHS = new HashSet<string>(selectedTeam);
+            var userTeam = new HashSet<int>
+                (userToUpdate.UsersTeam.Select(c => c.Teams.ID));
+            foreach (var team in _context.Team)
+            {
+                if (selectedTeamHS.Contains(team.ID.ToString()))
+                {
+                    if (!userTeam.Contains(team.ID))
+                    {
+                        userToUpdate.UsersTeam.Add(new UserTeam { UsersID = userToUpdate.ID, TeamID = team.ID });
+                    }
+                }
+                else
+                {
+
+                    if (userTeam.Contains(team.ID))
+                    {
+                        UserTeam teamToRemove = userToUpdate.UsersTeam.SingleOrDefault(i => i.TeamID == team.ID);
+                        _context.Remove(teamToRemove);
+                    }
+                }
+            }
+        }
 
 
         // GET: Users/Delete/5
