@@ -12,7 +12,7 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li><a href="#">@ViewBag.currentMonth</></a></li>
+        <li><a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a></li>
         <li>
             <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -24,7 +24,7 @@
 <table class=" table table-bordered table-hover">
     <tbody>
         <tr>
-           
+
             <th>
 
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
@@ -41,8 +41,8 @@
 
             </tr>
 
-                @foreach (var user in Model.users)
-                {
+            @foreach (var user in Model.users)
+            {
                 <tr>
                     <td>
                         @Html.DisplayFor(model => user.FullName)
@@ -53,7 +53,7 @@
 
                         if (x.weekDay == true)
                         {
-                            <td bgcolor="#e2dede"></td>
+                            <td bgcolor="#F8F6F6"></td>
 
                         }
 
@@ -75,18 +75,18 @@
 
                     }
 
-                    </tr>
-                }
+                </tr>
+            }
 
 
 
 
 
-            </tbody>
+        </tbody>
 
-        </table>
-
-
+    </table>
 
 
-        <!-- hghgh -->
+
+
+    <!-- hghgh -->
