@@ -99,6 +99,13 @@ namespace AnturaSemester.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            var users = new Users();
+            users.UsersRole = new List<UserRoles>();
+            PopulateUsersRoles(users);
+            users.UsersDepartment = new List<UserDepartment>();
+            PopulateUsersDepartment(users);
+            users.UsersTeam = new List<UserTeam>();
+            PopulateUsersTeam(users);
             return View();
         }
 
@@ -107,33 +114,49 @@ namespace AnturaSemester.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department,Team")] Users users, int id)
+        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department,Team")] Users users, string[] selectedRoles, string[] selectedDepartment, string[] selectedTeam)
         {
-            try
+            if (selectedRoles != null)
             {
-                if (ModelState.IsValid)
+                users.UsersRole = new List<UserRoles>();
+                foreach (var role in selectedRoles)
                 {
-                    //_context.Add(users);
-                    var user = await _context.Users
-                .Include(r => r.UsersRole)
-                 .ThenInclude(e => e.Role)
-                .Include(d => d.UsersDepartment)
-                 .ThenInclude(u => u.Departments)
-                .Include(t => t.UsersTeam)
-                 .ThenInclude(n => n.Teams)
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.ID == id);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    var roleToAdd = new UserRoles { UsersID = users.ID, RolesID = int.Parse(role) };
+                    users.UsersRole.Add(roleToAdd);
                 }
             }
-            catch (DbUpdateException /* ex */)
+
+            if (selectedDepartment != null)
             {
-                //Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists " +
-                    "see your system administrator.");
+                users.UsersDepartment = new List<UserDepartment>();
+                foreach (var department in selectedDepartment)
+                {
+                    var departmentToAdd = new UserDepartment { UsersID = users.ID, DepartmentID = int.Parse(department) };
+                    users.UsersDepartment.Add(departmentToAdd);
+                }
             }
+
+            if (selectedTeam != null)
+            {
+                users.UsersTeam = new List<UserTeam>();
+                foreach (var team in selectedTeam)
+                {
+                    var teamToAdd = new UserTeam { UsersID = users.ID, TeamID = int.Parse(team) };
+                    users.UsersTeam.Add(teamToAdd);
+                }
+            }
+
+
+            if (ModelState.IsValid)
+                {
+
+                _context.Add(users);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            
+            
+           
             return View(users);
         }
 

@@ -13,19 +13,21 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label asp-for="LastName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            </div>
+        
      
         <!-- Dropdown with checkbox Roles-->
         <div class="form-group">
@@ -34,10 +36,31 @@
                 <div class="button-group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Role(s) <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" /> <!--asp-for="UsersRole.Role.Architect"--> &nbsp;Architect</a></li>
-                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Developer</a></li>
-                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Product Owner</a></li>
-                        <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox" />&nbsp;Tester</a></li>
+
+
+                        @{
+
+                            List<AnturaSemester.Models.UserRoles> roles = ViewBag.Roles;
+
+
+                            foreach (var role in roles)
+                            {
+                                
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedRoles"
+                                               value="@role.RolesID"/>
+                                        @role.Role.RoleName
+
+                                    </a>
+                                </li>
+
+                            }
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -50,9 +73,28 @@
                 <div class="button-group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Department <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;Product Development</a></li>
-                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Sales Department</a></li>
-                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Test test Department</a></li>
+                        @{
+
+                            List<AnturaSemester.Models.UserDepartment> department = ViewBag.Department;
+
+
+                            foreach (var departments in department)
+                            {
+                                
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedDepartment"
+                                               value="@departments.DepartmentID"/>
+                                        @departments.Departments.DepartmentName
+
+                                    </a>
+                                </li>
+
+                            }
+                        }
                     </ul>
                 </div>
             </div>
@@ -65,10 +107,29 @@
                 <div class="button-group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Team <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;A-Team</a></li>
-                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Gold Team</a></li>
-                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Wombats</a></li>
 
+                        @{
+
+                            List<AnturaSemester.Models.UserTeam> team = ViewBag.Team;
+
+
+                            foreach (var teams in team)
+                            {
+                                
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedTeam"
+                                               value="@teams.TeamID"/>
+                                        @teams.Teams.TeamName
+
+                                    </a>
+                                </li>
+
+                            }
+                        }
                     </ul>
                 </div>
             </div>
