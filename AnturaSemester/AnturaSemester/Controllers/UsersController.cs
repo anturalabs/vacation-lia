@@ -156,7 +156,29 @@ namespace AnturaSemester.Controllers
             {
                 return NotFound();
             }
+            PopulateUsersRoles(users);
+
             return View(users);
+        }
+
+        private void PopulateUsersRoles(Users users)
+        {
+            var allRoles = _context.Roles;
+            var userRoles = new HashSet<int>(users.UsersRole.Select(c => c.Role.ID));
+            var viewModel = new List<UserRoles>();
+            foreach (var role in allRoles)
+            {
+                viewModel.Add(new UserRoles
+                {
+                    RolesID = role.ID,
+                    UsersID = users.ID,
+                    Role = role,
+                    User = users                   
+                    //UserRolesID = userRoles.FirstOrDefault(),
+                   // Assigned = userRoles.Contains(role.RoleName)
+                });
+            }
+            ViewData["Roles"] = viewModel;
         }
 
         // POST: Users/Edit/5
@@ -164,7 +186,8 @@ namespace AnturaSemester.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> Edit(int? id, string[] selectedRoles)
+
         {
             if (id == null)
             {
@@ -172,21 +195,22 @@ namespace AnturaSemester.Controllers
             }
 
             var userToUpdate = await _context.Users
-
                 .Include(r => r.UsersRole)
                  .ThenInclude(e => e.Role)
                 .Include(d => d.UsersDepartment)
                  .ThenInclude(u => u.Departments)
                 .Include(t => t.UsersTeam)
                  .ThenInclude(n => n.Teams)
-                .AsNoTracking()
-
                 .SingleOrDefaultAsync(s => s.ID == id);
+
             if (await TryUpdateModelAsync<Users>(
                 userToUpdate,
                 "",
                 s => s.FirstName, s => s.LastName, s => s.UsersRole, s => s.UsersDepartment, s => s.UsersTeam))
             {
+
+                UpdateUserRoles(selectedRoles, userToUpdate);
+
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -204,7 +228,37 @@ namespace AnturaSemester.Controllers
         }
 
 
+        private void UpdateUserRoles(string[] selectedRoles, Users userToUpdate)
+        {
+            if (selectedRoles == null)
+            {
+                userToUpdate.UsersRole = new List<UserRoles>();
+                return;
+            }
 
+            var selectedRolesHS = new HashSet<string>(selectedRoles);
+            var userRoles = new HashSet<int>
+                (userToUpdate.UsersRole.Select(c => c.Role.ID));
+            foreach (var role in _context.Roles)
+            {
+                if (selectedRolesHS.Contains(role.ID.ToString()))
+                {
+                    if (!userRoles.Contains(role.ID))
+                    {
+                        userToUpdate.UsersRole.Add(new UserRoles { UsersID = userToUpdate.ID, RolesID = role.ID });
+                    }
+                }
+                else
+                {
+
+                    if (userRoles.Contains(role.ID))
+                    {
+                        UserRoles roleToRemove = userToUpdate.UsersRole.SingleOrDefault(i => i.RolesID == role.ID);
+                        _context.Remove(roleToRemove);
+                    }
+                }
+            }
+        }
 
 
 

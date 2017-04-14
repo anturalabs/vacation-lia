@@ -36,10 +36,32 @@
                     <div class="button-group">
                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Role(s) <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />&nbsp;Architect</a></li>
-                            <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />&nbsp;Developer</a></li>
-                            <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />&nbsp;Product Owner</a></li>
-                            <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox" />&nbsp;Tester</a></li>
+
+
+                            @{
+                                
+                                List<AnturaSemester.Models.UserRoles> roles = ViewBag.Roles;
+
+
+                                foreach (var role in roles)
+                                {
+                                    var assigned = Model.UsersRole.Any(x => x.RolesID == role.RolesID);
+
+                                    <li>
+                                        <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                            <input type="checkbox"
+                                                   name="selectedRoles"
+                                                   value="@role.RolesID"
+                                                   @(Html.Raw(assigned ? "checked=\"checked\"" : "")) />
+                                            @role.Role.RoleName
+
+                                        </a>
+                                    </li>
+
+                                }
+                            }
+                            
                         </ul>
                     </div>
                 </div>
@@ -79,6 +101,7 @@
         </div>
         <!--End Team DropDown-->
 
+       
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
