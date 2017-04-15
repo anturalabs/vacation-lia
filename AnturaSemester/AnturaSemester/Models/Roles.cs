@@ -12,7 +12,7 @@ namespace AnturaSemester.Models
     {
         [Key]
         public int ID { get; set; }
-        [Display(Name = "Role")]
+        [Display(Name = "Role's Name")]
         public string RoleName { get; set; }
        
         public ICollection<UserRoles> UsersRoles { get; set; }
