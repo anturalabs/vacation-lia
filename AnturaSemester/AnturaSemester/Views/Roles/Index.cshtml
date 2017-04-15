@@ -12,9 +12,10 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RoleName)
-                </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Rolerball"]">Roles</a>
+
+            </th>
             
         </tr>
     </thead>
@@ -27,7 +28,7 @@
             
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>

@@ -21,26 +21,26 @@ namespace AnturaSemester.Controllers
 
 
 
-        // GET: Users
+        // GET: Roles
         public async Task<IActionResult> Index(
             string sortOrder,
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["RoleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Role" : "";
-            ViewData["DepartmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Department" : "";
+
+            ViewData["Rolerball"] = String.IsNullOrEmpty(sortOrder) ? "Roler" : "";
+
 
 
 
             var roles = from s in _context.Roles
                         select s;
             switch (sortOrder)
-            {               
-                case "Role":
+            {
+                case "Roler":
                     roles = roles.OrderByDescending(s => s.RoleName);
                     break;
-               
+
                 default:
                     roles = roles.OrderBy(s => s.RoleName);
                     break;
@@ -52,61 +52,31 @@ namespace AnturaSemester.Controllers
 
 
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var users = await _context.Users
-                .Include(r => r.UsersRole)
-                 .ThenInclude(e => e.Role)
-                // .Include(d => d.UsersDepartment)
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.ID == id);
 
 
-
-            if (users == null)
-            {
-                return NotFound();
-            }
-
-            return View(users);
-        }
-
-        // GET: Users/Create
+        // GET: Roles/Create
         public IActionResult Create()
         {
+            var roles = new Roles();
+
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstName,Role,Department,Team")] Users users)
+        public async Task<IActionResult> Create([Bind("RoleName")] Roles roles)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _context.Add(users);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
+                _context.Add(roles);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists " +
-                    "see your system administrator.");
-            }
-            return View(users);
+
+            return View(roles);
         }
 
         // GET: Users/Edit/5
@@ -117,32 +87,51 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
-            if (users == null)
+
+            var roles = await _context.Roles
+            .AsNoTracking()
+            .SingleOrDefaultAsync(m => m.ID == id);
+
+            if (roles == null)
             {
                 return NotFound();
             }
-            return View(users);
+
+
+
+            return View(roles);
         }
 
-        // POST: Users/Edit/5
+
+
+
+
+
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> Edit(int? id, string RoleName)
+
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var userToUpdate = await _context.Users.SingleOrDefaultAsync(s => s.ID == id);
-            if (await TryUpdateModelAsync<Users>(
-                userToUpdate,
-                "",
-                s => s.FirstName, s => s.LastName, s => s.UsersRole)) //, s => s.UsersDepartment
+            var roleToUpdate = await _context.Roles
+                .SingleOrDefaultAsync(s => s.ID == id);
+
+
+            if (await TryUpdateModelAsync<Roles>(
+           roleToUpdate,
+           "",
+           s => s.RoleName))
             {
+
+
+
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -156,7 +145,10 @@ namespace AnturaSemester.Controllers
                         "see your system administrator.");
                 }
             }
-            return View(userToUpdate);
+
+
+
+            return View(roleToUpdate);
         }
 
 
@@ -165,7 +157,10 @@ namespace AnturaSemester.Controllers
 
 
 
-        // GET: Users/Delete/5
+
+
+
+        // GET: Roles/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -173,10 +168,15 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Users
+            var roles = await _context.Roles
+
+
+
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (users == null)
+
+
+            if (roles == null)
             {
                 return NotFound();
             }
@@ -188,25 +188,25 @@ namespace AnturaSemester.Controllers
                     "see your system administrator.";
             }
 
-            return View(users);
+            return View(roles);
         }
 
-        // POST: Users/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var users = await _context.Users
+            var roles = await _context.Roles
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (users == null)
+            if (roles == null)
             {
                 return RedirectToAction("Index");
             }
 
             try
             {
-                _context.Users.Remove(users);
+                _context.Roles.Remove(roles);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -217,11 +217,5 @@ namespace AnturaSemester.Controllers
             }
         }
 
-
-
-        private bool UsersExists(int id)
-        {
-            return _context.Users.Any(e => e.ID == id);
-        }
     }
 }
