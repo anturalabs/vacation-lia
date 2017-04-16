@@ -10,14 +10,14 @@ namespace AnturaSemester.Models
     public class Team
     {
         [Key]
-        public int UsersID { get; set; }
         public int ID { get; set; }
-        //public Team UserTeams { get; set; }
-       
-        public enum TeamEnum { ATeam, GoldTeam, Wombats}
-        public ICollection<Team> UserTeams { get; set; }
+        public string TeamName { get; set; }
+        
+
+        
+        public ICollection<UserTeam> UserTeams { get; set; }
 
         public Users Users { get; set; }
-        public TeamEnum? UsersTeams { get; set; }
+        
     }
 }

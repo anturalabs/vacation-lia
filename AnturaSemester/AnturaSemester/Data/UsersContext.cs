@@ -17,7 +17,9 @@ namespace AnturaSemester.Data
         public DbSet<UserRoles> UserRole { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Department> Department { get; set; }
-        public DbSet<Team> UsersTeam { get; set; }
+        public DbSet<UserDepartment> UserDepartment { get; set; }
+        public DbSet<Team> Team { get; set; }
+        public DbSet<UserTeam> UserTeam { get; set; }
         public DbSet<CalendarCell> Calendar { get; set; }
         
 
@@ -33,7 +35,11 @@ namespace AnturaSemester.Data
 
             modelBuilder.Entity<UserRoles>()
               .HasKey(c => new { c.UsersID, c.RolesID });
-            
+            modelBuilder.Entity<UserDepartment>()
+              .HasKey(c => new { c.UsersID, c.DepartmentID });
+            modelBuilder.Entity<UserTeam>()
+              .HasKey(c => new { c.UsersID, c.TeamID });
+
         }
     }
 }

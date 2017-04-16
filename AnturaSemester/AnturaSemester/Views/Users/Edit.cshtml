@@ -15,19 +15,136 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ID" />
         <div class="form-group">
-            <label asp-for="LastName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
             <label asp-for="FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
         </div>
+
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+       
+
+        <!-- Dropdown with checkbox Roles-->
+            <div class="form-group">
+                <label asp-for="UsersRole" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Role(s) <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+
+
+                            @{
+                                
+                                List<AnturaSemester.Models.UserRoles> roles = ViewBag.Roles;
+
+
+                                foreach (var role in roles)
+                                {
+                                    var assigned = Model.UsersRole.Any(x => x.RolesID == role.RolesID);
+
+                                    <li>
+                                        <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                            <input type="checkbox"
+                                                   name="selectedRoles"
+                                                   value="@role.RolesID"
+                                                   @(Html.Raw(assigned ? "checked=\"checked\"" : "")) />
+                                            @role.Role.RoleName
+
+                                        </a>
+                                    </li>
+
+                                }
+                            }
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <!--End Role DropDown-->
+
+        <!-- Dropdown with checkbox Department-->
+        <div class="form-group">
+            <label asp-for="UsersDepartment" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="button-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Department <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        @{
+
+                            List<AnturaSemester.Models.UserDepartment> department = ViewBag.Department;
+
+
+                            foreach (var departments in department)
+                            {
+                                var assigned = Model.UsersDepartment.Any(x => x.DepartmentID == departments.DepartmentID);
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedDepartment"
+                                               value="@departments.DepartmentID"
+                                               @(Html.Raw(assigned ? "checked=\"checked\"" : "")) />
+                                        @departments.Departments.DepartmentName
+
+                                    </a>
+                                </li>
+
+                            }
+                        } 
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Department DropDown-->
+
+        <!-- Dropdown with checkbox Team-->
+        <div class="form-group">
+            <label asp-for="UsersTeam" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="button-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Team <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+
+                        @{
+
+                            List<AnturaSemester.Models.UserTeam> team = ViewBag.Team;
+
+
+                            foreach (var teams in team)
+                            {
+                                var assigned = Model.UsersTeam.Any(x => x.TeamID == teams.TeamID);
+
+                                <li>
+                                    <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                        <input type="checkbox"
+                                               name="selectedTeam"
+                                               value="@teams.TeamID"
+                                               @(Html.Raw(assigned ? "checked=\"checked\"" : "")) />
+                                        @teams.Teams.TeamName
+
+                                    </a>
+                                </li>
+
+                            }
+                        }    
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Team DropDown-->
+
+       
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

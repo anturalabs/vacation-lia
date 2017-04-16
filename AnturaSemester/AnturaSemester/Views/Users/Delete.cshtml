@@ -27,6 +27,49 @@
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersRole)
+        </dt>
+        @foreach (var item in Model.UsersRole)
+            {
+
+            <dd>
+                @Html.DisplayFor(modelItem => item.Role.RoleName)
+            </dd>
+
+
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersDepartment)
+        </dt>
+
+        @foreach (var item in Model.UsersDepartment)
+        {
+
+            <dd>
+                @Html.DisplayFor(modelItem => item.Departments.DepartmentName)
+            </dd>
+
+        }
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersTeam)
+        </dt>
+
+        @foreach (var item in Model.UsersTeam)
+        {
+
+            <dd>
+                @Html.DisplayFor(modelItem => item.Teams.TeamName)
+            </dd>
+
+
+        }
     </dl>
     
     <form asp-action="Delete">

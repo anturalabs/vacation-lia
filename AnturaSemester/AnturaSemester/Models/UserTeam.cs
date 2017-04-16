@@ -7,5 +7,11 @@ namespace AnturaSemester.Models
 {
     public class UserTeam
     {
+        public int UserTeamID { get; set; }
+        public int UsersID { get; set; }
+        public int TeamID { get; set; }
+
+        public Users User { get; set; }
+        public Team Teams { get; set; }
     }
 }

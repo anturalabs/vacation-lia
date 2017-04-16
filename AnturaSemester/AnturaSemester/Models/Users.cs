@@ -32,11 +32,11 @@ namespace AnturaSemester.Models
         [Display(Name = "Role(s)")]
         public ICollection<UserRoles> UsersRole { get; set; }
 
-        //[Display(Name = "Department")]
-        //public ICollection<Department> UsersDepartment { get; set; }
+        [Display(Name = "Department")]
+        public ICollection<UserDepartment> UsersDepartment { get; set; }
 
-        //[Display(Name = "Team")]
-        //public ICollection<Team> UsersTeam {get; set;}
+        [Display(Name = "Team")]
+        public ICollection<UserTeam> UsersTeam {get; set;}
     
     }
 }
