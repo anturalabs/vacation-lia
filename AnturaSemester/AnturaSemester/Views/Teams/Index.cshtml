@@ -1,7 +1,7 @@
-@model IEnumerable<AnturaSemester.Models.Roles>
+@model IEnumerable<AnturaSemester.Models.Team>
 
 @{
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
@@ -12,23 +12,21 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["Rolerball"]">Roles</a>
-
-            </th>
-            
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["Teamwork"]">Teams</a>
+                </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RoleName)
+                @Html.DisplayFor(modelItem => item.TeamName)
             </td>
-            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                
+               
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>

@@ -11,6 +11,7 @@ namespace AnturaSemester.Models
     {
         [Key]
         public int ID { get; set; }
+        [Display(Name = "Department's Name")]
         public string DepartmentName { get; set; }
         
 

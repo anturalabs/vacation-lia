@@ -1,27 +1,27 @@
-@model AnturaSemester.Models.Roles
+@model AnturaSemester.Models.Department
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
-<form asp-action="Create">
+<form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Roles</h4>
+        <h4>Department</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID" />
         <div class="form-group">
-            <label asp-for="RoleName" class="col-md-2 control-label"></label>
+            <label asp-for="DepartmentName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="RoleName" class="form-control" />
-                <span asp-validation-for="RoleName" class="text-danger"></span>
+                <input asp-for="DepartmentName" class="form-control" />
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
             </div>
         </div>
-      
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

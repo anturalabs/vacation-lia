@@ -26,21 +26,27 @@
         <tr>
 
             <th>
-
+             
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
+                    
                 {
                     if (x.weekDay == true)
                     {
                     <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
                     }
+                    if (x.highLight == true)
+                    {
+                        <td bgcolor="#3D85C6">@x.Day</td>
+                    }
+
                     else
                     {
-                        <td>@x.Day</td>                  
+                        < td > @x.Day </ td >
 
                     }
                 }
-
             </tr>
+
 
             @foreach (var user in Model.users)
             {

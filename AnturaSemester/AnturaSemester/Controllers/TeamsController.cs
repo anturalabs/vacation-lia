@@ -10,76 +10,70 @@ using AnturaSemester.Models;
 
 namespace AnturaSemester.Controllers
 {
-    public class RolesController : Controller
+    public class TeamsController : Controller
     {
         private readonly UsersContext _context;
 
-        public RolesController(UsersContext context)
+        public TeamsController(UsersContext context)
         {
-            _context = context;
+            _context = context;    
         }
 
-
-
-        // GET: Roles
+        // GET: Teams
         public async Task<IActionResult> Index(
             string sortOrder,
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
 
-            ViewData["Rolerball"] = String.IsNullOrEmpty(sortOrder) ? "Roler" : "";
+            ViewData["Teamwork"] = String.IsNullOrEmpty(sortOrder) ? "Workwork" : "";
 
 
 
 
-            var roles = from s in _context.Roles
-                        select s;
+            var teams = from s in _context.Team
+                              select s;
             switch (sortOrder)
             {
-                case "Roler":
-                    roles = roles.OrderByDescending(s => s.RoleName);
+                case "Workwork":
+                    teams = teams.OrderByDescending(s => s.TeamName);
                     break;
 
                 default:
-                    roles = roles.OrderBy(s => s.RoleName);
+                    teams = teams.OrderBy(s => s.TeamName);
                     break;
             }
             int pageSize = 9;
-            return View(await PaginatedList<Roles>.CreateAsync(roles.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<Team>.CreateAsync(teams.AsNoTracking(), page ?? 1, pageSize));
 
         }
 
+      
 
-
-
-
-        // GET: Roles/Create
+        // GET: Teams/Create
         public IActionResult Create()
         {
-            var roles = new Roles();
-
+            var teams = new Team();
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: Teams/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleName")] Roles roles)
+        public async Task<IActionResult> Create([Bind("ID,TeamName")] Team team)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(roles);
+                _context.Add(team);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            return View(roles);
+            return View(team);
         }
 
-        // GET: Roles/Edit/5
+        // GET: Teams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,47 +81,34 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-
-            var roles = await _context.Roles
-            .AsNoTracking()
-            .SingleOrDefaultAsync(m => m.ID == id);
-
-            if (roles == null)
+            var team = await _context.Team.SingleOrDefaultAsync(m => m.ID == id);
+            if (team == null)
             {
                 return NotFound();
             }
-
-
-
-            return View(roles);
+            return View(team);
         }
 
-
-
-
-
-
-        // POST: Roles/Edit/5
+        // POST: Teams/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, string RoleName)
-
+        public async Task<IActionResult> Edit(int id, [Bind("ID,TeamName")] Team team)
         {
-            if (id == null)
+            if (id != team.ID)
             {
                 return NotFound();
             }
 
-            var roleToUpdate = await _context.Roles
-                .SingleOrDefaultAsync(s => s.ID == id);
+            var teamToUpdate = await _context.Team
+               .SingleOrDefaultAsync(s => s.ID == id);
 
 
-            if (await TryUpdateModelAsync<Roles>(
-           roleToUpdate,
+            if (await TryUpdateModelAsync<Team>(
+           teamToUpdate,
            "",
-           s => s.RoleName))
+           s => s.TeamName))
             {
 
 
@@ -148,19 +129,10 @@ namespace AnturaSemester.Controllers
 
 
 
-            return View(roleToUpdate);
+            return View(teamToUpdate);
         }
 
-
-
-
-
-
-
-
-
-
-        // GET: Roles/Delete/5
+        // GET: Teams/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -168,54 +140,30 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var roles = await _context.Roles
-
-
-
-                .AsNoTracking()
+            var team = await _context.Team
                 .SingleOrDefaultAsync(m => m.ID == id);
-
-
-            if (roles == null)
+            if (team == null)
             {
                 return NotFound();
             }
 
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewData["ErrorMessage"] =
-                    "Delete failed. Try again, and if the problem persists " +
-                    "see your system administrator.";
-            }
-
-            return View(roles);
+            return View(team);
         }
 
-        // POST: Roles/Delete/5
+        // POST: Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var roles = await _context.Roles
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (roles == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            try
-            {
-                _context.Roles.Remove(roles);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
-            }
+            var team = await _context.Team.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Team.Remove(team);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
+        private bool TeamExists(int id)
+        {
+            return _context.Team.Any(e => e.ID == id);
+        }
     }
 }

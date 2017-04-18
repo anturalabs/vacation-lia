@@ -10,76 +10,70 @@ using AnturaSemester.Models;
 
 namespace AnturaSemester.Controllers
 {
-    public class RolesController : Controller
+    public class DepartmentsController : Controller
     {
         private readonly UsersContext _context;
 
-        public RolesController(UsersContext context)
+        public DepartmentsController(UsersContext context)
         {
-            _context = context;
+            _context = context;    
         }
 
-
-
-        // GET: Roles
+        // GET: Departments
         public async Task<IActionResult> Index(
-            string sortOrder,
-            int? page)
+           string sortOrder,
+           int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
 
-            ViewData["Rolerball"] = String.IsNullOrEmpty(sortOrder) ? "Roler" : "";
+            ViewData["Depo"] = String.IsNullOrEmpty(sortOrder) ? "Derp" : "";
 
 
 
 
-            var roles = from s in _context.Roles
+            var departments = from s in _context.Department
                         select s;
             switch (sortOrder)
             {
-                case "Roler":
-                    roles = roles.OrderByDescending(s => s.RoleName);
+                case "Derp":
+                    departments = departments.OrderByDescending(s => s.DepartmentName);
                     break;
 
                 default:
-                    roles = roles.OrderBy(s => s.RoleName);
+                    departments = departments.OrderBy(s => s.DepartmentName);
                     break;
             }
             int pageSize = 9;
-            return View(await PaginatedList<Roles>.CreateAsync(roles.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<Department>.CreateAsync(departments.AsNoTracking(), page ?? 1, pageSize));
 
         }
 
+        
 
-
-
-
-        // GET: Roles/Create
+        // GET: Departments/Create
         public IActionResult Create()
         {
-            var roles = new Roles();
-
+            var departments = new Department();
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleName")] Roles roles)
+        public async Task<IActionResult> Create([Bind("ID,DepartmentName")] Department department)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(roles);
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            return View(roles);
+            return View(department);
         }
 
-        // GET: Roles/Edit/5
+        // GET: Departments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,47 +81,34 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-
-            var roles = await _context.Roles
-            .AsNoTracking()
-            .SingleOrDefaultAsync(m => m.ID == id);
-
-            if (roles == null)
+            var department = await _context.Department.SingleOrDefaultAsync(m => m.ID == id);
+            if (department == null)
             {
                 return NotFound();
             }
-
-
-
-            return View(roles);
+            return View(department);
         }
 
-
-
-
-
-
-        // POST: Roles/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, string RoleName)
-
+        public async Task<IActionResult> Edit(int id, [Bind("ID,DepartmentName")] Department department)
         {
-            if (id == null)
+            if (id != department.ID)
             {
                 return NotFound();
             }
 
-            var roleToUpdate = await _context.Roles
-                .SingleOrDefaultAsync(s => s.ID == id);
+            var departmentToUpdate = await _context.Department
+               .SingleOrDefaultAsync(s => s.ID == id);
 
 
-            if (await TryUpdateModelAsync<Roles>(
-           roleToUpdate,
+            if (await TryUpdateModelAsync<Department>(
+           departmentToUpdate,
            "",
-           s => s.RoleName))
+           s => s.DepartmentName))
             {
 
 
@@ -148,19 +129,10 @@ namespace AnturaSemester.Controllers
 
 
 
-            return View(roleToUpdate);
+            return View(departmentToUpdate);
         }
 
-
-
-
-
-
-
-
-
-
-        // GET: Roles/Delete/5
+        // GET: Departments/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -168,54 +140,30 @@ namespace AnturaSemester.Controllers
                 return NotFound();
             }
 
-            var roles = await _context.Roles
-
-
-
-                .AsNoTracking()
+            var department = await _context.Department
                 .SingleOrDefaultAsync(m => m.ID == id);
-
-
-            if (roles == null)
+            if (department == null)
             {
                 return NotFound();
             }
 
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewData["ErrorMessage"] =
-                    "Delete failed. Try again, and if the problem persists " +
-                    "see your system administrator.";
-            }
-
-            return View(roles);
+            return View(department);
         }
 
-        // POST: Roles/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var roles = await _context.Roles
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (roles == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            try
-            {
-                _context.Roles.Remove(roles);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
-            }
+            var department = await _context.Department.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Department.Remove(department);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
+        private bool DepartmentExists(int id)
+        {
+            return _context.Department.Any(e => e.ID == id);
+        }
     }
 }
