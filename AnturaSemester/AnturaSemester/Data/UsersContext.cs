@@ -41,5 +41,8 @@ namespace AnturaSemester.Data
               .HasKey(c => new { c.UsersID, c.TeamID });
 
         }
+        
+
+        public DbSet<AnturaSemester.Models.SemesterViewModel> SemesterViewModel { get; set; }
     }
 }
