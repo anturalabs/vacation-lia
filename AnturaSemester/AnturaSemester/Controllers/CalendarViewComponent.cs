@@ -58,12 +58,12 @@ namespace AnturaSemester.Controllers
             for (int i = 1; i <= daysInMonth; i++)
             {
                 CalendarDay Day = new CalendarDay();
-                // CalendarDay HighlightToday1 = new CalendarDay();
+                
                 Darray.Add(Day);
 
                 DateTime iDay = new DateTime(year, month, i); // Highlight dagens datum - Dumma kod vill inte funka som den gjorde innan kraschen. 
                 bool result = IsThisWeekend(iDay); // Kommer ej ihåg hur jag lyckades från början men klurar ut det sen.
-                bool result1 = HighlightToday(Today);
+                bool result1 = HighlightToday(DateTime.Today.Date);
                 Day.weekDay = result;
                 Day.highLight = result1;
                 Day.Day = i;
@@ -76,10 +76,14 @@ namespace AnturaSemester.Controllers
 
             ViewBag.Column = Darray;
 
+            ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
             ViewBag.year = year;
             ViewBag.today = Today;
             ViewBag.month = month;
+            ViewBag.GetWeeks = GetWeeks;
 
+
+            GetWeeks();
             GetHolidaysRedDays();
 
             //Retrieves saved holidays and returns them in calendar SH
@@ -87,6 +91,22 @@ namespace AnturaSemester.Controllers
             calendar.users = _context.Users.ToList();
             calendar.calendar = _context.Calendar.ToList();
             return View(calendar);
+
+
+
+
+             int GetWeeks(DateTime time)
+            {
+                DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+                if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+                {
+                    time = time.AddDays(3);
+                }
+
+                return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            }
+
 
         }
 
@@ -151,7 +171,9 @@ namespace AnturaSemester.Controllers
             return false;
         }
 
+        
     }
+   
 }
 
 

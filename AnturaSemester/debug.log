@@ -1,1 +1,3 @@
 [0330/095558.701:ERROR:file_io.cc(41)] write: The pipe is being closed. (0xE8)
+[0419/155322.750:ERROR:exception_snapshot_win.cc(87)] thread ID 1732 not found in process
+[0419/155322.750:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
