@@ -23,7 +23,7 @@ namespace AnturaSemester.Controllers
 
 
             // IF som sätter år som nuvarande år om det har värde av noll. Samma för månad. 
-
+            // IF pagination
             if (year > 0 && month == 0)
             {
                 year = year - 1;
@@ -42,19 +42,6 @@ namespace AnturaSemester.Controllers
 
             if (month == 0)
                 month = DateTime.Now.Month;
-
-
-
-
-
-
-
-            /* }
-             if (month <= 0)
-                 month = month - 1;
-             {*/
-
-
 
             //today
             DateTime Today = DateTime.Today;
@@ -76,13 +63,13 @@ namespace AnturaSemester.Controllers
 
                 DateTime iDay = new DateTime(year, month, i); // Highlight dagens datum - Dumma kod vill inte funka som den gjorde innan kraschen. 
                 bool result = IsThisWeekend(iDay); // Kommer ej ihåg hur jag lyckades från början men klurar ut det sen.
-                bool result1 = HighlightToday(DateTime.Today);
+                bool result1 = HighlightToday(Today);
                 Day.weekDay = result;
                 Day.highLight = result1;
                 Day.Day = i;
                 if (Day.weekDay == true)
-
-                {
+                    if (Day.highLight == true)
+                    {
 
                 }
             }
