@@ -9,10 +9,17 @@
         <h4>SemesterViewModel</h4>
         <hr />
 
+        <div class="dropdown">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose User <span class="caret"></span></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">User 1</a>
+                <a class="dropdown-item" href="#">User 2</a>
+                <a class="dropdown-item" href="#">User 3</a>
+            </div>
+        </div>
+        <br />
 
-        Type of absence dropdown <br />
-        Repeat check box <br />
-        Commentbox <br />
+        
 
         
         <!--Datepicker start-->
@@ -35,19 +42,31 @@
         </script>
 
         <!--DatePicker End-->
+        <br />
+        <div class="dropdown">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">User 1</a>
+                    <a class="dropdown-item" href="#">User 2</a>
+                    <a class="dropdown-item" href="#">User 3</a>
+                </div>
+            </div>
+            <br /> 
 
-        
-
-
-
-
-        
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input">
+                Repeat Absence?
+            </label>
+        </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <label for="comments">Comments</label>
+            <textarea class="form-control" id="comments" rows="3"></textarea>
         </div>
+        
+
+        
     </div>
 </form>
 
