@@ -18,26 +18,30 @@ namespace AnturaSemester.Controllers
             _context = context;
         }
 
-        public IViewComponentResult Invoke(int year, int month, int prevYear, int nextYear)
-
-
+        public IViewComponentResult Invoke(int year, int month, int prevMonth, int nextYear)
         {
+
+
+            // IF som sätter år som nuvarande år om det har värde av noll. Samma för månad. 
+            // IF pagination
+            if (year > 0 && month == 0)
             {
-                // IF som sätter år som nuvarande år om det har värde av noll. Samma för månad. 
-                if (year == 0)
-                    year = DateTime.Now.Year;
+                year = year - 1;
+                month = 12;
             }
+
+            if (year > 0 && month == 13)
+            {
+                year = year + 1;
+                month = 1;
+            }
+
+            if (year == 0)
+                year = DateTime.Now.Year;
+
+
             if (month == 0)
                 month = DateTime.Now.Month;
-            {
-
-                if (prevYear < year)
-                    prevYear = year - 1;
-            }
-            if (nextYear > year)
-                nextYear = year + 1;
-
-
 
             //today
             DateTime Today = DateTime.Today;
@@ -54,38 +58,32 @@ namespace AnturaSemester.Controllers
             for (int i = 1; i <= daysInMonth; i++)
             {
                 CalendarDay Day = new CalendarDay();
+                
                 Darray.Add(Day);
 
-                DateTime iDay = new DateTime(year, month, i);
-                bool result = IsThisWeekend(iDay);
+                DateTime iDay = new DateTime(year, month, i); // Highlight dagens datum - Dumma kod vill inte funka som den gjorde innan kraschen. 
+                bool result = IsThisWeekend(iDay); // Kommer ej ihåg hur jag lyckades från början men klurar ut det sen.
+                bool result1 = HighlightToday(DateTime.Today.Date);
                 Day.weekDay = result;
+                Day.highLight = result1;
                 Day.Day = i;
                 if (Day.weekDay == true)
-
-                {
+                    if (Day.highLight == true)
+                    {
 
                 }
             }
 
             ViewBag.Column = Darray;
 
-
-
-
-            /*
-             ViewBag.dateValue = Today;
-             ViewBag.DaysNextMonth = daysInNextMonth;
-             ViewBag.currentMonth = DateTime.Now.ToString("MMMM yyyy").ToUpper();
-             ViewBag.prevMonth = DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper();   // Testing different methods for the browsing between months
-             ViewBag.nextMonth = DateTime.Now.AddMonths(+1).ToString("MMMM yyyy").ToUpper(); */
             ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
-            ViewBag.nextMonth = DateTime.Now.AddMonths(+1);
             ViewBag.year = year;
-            // ViewBag.month = new DateTime(month);
+            ViewBag.today = Today;
             ViewBag.month = month;
-            ViewBag.PreviousYear = prevYear;
-            ViewBag.NextYear = nextYear;
+            ViewBag.GetWeeks = GetWeeks;
 
+
+            GetWeeks();
             GetHolidaysRedDays();
 
             //Retrieves saved holidays and returns them in calendar SH
@@ -93,6 +91,22 @@ namespace AnturaSemester.Controllers
             calendar.users = _context.Users.ToList();
             calendar.calendar = _context.Calendar.ToList();
             return View(calendar);
+
+
+
+
+             int GetWeeks(DateTime time)
+            {
+                DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+                if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+                {
+                    time = time.AddDays(3);
+                }
+
+                return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            }
+
 
         }
 
@@ -119,40 +133,22 @@ namespace AnturaSemester.Controllers
             DateTime secondDayChristmas = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
             holidays.Add(secondDayChristmas);
 
-            /* var sofiaHelg = (from day in Enumerable.Range(1, 30) // En test röd-dag som alltid förekommer på den 3:e torsdag i november. 
-                            where new DateTime(year/ 11/ day).DayOfWeek == DayOfWeek.Thursday
-                            select day).ElementAt(3);
-             DateTime aweHelgDag = new DateTime(year/ 11/ sofiaHelg);
-             holidays.Add(sofiaHelgDag.Date); */
-
-            /* foreach (DateTime DayOfWeek in GetHolidays()) ; */
-
-
             return holidays;
-
         }
-
-
 
         // Hänger ihop med ÖVRIGA RÖDA DAGAR (holidays)
         DateTime AdjustForWeekendHoliday(DateTime holiday)
-
         {
-
             if (holiday.DayOfWeek == DayOfWeek.Saturday)
-
             {
                 return holiday.AddDays(-1);
-
             }
             else if (holiday.DayOfWeek == DayOfWeek.Sunday)
             {
                 return holiday.AddDays(1);
             }
-
             else
             {
-
                 return holiday;
             }
         }
@@ -165,14 +161,19 @@ namespace AnturaSemester.Controllers
             if (now.DayOfWeek == DayOfWeek.Sunday)
                 return true;
             return false;
-
         }
 
 
+        bool HighlightToday(DateTime now)
+        {
+            if (DateTime.Today == now)
+                return true;
+            return false;
+        }
+
+        
     }
-
-
-
+   
 }
 
 

@@ -11,7 +11,8 @@ namespace AnturaSemester.Models
         public int Month;
         public int Year;
         public bool weekDay;
-       // public bool otherRedDay;
+        public bool highLight;
+       
 
     }
 }
