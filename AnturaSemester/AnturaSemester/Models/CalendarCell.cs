@@ -14,7 +14,7 @@ namespace AnturaSemester.Models
 
         public int UsersID { get; set; }
         public string AbsenceName { get; set; }
-        public enum AbsenceType { Holiday, VAB, Sick, Workrelated}
+        public enum AbsenceType { Holiday, VAB, Sick, ParentalLeave}
         public string Approval { get; set; }
         public enum ApprovalState { Approved, Denied, Ongoing}
         public Users User { get; set; }

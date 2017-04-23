@@ -21,7 +21,9 @@ namespace AnturaSemester.Data
         public DbSet<Team> Team { get; set; }
         public DbSet<UserTeam> UserTeam { get; set; }
         public DbSet<CalendarCell> Calendar { get; set; }
+
         
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +45,6 @@ namespace AnturaSemester.Data
         }
         
 
-        public DbSet<AnturaSemester.Models.SemesterViewModel> SemesterViewModel { get; set; }
+        
     }
 }

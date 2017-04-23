@@ -7,11 +7,9 @@ namespace AnturaSemester.Models
 {
     public class SemesterViewModel
     {
-        public int ID { get; set; }
-        public string AbsenceName { get; set; }
-        public enum AbsenceType { Holiday, VAB, Sick, Workrelated }
-        public string Approval { get; set; }
-        public enum ApprovalState { Approved, Denied, Ongoing }
-        public bool RepeatChosen { get; set; }
+
+        public List<CalendarCell> calendar;
+        public List<Users> users;
+        
     }
 }

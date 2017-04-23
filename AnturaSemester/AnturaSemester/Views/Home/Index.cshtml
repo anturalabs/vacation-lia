@@ -8,7 +8,7 @@
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a class="navbar-link active" data-toggle="tab" href="#home">A-Team</a></li>
     <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu1">PD</a></li>
-    <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu2">Poäng</a></li>
+    <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu2">Sprintplanering</a></li>
 </ul>
 
 <div class="tab-content">
@@ -24,26 +24,23 @@
 
        
             
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+            <!-- Button trigger for modal -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal">
                 Semesterplanering
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="SemesterModal" tabindex="-1" role="dialog" aria-labelledby="SemesterModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Semesterplanering</h5>
+                            <h5 class="modal-title" id="SemesterModalLabel">Semesterplanering</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Datepicker <br />
-                            Type of absence dropdown <br />
-                            Repeat check box <br />
-                            Commentbox <br />
+                           @await  Component.InvokeAsync("Semester")
 
 
                         </div>

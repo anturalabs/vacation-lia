@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AnturaSemester.Data;
+using AnturaSemester.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnturaSemester.Controllers
 {
-    public class SemesterViewComponent
+    public class SemesterViewComponent : ViewComponent
     {
         private readonly UsersContext _context;
 
@@ -18,7 +20,20 @@ namespace AnturaSemester.Controllers
 
         public IViewComponentResult Invoke()
         {
-            return View();
+
+            return View(new SemesterViewModel());
         }
+
+
+
+
+
+
+
+
+
+
+
     }
 }
+

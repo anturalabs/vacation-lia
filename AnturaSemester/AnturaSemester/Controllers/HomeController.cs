@@ -24,6 +24,7 @@ namespace AnturaSemester.Controllers
             ViewBag.Year = year;
             ViewBag.Month = month;
             return View(_context.Users.ToList());
+            
         }
 
        /* [HttpPost]

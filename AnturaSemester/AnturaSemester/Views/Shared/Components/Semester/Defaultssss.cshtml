@@ -1,0 +1,92 @@
+@model AnturaSemester.Models.SemesterViewModel
+
+@{
+    ViewData["Title"] = "Semester";
+}
+
+<h2>Semester</h2>
+
+<form asp-action="Default">
+    <div class="form-horizontal">
+        <h4>SemesterViewModel</h4>
+        <hr />
+
+        Datepicker <br />
+        Type of absence dropdown <br />
+        Repeat check box <br />
+        Commentbox <br />
+
+        <!--Datepicker start-->
+        <div class="input-daterange input-group" id="datepicker">
+            <input type="text" class="input-sm form-control" name="start" />
+            <span class="input-group-addon">to</span>
+            <input type="text" class="input-sm form-control" name="end" />
+        </div>
+        <script type="text/javascript">
+        $('#sandbox-container .input-daterange').datepicker({
+        startView: 1,
+        forceParse: false,
+        daysOfWeekHighlighted: "0,6",
+        calendarWeeks: true,
+        todayHighlight: true
+    });
+    </script>
+<!--DatePicker End-->
+
+        <!--
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+
+       
+
+        <!-- Dropdown Absencetype
+        <div class="form-group">
+            <label asp-for="AbsenceType" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="button-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+
+
+                        {
+
+                            List<AnturaSemester.Models.SemesterViewModel> AbsenceName = ViewBag.AbsenceDropdown;
+
+
+                            foreach (var name in calendar)
+                            {
+
+
+                            <li>
+                                <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                                    <input
+                                           name="AbsenceType"
+                                           value="SemesterViewModel.AbsenceName" />
+                                    name.SemesterViewModel.AbsenceName
+
+                                </a>
+                            </li>
+
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End AbsenceType DropDown
+        -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

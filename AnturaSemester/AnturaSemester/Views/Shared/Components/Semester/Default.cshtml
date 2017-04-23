@@ -1,30 +1,48 @@
-@model AnturaSemester.Models.SemesterViewModel
+﻿@model AnturaSemester.Models.SemesterViewModel
 
 @{
-    ViewData["Title"] = "Default";
+    ViewData["Title"] = "Semester";
 }
-
-<h2>Default</h2>
 
 <form asp-action="Default">
     <div class="form-horizontal">
         <h4>SemesterViewModel</h4>
         <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="AbsenceName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="AbsenceName" class="form-control" />
-                <span asp-validation-for="AbsenceName" class="text-danger"></span>
+
+
+        Type of absence dropdown <br />
+        Repeat check box <br />
+        Commentbox <br />
+
+        
+        <!--Datepicker start-->
+        <div id="sandbox-container">
+            <div class="input-daterange input-group" id="datepicker">
+                <input type="text" class="input-sm form-control" name="start" />
+                <span class="input-group-addon">to</span>
+                <input type="text" class="input-sm form-control" name="end" />
             </div>
+            
         </div>
-        <div class="form-group">
-            <label asp-for="Approval" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Approval" class="form-control" />
-                <span asp-validation-for="Approval" class="text-danger"></span>
-            </div>
-        </div>
+        <script type="text/javascript">
+            $('#sandbox-container .input-daterange').datepicker({
+                startView: 1,
+                forceParse: false,
+                daysOfWeekHighlighted: "0,6",
+                calendarWeeks: true,
+                todayHighlight: true
+            });
+        </script>
+
+        <!--DatePicker End-->
+
+        
+
+
+
+
+        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -33,9 +51,7 @@
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
