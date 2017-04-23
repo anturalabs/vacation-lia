@@ -63,7 +63,7 @@ namespace AnturaSemester.Controllers
 
                 DateTime iDay = new DateTime(year, month, i); // Highlight dagens datum - Dumma kod vill inte funka som den gjorde innan kraschen. 
                 bool result = IsThisWeekend(iDay); // Kommer ej ihåg hur jag lyckades från början men klurar ut det sen.
-                bool result1 = HighlightToday(DateTime.Today.Date);
+                bool result1 = HighlightToday(iDay);
                 Day.weekDay = result;
                 Day.highLight = result1;
                 Day.Day = i;
@@ -80,11 +80,9 @@ namespace AnturaSemester.Controllers
             ViewBag.year = year;
             ViewBag.today = Today;
             ViewBag.month = month;
-            ViewBag.GetWeeks = GetWeeks;
+            ViewBag.GetWeeks = GetWeeks(DateTime.Now); //temp change that doesn't really do anything, but otherwise build has errors
 
-
-            GetWeeks();
-            GetHolidaysRedDays();
+                       GetHolidaysRedDays();
 
             //Retrieves saved holidays and returns them in calendar SH
             var calendar = new CalendarViewModel { };
@@ -102,7 +100,7 @@ namespace AnturaSemester.Controllers
                 {
                     time = time.AddDays(3);
                 }
-
+                
                 return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
             }
