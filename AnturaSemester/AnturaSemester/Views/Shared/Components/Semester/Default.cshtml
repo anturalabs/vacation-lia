@@ -11,17 +11,29 @@
 
         <div class="dropdown">
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose User <span class="caret"></span></button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">User 1</a>
-                <a class="dropdown-item" href="#">User 2</a>
-                <a class="dropdown-item" href="#">User 3</a>
-            </div>
+            <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach (var user in Model.users)
+                {
+                    <li>
+                        <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                            @Html.DisplayFor(model => user.FullName)
+                        </a>
+                    </li>
+                }
+
+
+
+
+
+
+            </ul>
         </div>
         <br />
 
-        
 
-        
+
+
         <!--Datepicker start-->
         <div id="sandbox-container">
             <div class="input-daterange input-group" id="datepicker">
@@ -29,29 +41,21 @@
                 <span class="input-group-addon">to</span>
                 <input type="text" class="input-sm form-control" name="end" />
             </div>
-            
-        </div>
-        <script type="text/javascript">
-            $('#sandbox-container .input-daterange').datepicker({
-                startView: 1,
-                forceParse: false,
-                daysOfWeekHighlighted: "0,6",
-                calendarWeeks: true,
-                todayHighlight: true
-            });
-        </script>
+
+        </div>     
 
         <!--DatePicker End-->
         <br />
         <div class="dropdown">
-                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">User 1</a>
-                    <a class="dropdown-item" href="#">User 2</a>
-                    <a class="dropdown-item" href="#">User 3</a>
-                </div>
-            </div>
-            <br /> 
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
+            <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li>
+                    <a href="#" class="small" data-value="option1" tabIndex="-1">VAB</a>
+                    <a href="#" class="small" data-value="option1" tabIndex="-1">Semester</a>
+                </li>
+            </ul>
+        </div>
+        <br />
 
         <div class="form-check">
             <label class="form-check-label">
@@ -64,10 +68,26 @@
             <label for="comments">Comments</label>
             <textarea class="form-control" id="comments" rows="3"></textarea>
         </div>
-        
 
-        
+
+
     </div>
+
+    <script type="text/javascript">
+          $(".dropdown-menu li a").click(function () {
+              $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+              $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+          });
+
+          $('#sandbox-container .input-daterange').datepicker({
+              startView: 1,
+              forceParse: false,
+              daysOfWeekHighlighted: "0,6",
+              calendarWeeks: true,
+              todayHighlight: true
+          });
+    </script>
+
 </form>
 
 

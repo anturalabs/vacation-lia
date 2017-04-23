@@ -20,8 +20,11 @@ namespace AnturaSemester.Controllers
 
         public IViewComponentResult Invoke()
         {
-
-            return View(new SemesterViewModel());
+            var semester = new SemesterViewModel { };
+            semester.users = _context.Users.ToList();
+            semester.calendar = _context.Calendar.ToList();
+            return View(semester);
+            
         }
 
 
