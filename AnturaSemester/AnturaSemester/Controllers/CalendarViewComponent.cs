@@ -18,7 +18,7 @@ namespace AnturaSemester.Controllers
             _context = context;
         }
 
-        public IViewComponentResult Invoke(int year, int month, int prevMonth, int nextYear)
+        public IViewComponentResult Invoke(int year, int month)
         {
 
 
@@ -54,7 +54,7 @@ namespace AnturaSemester.Controllers
             for (int i = 1; i <= daysInMonth; i++)
             {
                 CalendarDay Day = new CalendarDay();
-                
+
                 Darray.Add(Day);
 
                 DateTime iDay = new DateTime(year, month, i); // Highlight dagens datum - Dumma kod vill inte funka som den gjorde innan kraschen. 
@@ -62,11 +62,15 @@ namespace AnturaSemester.Controllers
                 bool result1 = HighlightToday(iDay);
                 Day.weekEnd = result;
                 Day.highLight = result1;
-                int getWeekNum = culture.Calendar.GetWeekOfYear(iDay, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-                Day.weekNumber = getWeekNum;
+                int GetWeekNum = culture.Calendar.GetWeekOfYear(iDay, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+                Day.weekNumber = GetWeekNum;
+                bool result2 = MondayTest(iDay);
+                Day.getMonday = result2;
+              //  int result3 = GetHolidaysRedDays.result3(iDay);
+               // Day.holidaysRedDay = result3;
                 Day.Day = i;
-                
-                    
+
+
             }
 
             ViewBag.Column = Darray;
@@ -74,45 +78,53 @@ namespace AnturaSemester.Controllers
             ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
             ViewBag.year = year;
             ViewBag.month = month;
-           
-            GetHolidaysRedDays();
+
+            
 
             //Retrieves saved holidays and returns them in calendar SH
             var calendar = new CalendarViewModel { };
             calendar.users = _context.Users.ToList();
             calendar.calendar = _context.Calendar.ToList();
             return View(calendar);
-          
+
+
+            DateTime GetHolidaysRedDays()
+            {
+
+                List<DateTime> holidays = new List<DateTime>();
+
+
+                DateTime newYearsDate = (new DateTime(DateTime.Now.Year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
+                holidays.Add(newYearsDate);
+
+
+                DateTime valborgEve = (new DateTime(DateTime.Now.Year, 5, 1).Date); // skriver ut Valborg, alltid förekommer 1:a maj
+                holidays.Add(valborgEve);
+
+                DateTime nationalDay = (new DateTime(DateTime.Now.Year, 6, 6).Date); // National dagen, alltid förekommer 6:e juni
+                holidays.Add(nationalDay);
+
+                DateTime christmasDay = (new DateTime(DateTime.Now.Year, 12, 25).Date); // Juldagen, alltid förekommer 25:e dec
+                holidays.Add(christmasDay);
+
+                DateTime secondDayChristmas = (new DateTime(DateTime.Now.Year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
+                holidays.Add(secondDayChristmas);
+
+                return GetHolidaysRedDays();
+            }
 
         }
 
         // ÖVRIGA RÖDA DAGAR - Röda dagar som förekommer under ett helt år utöver söndagar 
-        HashSet<DateTime> GetHolidaysRedDays()
-        {
+        /*  HashSet<DateTime> GetHolidaysRedDays()
+          {
 
-            HashSet<DateTime> holidays = new HashSet<DateTime>();
+              HashSet<DateTime> holidays = new HashSet<DateTime>(); */
 
+        
+        
 
-            DateTime newYearsDate = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
-            holidays.Add(newYearsDate);
-
-
-            DateTime valborgEve = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 5, 1).Date); // skriver ut Valborg, alltid förekommer 1:a maj
-            holidays.Add(valborgEve);
-
-            DateTime nationalDay = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 6, 6).Date); // National dagen, alltid förekommer 6:e juni
-            holidays.Add(nationalDay);
-
-            DateTime christmasDay = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 12, 25).Date); // Juldagen, alltid förekommer 25:e dec
-            holidays.Add(christmasDay);
-
-            DateTime secondDayChristmas = AdjustForWeekendHoliday(new DateTime(DateTime.Now.Year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
-            holidays.Add(secondDayChristmas);
-
-            return holidays;
-        }
-
-        // Hänger ihop med ÖVRIGA RÖDA DAGAR (holidays)
+       /* // Hänger ihop med ÖVRIGA RÖDA DAGAR (holidays)
         DateTime AdjustForWeekendHoliday(DateTime holiday)
         {
             if (holiday.DayOfWeek == DayOfWeek.Saturday)
@@ -127,7 +139,7 @@ namespace AnturaSemester.Controllers
             {
                 return holiday;
             }
-        }
+        } */
 
         // Retunerar helg (lördag & söndag) om resultat är true
         bool IsThisWeekend(DateTime now)
@@ -136,30 +148,35 @@ namespace AnturaSemester.Controllers
                 return true;
             if (now.DayOfWeek == DayOfWeek.Sunday)
                 return true;
+            // if (now.DayOfWeek == DateTime.Now.Year(1, 1))
+            // return true
             return false;
+
         }
+        bool MondayTest(DateTime now) // Checks every monday 
+        {
+            if (now.DayOfWeek == DayOfWeek.Monday)
+                return true;
+            return false;
+        } 
 
 
-        bool HighlightToday(DateTime now)
+
+        bool HighlightToday(DateTime now) 
         {
             if (DateTime.Today == now)
                 return true;
             return false;
         }
 
-        
+       /* bool StartOfWeek(DateTime week)
+        {
+
+            if (StartOfWeek.week)
+                return true;
+            return false;
+        } */
+
     }
-   
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

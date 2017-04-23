@@ -1,3 +1,9 @@
 [0330/095558.701:ERROR:file_io.cc(41)] write: The pipe is being closed. (0xE8)
 [0419/155322.750:ERROR:exception_snapshot_win.cc(87)] thread ID 1732 not found in process
 [0419/155322.750:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0422/140713.240:ERROR:process_info.cc(343)] VirtualQueryEx: Access is denied. (0x5)
+[0422/140713.241:ERROR:process_info.cc(564)] ReadMemoryInfo failed
+[0422/140713.241:ERROR:process_reader_win.cc(233)] ReadMemory at 0x7fed69b3970 of 12 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
+[0422/140713.241:WARNING:process_snapshot_win.cc(68)] ReadMemory ExceptionInformation failed
+[0422/140713.241:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0422/140713.242:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: An attempt was made to access an exiting process.  (0xc000010a)
