@@ -1,9 +1,7 @@
 @model AnturaSemester.Models.CalendarViewModel
-
 @{
     ViewData["Title"] = "Calendar";
 }
-
 <nav aria-label="Page navigation">
     <ul class="pagination">
         <li class="active">
@@ -20,33 +18,41 @@
         </li>
     </ul>
 </nav>
-
 <table class=" table table-bordered table-hover">
     <tbody>
         <tr>
-
             <th>
-             
+                oogaabogaaawoooo
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
-                    
                 {
-                    if (x.weekDay == true)
+                    if (x.highLight && x.getMonday == true)
                     {
-                    <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
+                        <td bgcolor="#3D85C6">@x.Day </td>
                     }
-                    else if (x.highLight == true)
+
+                    else
+
+                     if (x.weekEnd == true)
                     {
-                        <td bgcolor="#3D85C6">@x.Day</td>
+                        <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
+                    }
+
+                    else
+
+                     if (x.getMonday == true)
+                    {
+                        
+                        <td><font color="grey"><strong>V:@x.weekNumber</strong></font> <font color="black">@x.Day</font></td>
+                        
                     }
 
                     else
                     {
-                        <td> @x.Day </td>
+                        <td>@x.Day</td>
 
                     }
                 }
             </tr>
-
 
             @foreach (var user in Model.users)
             {
@@ -54,15 +60,15 @@
                     <td>
                         @Html.DisplayFor(model => user.FullName)
                     </td>
-
                     @foreach (var x in ViewBag.Column)
                     {
 
-                        if (x.weekDay == true)
+                        if (x.weekEnd == true)
                         {
                             <td bgcolor="#F8F6F6"></td>
 
                         }
+
                         else
                         {
                             bool HasAddedCell = false;
@@ -80,19 +86,10 @@
 
 
                     }
-
                 </tr>
             }
 
 
-
-
-
         </tbody>
-
     </table>
-
-
-
-
     <!-- hghgh -->

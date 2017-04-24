@@ -10,9 +10,9 @@ namespace AnturaSemester.Models
          public int Day;
         public int Month;
         public int Year;
-        public bool weekDay;
+        public bool weekEnd;
         public bool highLight;
-       
-
+        public int weekNumber;
+        public bool getMonday;
     }
 }

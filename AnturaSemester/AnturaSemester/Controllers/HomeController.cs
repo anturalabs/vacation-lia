@@ -19,9 +19,8 @@ namespace AnturaSemester.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index( int year, int month, int prevMonth)
+        public ActionResult Index( int year, int month)
         {
-            ViewBag.prevMonth = (month-1);
             ViewBag.Year = year;
             ViewBag.Month = month;
             return View(_context.Users.ToList());
