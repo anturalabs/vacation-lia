@@ -25,9 +25,9 @@
                 oogaabogaaawoooo
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
-                    if (x.highLight == true)
+                    if (x.highLight && x.getMonday == true)
                     {
-                        <td bgcolor="#3D85C6">@x.Day</td>
+                        <td bgcolor="#3D85C6">@x.Day </td>
                     }
 
                     else

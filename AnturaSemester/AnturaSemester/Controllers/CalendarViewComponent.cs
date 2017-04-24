@@ -66,8 +66,6 @@ namespace AnturaSemester.Controllers
                 Day.weekNumber = GetWeekNum;
                 bool result2 = MondayTest(iDay);
                 Day.getMonday = result2;
-                //  int result3 = GetHolidaysRedDays.result3(iDay);
-                // Day.holidaysRedDay = result3;
                 Day.Day = i;
 
 
@@ -78,78 +76,27 @@ namespace AnturaSemester.Controllers
             ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
             ViewBag.year = year;
             ViewBag.month = month;
-
-
+ 
 
             //Retrieves saved holidays and returns them in calendar SH
             var calendar = new CalendarViewModel { };
             calendar.users = _context.Users.ToList();
             calendar.calendar = _context.Calendar.ToList();
             return View(calendar);
-
-
-            DateTime GetHolidaysRedDays()
-            {
-
-                List<DateTime> holidays = new List<DateTime>();
-
-
-                DateTime newYearsDate = (new DateTime(DateTime.Now.Year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
-                holidays.Add(newYearsDate);
-
-
-                DateTime valborgEve = (new DateTime(DateTime.Now.Year, 5, 1).Date); // skriver ut Valborg, alltid förekommer 1:a maj
-                holidays.Add(valborgEve);
-
-                DateTime nationalDay = (new DateTime(DateTime.Now.Year, 6, 6).Date); // National dagen, alltid förekommer 6:e juni
-                holidays.Add(nationalDay);
-
-                DateTime christmasDay = (new DateTime(DateTime.Now.Year, 12, 25).Date); // Juldagen, alltid förekommer 25:e dec
-                holidays.Add(christmasDay);
-
-                DateTime secondDayChristmas = (new DateTime(DateTime.Now.Year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
-                holidays.Add(secondDayChristmas);
-
-                return GetHolidaysRedDays();
-            }
-
+       
         }
 
-        // ÖVRIGA RÖDA DAGAR - Röda dagar som förekommer under ett helt år utöver söndagar 
-        /*  HashSet<DateTime> GetHolidaysRedDays()
-          {
-
-              HashSet<DateTime> holidays = new HashSet<DateTime>(); */
-
-
-
-
-        /* // Hänger ihop med ÖVRIGA RÖDA DAGAR (holidays)
-         DateTime AdjustForWeekendHoliday(DateTime holiday)
-         {
-             if (holiday.DayOfWeek == DayOfWeek.Saturday)
-             {
-                 return holiday.AddDays(-1);
-             }
-             else if (holiday.DayOfWeek == DayOfWeek.Sunday)
-             {
-                 return holiday.AddDays(1);
-             }
-             else
-             {
-                 return holiday;
-             }
-         } */
-
         // Retunerar helg (lördag & söndag) om resultat är true
-        bool IsThisWeekend(DateTime now)
+        bool IsThisWeekend(DateTime date)
         {
-            if (now.DayOfWeek == DayOfWeek.Saturday)
+            if (date.DayOfWeek == DayOfWeek.Saturday)
                 return true;
-            if (now.DayOfWeek == DayOfWeek.Sunday)
+            if (date.DayOfWeek == DayOfWeek.Sunday)
                 return true;
-            // if (now.DayOfWeek == DateTime.Now.Year(1, 1))
-            // return true
+           // if (date.Date == (new DateTime(date.Year, 5, 1).Date)) // bortkommentera - spara lösning inför framtiden
+           //     return true;
+            if (GetHolidaysRedDays(date.Year).Any(item => item.Date == date.Date)) // LINQ contains funktion som kollar igenom röda dagar i GetHolidaysRedDays list
+                return true;
             return false;
 
         }
@@ -160,23 +107,36 @@ namespace AnturaSemester.Controllers
             return false;
         }
 
-
-
-        bool HighlightToday(DateTime now)
+        bool HighlightToday(DateTime now) // För highlightning av dagen
         {
             if (DateTime.Today == now)
                 return true;
             return false;
         }
 
-        /* bool StartOfWeek(DateTime week)
-         {
+            List<DateTime> GetHolidaysRedDays(int year) // Lista med "alla" röda dagar som förekommer under ett år och som är på samma datum
+           {
 
-             if (StartOfWeek.week)
-                 return true;
-             return false;
-         } */
+               List<DateTime> holidays = new List<DateTime>();
 
+               DateTime newYearsDate = (new DateTime(year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
+               holidays.Add(newYearsDate);
+
+
+               DateTime valborgEve = (new DateTime(year, 5, 1).Date); // skriver ut Valborg, alltid förekommer 1:a maj
+               holidays.Add(valborgEve);
+
+               DateTime nationalDay = (new DateTime(year, 6, 6).Date); // National dagen, alltid förekommer 6:e juni
+               holidays.Add(nationalDay);
+
+               DateTime christmasDay = (new DateTime(year, 12, 25).Date); // Juldagen, alltid förekommer 25:e dec
+               holidays.Add(christmasDay);
+
+               DateTime secondDayChristmas = (new DateTime(year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
+               holidays.Add(secondDayChristmas);
+
+               return holidays;
+           } 
     }
 
 }
