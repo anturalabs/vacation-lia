@@ -28,23 +28,34 @@ namespace AnturaSemester.Controllers
             
         }
 
-       /* [HttpPost]
-        [ActionName("GetMonthAndYear")]
-        public ActionResult GetMonthAndYear(int year, int month)
+        
+
+        [HttpPost]
+        public void CreateAbsence(string Absencetype, int UsersID, DateTime Date)
         {
+            var newcell = new CalendarCell { AbsenceName = Absencetype, UsersID = UsersID, Date = Date };
             
-            return View();
+            _context.Calendar.Add(newcell);   
+
         }
-        */
 
-            //public IActionResult Users()
-            // {
-            //   ViewData["Message"] = "Your application description page.";
+        /* [HttpPost]
+         [ActionName("GetMonthAndYear")]
+         public ActionResult GetMonthAndYear(int year, int month)
+         {
 
-            //   return View();
-            //}
+             return View();
+         }
+         */
 
-            public IActionResult Contact()
+        //public IActionResult Users()
+        // {
+        //   ViewData["Message"] = "Your application description page.";
+
+        //   return View();
+        //}
+
+        public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 

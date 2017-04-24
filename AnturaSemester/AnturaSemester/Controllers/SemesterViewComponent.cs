@@ -6,6 +6,7 @@ using AnturaSemester.Data;
 using AnturaSemester.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static AnturaSemester.Models.CalendarCell;
 
 namespace AnturaSemester.Controllers
 {
@@ -20,6 +21,11 @@ namespace AnturaSemester.Controllers
 
         public IViewComponentResult Invoke()
         {
+            var allAbsenceTypeValues = (AbsenceType[])Enum.GetValues(typeof(AbsenceType));
+            ViewBag.Absences = allAbsenceTypeValues;
+
+            
+
             var semester = new SemesterViewModel { };
             semester.users = _context.Users.ToList();
             semester.calendar = _context.Calendar.ToList();
@@ -27,7 +33,7 @@ namespace AnturaSemester.Controllers
             
         }
 
-
+        
 
 
 

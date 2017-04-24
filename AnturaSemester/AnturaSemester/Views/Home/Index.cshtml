@@ -13,21 +13,19 @@
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-    <h3>A-Team</h3>
+        <h3>A-Team</h3>
 
-        <table class="">  
+        <table class="">
 
 
-  
+
             <!--Fick ändra från ViewBags till DateTime.-->
-               @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
+            @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
 
-       
-            
+
+
             <!-- Button trigger for modal -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal">
-                Semesterplanering
-            </button>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal">Create New</button>
 
             <!-- Modal -->
             <div class="modal fade" id="SemesterModal" tabindex="-1" role="dialog" aria-labelledby="SemesterModalLabel" aria-hidden="true">
@@ -40,31 +38,31 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                           @await  Component.InvokeAsync("Semester")
+                            @await Component.InvokeAsync("Semester")
 
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-primary">Delete</button>
+                            <button type="button" value="Submit" class="btn btn-default">Submit</button>
+                            <button type="button" value="Delete" class="btn btn-danger">Delete</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
-                
 
-        </table>   
-            
-        
+
+        </table>
+
+
     </div>
 
 
-   
 
 
 
-   
+
+
 
     <div id="menu1" class="tab-pane fade in">
         <h3>Product Development</h3>
@@ -73,9 +71,9 @@
     <div id="menu2" class="tab-pane fade in">
         <h3>Poäng</h3>
 
-       
-        
-       
+
+
+
 
 
     </div>

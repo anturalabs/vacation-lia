@@ -41,18 +41,21 @@
                 <span class="input-group-addon">to</span>
                 <input type="text" class="input-sm form-control" name="end" />
             </div>
-
         </div>     
-
         <!--DatePicker End-->
         <br />
         <div class="dropdown">
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
             <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                    <a href="#" class="small" data-value="option1" tabIndex="-1">VAB</a>
-                    <a href="#" class="small" data-value="option1" tabIndex="-1">Semester</a>
-                </li>
+                @foreach (var absence in ViewBag.Absences)
+                {
+                    <li>
+                        <a href="#" class="small" data-value="option1" tabIndex="-1">
+
+                            @absence
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
         <br />
