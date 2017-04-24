@@ -66,8 +66,8 @@ namespace AnturaSemester.Controllers
                 Day.weekNumber = GetWeekNum;
                 bool result2 = MondayTest(iDay);
                 Day.getMonday = result2;
-              //  int result3 = GetHolidaysRedDays.result3(iDay);
-               // Day.holidaysRedDay = result3;
+                //  int result3 = GetHolidaysRedDays.result3(iDay);
+                // Day.holidaysRedDay = result3;
                 Day.Day = i;
 
 
@@ -79,7 +79,7 @@ namespace AnturaSemester.Controllers
             ViewBag.year = year;
             ViewBag.month = month;
 
-            
+
 
             //Retrieves saved holidays and returns them in calendar SH
             var calendar = new CalendarViewModel { };
@@ -121,25 +121,25 @@ namespace AnturaSemester.Controllers
 
               HashSet<DateTime> holidays = new HashSet<DateTime>(); */
 
-        
-        
 
-       /* // Hänger ihop med ÖVRIGA RÖDA DAGAR (holidays)
-        DateTime AdjustForWeekendHoliday(DateTime holiday)
-        {
-            if (holiday.DayOfWeek == DayOfWeek.Saturday)
-            {
-                return holiday.AddDays(-1);
-            }
-            else if (holiday.DayOfWeek == DayOfWeek.Sunday)
-            {
-                return holiday.AddDays(1);
-            }
-            else
-            {
-                return holiday;
-            }
-        } */
+
+
+        /* // Hänger ihop med ÖVRIGA RÖDA DAGAR (holidays)
+         DateTime AdjustForWeekendHoliday(DateTime holiday)
+         {
+             if (holiday.DayOfWeek == DayOfWeek.Saturday)
+             {
+                 return holiday.AddDays(-1);
+             }
+             else if (holiday.DayOfWeek == DayOfWeek.Sunday)
+             {
+                 return holiday.AddDays(1);
+             }
+             else
+             {
+                 return holiday;
+             }
+         } */
 
         // Retunerar helg (lördag & söndag) om resultat är true
         bool IsThisWeekend(DateTime now)
@@ -158,24 +158,24 @@ namespace AnturaSemester.Controllers
             if (now.DayOfWeek == DayOfWeek.Monday)
                 return true;
             return false;
-        } 
+        }
 
 
 
-        bool HighlightToday(DateTime now) 
+        bool HighlightToday(DateTime now)
         {
             if (DateTime.Today == now)
                 return true;
             return false;
         }
 
-       /* bool StartOfWeek(DateTime week)
-        {
+        /* bool StartOfWeek(DateTime week)
+         {
 
-            if (StartOfWeek.week)
-                return true;
-            return false;
-        } */
+             if (StartOfWeek.week)
+                 return true;
+             return false;
+         } */
 
     }
 
