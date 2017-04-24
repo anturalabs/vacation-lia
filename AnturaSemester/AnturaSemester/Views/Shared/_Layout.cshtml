@@ -6,20 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Antura Semesterplanering</title>
 
-    <!--Following scripts and stylesheets are for DateTimePicker-->
-    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="/scripts/moment.min.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.*js"></script>
-    <!-- include your less or built css files  -->
-    <!--
-    bootstrap-datetimepicker-build.less will pull in "../bootstrap/variables.less" and "bootstrap-datetimepicker.less";
-    or
-    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
-    -->
-   <!--End scripts and stylesheets for DateTimePicker-->
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/datepicker/dist/js/bootstrap-datepicker.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+    </environment>
 
     <environment names="Development">
+        <link rel="stylesheet" href="~/lib/datepicker/dist/css/bootstrap-datepicker.standalone.min.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -64,15 +63,7 @@
         </footer>
     </div>
 
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-
-        
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-        
-    </environment>
+  
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"

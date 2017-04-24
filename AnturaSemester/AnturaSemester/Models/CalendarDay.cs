@@ -13,7 +13,6 @@ namespace AnturaSemester.Models
         public bool weekEnd;
         public bool highLight;
         public int weekNumber;
-        public int holidaysRedDay;
         public bool getMonday;
     }
 }

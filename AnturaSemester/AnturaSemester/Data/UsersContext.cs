@@ -21,7 +21,9 @@ namespace AnturaSemester.Data
         public DbSet<Team> Team { get; set; }
         public DbSet<UserTeam> UserTeam { get; set; }
         public DbSet<CalendarCell> Calendar { get; set; }
+
         
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,5 +43,8 @@ namespace AnturaSemester.Data
               .HasKey(c => new { c.UsersID, c.TeamID });
 
         }
+        
+
+        
     }
 }
