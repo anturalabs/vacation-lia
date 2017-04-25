@@ -25,9 +25,9 @@
                 oogaabogaaawoooo
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
-                    if (x.highLight && x.getMonday == true)
+                    if (x.highLight == true)
                     {
-                        <td bgcolor="#3D85C6">@x.Day </td>
+                    <td bgcolor="#3D85C6">@x.Day </td>
                     }
 
                     else
@@ -41,9 +41,9 @@
 
                      if (x.getMonday == true)
                     {
-                        
+
                         <td><font color="grey"><strong>V:@x.weekNumber</strong></font> <font color="black">@x.Day</font></td>
-                        
+
                     }
 
                     else
@@ -53,7 +53,6 @@
                     }
                 }
             </tr>
-
             @foreach (var user in Model.users)
             {
                 <tr>
@@ -88,7 +87,6 @@
                     }
                 </tr>
             }
-
 
         </tbody>
     </table>
