@@ -19,47 +19,36 @@ namespace AnturaSemester.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index( int year, int month)
+        public ActionResult Index(int year, int month)
         {
             ViewBag.Year = year;
             ViewBag.Month = month;
             return View(_context.Users.ToList());
-            
+
         }
 
-        
+
 
         [HttpPost]
-        public void CreateAbsence(string Absencetype, int UsersID, DateTime Date)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAbsence(string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate)
         {
-            var newcell = new CalendarCell { AbsenceName = Absencetype, UsersID = UsersID, Date = Date };
-            
-            _context.Calendar.Add(newcell);   
+            //break down from and to date and get every date inbetween and create new calendarcell for each of those dates (solved)
+            //validation unique properties for absences (based on userID and date) so no overlapping in absences is allowed (it is possible right now)
 
+            for (DateTime date = FromDate; date <= ToDate; date = date.AddDays(1))
+            {
+                
+                var newcell = new CalendarCell { AbsenceName = Absencetype, UsersID = UsersID, Date = date };
+                _context.Calendar.Add(newcell);
+            }
+            await _context.SaveChangesAsync();
+            return Redirect("/");
         }
 
-        /* [HttpPost]
-         [ActionName("GetMonthAndYear")]
-         public ActionResult GetMonthAndYear(int year, int month)
-         {
 
-             return View();
-         }
-         */
 
-        //public IActionResult Users()
-        // {
-        //   ViewData["Message"] = "Your application description page.";
 
-        //   return View();
-        //}
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
 
 
 

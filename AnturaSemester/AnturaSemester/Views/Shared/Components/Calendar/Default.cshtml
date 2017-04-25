@@ -22,7 +22,7 @@
     <tbody>
         <tr>
             <th>
-                oogaabogaaawoooo
+                
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
                     if (x.highLight == true)
@@ -71,7 +71,7 @@
                         else
                         {
                             bool HasAddedCell = false;
-                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day))
+                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month))
                             {
                                 <td>@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
                                 HasAddedCell = true;
