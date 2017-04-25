@@ -43,8 +43,56 @@ namespace AnturaSemester.Data
               .HasKey(c => new { c.UsersID, c.TeamID });
 
         }
-        
 
-        
+     /*   protected override DbEntityValidationResult ValidateEntity(
+                                        DbEntityEntry entityEntry,
+                                        IDictionary<object, object> items)
+        {
+            //base validation for Data Annotations, IValidatableObject
+            var result = base.ValidateEntity(entityEntry, items);
+
+            //You can choose to bail out before custom validation
+            //if (result.IsValid)
+            //    return result;
+
+            CustomValidate(result);
+            return result;
+        }
+
+        private void CustomValidate(DbEntityValidationResult result)
+        {
+            ValidateContacts(result);
+            ValidateOrganisation(result);
+        }
+
+        private void ValidateContacts(DbEntityValidationResult result)
+        {
+            var c = result.Entry.Entity as Contact;
+            if (c == null)
+                return;
+
+            if (Contacts.Any(a => a.FirstName == c.FirstName
+                                  && a.LastName == c.LastName
+                                  && a.ID != c.ID))
+                result.ValidationErrors.Add(
+                                  new DbValidationError("Name",
+                                        "Name already exists"));
+        }
+
+        private void ValidateOrganisation(DbEntityValidationResult result)
+        {
+            var organisation = result.Entry.Entity as Organisation;
+            if (organisation == null)
+                return;
+
+            if (Organisations.Any(o => o.Name == organisation.Name
+                                       && o.ID != organisation.ID))
+                result.ValidationErrors.Add(
+                                      new DbValidationError("Name",
+                                            "Name already exists"));
+        } */
+
+
+
     }
 }
