@@ -63,7 +63,7 @@ namespace AnturaSemester.Controllers
                 Day.weekEnd = result;
                 Day.highLight = result1;
                 Day.Month = month;
-                int GetWeekNum = culture.Calendar.GetWeekOfYear(iDay, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+                int GetWeekNum = culture.Calendar.GetWeekOfYear(iDay, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
                 Day.weekNumber = GetWeekNum;
                 bool result2 = MondayTest(iDay);
                 Day.getMonday = result2;
@@ -77,7 +77,8 @@ namespace AnturaSemester.Controllers
             ViewBag.currentMonth = new DateTime(year, month, 5).ToString("MMMM yyyy").ToUpper();
             ViewBag.year = year;
             ViewBag.month = month;
- 
+
+            ViewBag.GroupedWeeks = Darray.GroupBy(day => day.weekNumber).Select( group => new Tuple<int,int>(group.Key, group.Count()));
 
             //Retrieves saved holidays and returns them in calendar SH
             var calendar = new CalendarViewModel { };
