@@ -33,8 +33,7 @@ namespace AnturaSemester.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAbsence(string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate)
         {
-            //break down from and to date and get every date inbetween and create new calendarcell for each of those dates (solved)
-            //validation unique properties for absences (based on userID and date) so no overlapping in absences is allowed (it is possible right now)
+             //validation unique properties for absences (based on userID and date) so no overlapping in absences is allowed (it is possible right now)
 
             for (DateTime date = FromDate; date <= ToDate; date = date.AddDays(1))
             {

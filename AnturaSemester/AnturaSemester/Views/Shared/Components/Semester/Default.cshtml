@@ -35,15 +35,14 @@
         <br />
 
         <div class="dropdown">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
+            <button type="button" id ="selectedAbsenceButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
+            <input type="hidden" name="Absencetype" id="selectedAbsence" value="" />
             <ul id="absence-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach (var absence in ViewBag.Absences)
                 {
                     <li>
-                        <a href="#" class="small" data-value="option1" tabIndex="-1">
-                            <input type="hidden"
-                                   name="Absencetype"
-                                   value="@absence" />
+                        <a href="#" class="small" data-value="@absence" tabIndex="-1">
+                            
                             @absence
                         </a>
                     </li>
@@ -76,6 +75,10 @@
 
         $("#user-select li a").click(function () {
             document.getElementById('selectedUser').value = document.getElementById('selectedUserButton').value;
+        });
+
+        $("#absence-select li a").click(function () {
+            document.getElementById('selectedAbsence').value = document.getElementById('selectedAbsenceButton').value;
         });
 
        
