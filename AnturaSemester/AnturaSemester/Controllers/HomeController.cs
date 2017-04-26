@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AnturaSemester.Models;
 using Microsoft.AspNetCore.Mvc;
 using AnturaSemester.Data;
+using System.Data.Entity.Validation;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AnturaSemester.Controllers
