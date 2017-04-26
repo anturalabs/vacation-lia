@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AnturaSemester.Models;
 using System.Globalization;
-using System.Data.Entity.Validation;
+
 
 namespace AnturaSemester.Data
 {
@@ -44,9 +44,11 @@ namespace AnturaSemester.Data
               .HasKey(c => new { c.UsersID, c.DepartmentID });
             modelBuilder.Entity<UserTeam>()
               .HasKey(c => new { c.UsersID, c.TeamID });
-
+            modelBuilder.Entity<CalendarCell>()
+                .HasKey(c => new { c.Date, c.UsersID });
+                
         }
-
+        /*
         protected override DbEntityValidationResult ValidateEntity(
                                        DbEntityEntry entityEntry,
                                        IDictionary<object, object> items)
@@ -79,6 +81,6 @@ namespace AnturaSemester.Data
                                   && a.ID != c.ID))
                 result.ValidationErrors.Add(
                                   new DbValidationError("Absence for this user already exists on the specified date"));
-        }
+        }*/
     }
 }

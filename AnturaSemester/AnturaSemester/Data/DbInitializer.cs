@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AnturaSemester.Models;
-using System.Data.Entity.Validation;
 
 
 namespace AnturaSemester.Data

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AnturaSemester.Models;
 using Microsoft.AspNetCore.Mvc;
 using AnturaSemester.Data;
-using System.Data.Entity.Validation;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AnturaSemester.Controllers
@@ -34,16 +33,36 @@ namespace AnturaSemester.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAbsence(string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate)
         {
-             //validation unique properties for absences (based on userID and date) so no overlapping in absences is allowed (it is possible right now)
+            //validation unique properties for absences (based on userID and date) so no overlapping in absences is allowed (it is possible right now)
 
             for (DateTime date = FromDate; date <= ToDate; date = date.AddDays(1))
             {
-                
+
                 var newcell = new CalendarCell { AbsenceName = Absencetype, UsersID = UsersID, Date = date };
-                _context.Calendar.Add(newcell);
+
+                if (ModelState.IsValid)
+                {
+
+                    _context.Calendar.Add(newcell);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                ModelState.AddModelError("", "Absence for this user already exists on the specified date.");
             }
-            await _context.SaveChangesAsync();
-            return Redirect("/");
+
+
+
+
+
+            
+
+
+            
+
+           
+
+
+            return View();
         }
 
 
