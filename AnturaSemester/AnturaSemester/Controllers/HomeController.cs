@@ -33,16 +33,28 @@ namespace AnturaSemester.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAbsence(string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate)
         {
-             //validation unique properties for absences (based on userID and date) so no overlapping in absences is allowed (it is possible right now)
 
             for (DateTime date = FromDate; date <= ToDate; date = date.AddDays(1))
             {
-                
+
                 var newcell = new CalendarCell { AbsenceName = Absencetype, UsersID = UsersID, Date = date };
-                _context.Calendar.Add(newcell);
+
+                if (_context.Calendar.ToList().Any(item => (item.Date == newcell.Date && item.UsersID == newcell.UsersID)))
+                {
+                    ViewBag.error = "Wrong";
+
+                }
+                else
+                {
+                    _context.Calendar.Add(newcell);
+                }
             }
             await _context.SaveChangesAsync();
-            return Redirect("/");
+
+
+            return RedirectToAction("/");
+
+
         }
 
 

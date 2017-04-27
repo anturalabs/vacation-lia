@@ -29,7 +29,7 @@ namespace AnturaSemester.Data
             new Users{FirstName="Amadeus",LastName="Mozart"},
             new Users{FirstName="Varför",LastName="Inte"},
             new Users{FirstName="Awe",LastName="Risk"},
-            new Users{FirstName="Hitler",LastName="Paddan"},
+            new Users{FirstName="Anton",LastName="Äter"},
             new Users{FirstName="Klar",LastName="Av"},
  };
             foreach (Users s in users)

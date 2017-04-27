@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AnturaSemester.Models;
+using System.Globalization;
+
 
 namespace AnturaSemester.Data
 {
@@ -11,6 +13,7 @@ namespace AnturaSemester.Data
     {
         public UsersContext(DbContextOptions<UsersContext> options) : base(options)
         {
+
         }
 
         public DbSet<Roles> Roles { get; set; }
@@ -41,12 +44,14 @@ namespace AnturaSemester.Data
               .HasKey(c => new { c.UsersID, c.DepartmentID });
             modelBuilder.Entity<UserTeam>()
               .HasKey(c => new { c.UsersID, c.TeamID });
-
+            modelBuilder.Entity<CalendarCell>()
+                .HasKey(c => new { c.Date, c.UsersID });
+                
         }
-
-     /*   protected override DbEntityValidationResult ValidateEntity(
-                                        DbEntityEntry entityEntry,
-                                        IDictionary<object, object> items)
+        /*
+        protected override DbEntityValidationResult ValidateEntity(
+                                       DbEntityEntry entityEntry,
+                                       IDictionary<object, object> items)
         {
             //base validation for Data Annotations, IValidatableObject
             var result = base.ValidateEntity(entityEntry, items);
@@ -61,38 +66,21 @@ namespace AnturaSemester.Data
 
         private void CustomValidate(DbEntityValidationResult result)
         {
-            ValidateContacts(result);
-            ValidateOrganisation(result);
+            ValidateCell(result);
+            
         }
 
-        private void ValidateContacts(DbEntityValidationResult result)
+        private void ValidateCell(DbEntityValidationResult result)
         {
-            var c = result.Entry.Entity as Contact;
+            var c = result.Entry.Entity as CalendarCell;
             if (c == null)
                 return;
 
-            if (Contacts.Any(a => a.FirstName == c.FirstName
-                                  && a.LastName == c.LastName
+            if (Calendar.Any(a => a.UsersID == c.UsersID
+                                  && a.Date == c.Date
                                   && a.ID != c.ID))
                 result.ValidationErrors.Add(
-                                  new DbValidationError("Name",
-                                        "Name already exists"));
-        }
-
-        private void ValidateOrganisation(DbEntityValidationResult result)
-        {
-            var organisation = result.Entry.Entity as Organisation;
-            if (organisation == null)
-                return;
-
-            if (Organisations.Any(o => o.Name == organisation.Name
-                                       && o.ID != organisation.ID))
-                result.ValidationErrors.Add(
-                                      new DbValidationError("Name",
-                                            "Name already exists"));
-        } */
-
-
-
+                                  new DbValidationError("Absence for this user already exists on the specified date"));
+        }*/
     }
 }
