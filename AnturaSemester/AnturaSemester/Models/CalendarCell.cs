@@ -9,9 +9,9 @@ namespace AnturaSemester.Models
 {
     public class CalendarCell
     {
-        [Required]
+        public int ID { get; set; }
         public DateTime Date { get; set; }
-        [Required]
+        
         public int UsersID { get; set; }
 
         public string AbsenceName { get; set; }

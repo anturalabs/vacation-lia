@@ -76,7 +76,7 @@
                             bool HasAddedCell = false;
                             foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month))
                             {
-                                <td>@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
+                                <td data-id="@cell.ID" data-toggle="modal" data-target="#SemesterModal">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
                                 HasAddedCell = true;
                             }
 
@@ -91,6 +91,20 @@
                 </tr>
             }
 
+        
         </tbody>
     </table>
-    <!-- hghgh -->
+    <script type="text/javascript">
+            $(function () {
+                $('#SemesterModal').modal({
+                    keyboard: true,
+                    backdrop: "static",
+                    show: false,
+
+                }).on('show', function () { //subscribe to show method
+                    var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from tr
+                    //make your ajax call populate items or what even you need
+                    $(this).find('#SemesterBody').html($('<b> Order Id selected: ' + getIdFromCell + '</b>'))
+                });
+            });
+</script>
