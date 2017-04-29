@@ -9,7 +9,7 @@ namespace AnturaSemester.Models
 {
     public class CalendarCell
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public DateTime Date { get; set; }
         
         public int UsersID { get; set; }

@@ -40,11 +40,7 @@ namespace AnturaSemester.Data
 
             var calendars = new CalendarCell[]
           {
-             new CalendarCell {UsersID=1, Date=DateTime.ParseExact("20170412", "yyyyMMdd", CultureInfo.InvariantCulture),AbsenceName="Holiday"},
-             new CalendarCell {UsersID=2, Date=DateTime.ParseExact("20170413", "yyyyMMdd", CultureInfo.InvariantCulture),AbsenceName="VAB"},
-             new CalendarCell {UsersID=1, Date=DateTime.ParseExact("20170414", "yyyyMMdd", CultureInfo.InvariantCulture),AbsenceName="Sick"},
-             new CalendarCell {UsersID=3, Date=DateTime.ParseExact("20170411", "yyyyMMdd", CultureInfo.InvariantCulture), AbsenceName="VAB"},
-             new CalendarCell {UsersID=5, Date=DateTime.ParseExact("20170411", "yyyyMMdd", CultureInfo.InvariantCulture), AbsenceName="Sick"}
+             
           };
             foreach (CalendarCell c in calendars)
             {

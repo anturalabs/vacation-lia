@@ -80,7 +80,7 @@ namespace AnturaSemester.Controllers
 
             ViewBag.GroupedWeeks = Darray.GroupBy(day => day.weekNumber).Select( group => new Tuple<int,int>(group.Key, group.Count()));
 
-            //Retrieves saved holidays and returns them in calendar SH
+            
             var calendar = new CalendarViewModel { };
             calendar.users = _context.Users.ToList();
             calendar.calendar = _context.Calendar.ToList();

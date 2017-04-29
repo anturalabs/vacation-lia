@@ -18,7 +18,7 @@
         </li>
     </ul>
 </nav>
-<table class=" table table-bordered table-hover">
+<table id="calendartable" class="table table-bordered table-hover">
     <tbody>
         <tr>
             <td>
@@ -76,7 +76,7 @@
                             bool HasAddedCell = false;
                             foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month))
                             {
-                                <td data-id="@cell.ID" data-toggle="modal" data-target="#SemesterModal">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
+                                <td data-id="@cell.ID" data-toggle="modal" class="editAbsence">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
                                 HasAddedCell = true;
                             }
 
@@ -95,6 +95,46 @@
         </tbody>
     </table>
     <script type="text/javascript">
+        /*
+        $(function () {
+            $('.editModal').modal();
+        });
+        */
+        function editAbsence(absenceId) {
+            $.ajax({
+                url: '/Home/EditAbsence/' + absenceId, // The method name + paramater
+                success: function (data) {
+                    $('#SemesterModal').html(data); // This should be an empty div where you can inject your new html (the partial view)
+                }
+            });
+        } 
+
+        $(function () {
+            $("td.editAbsence").click(function () {
+                var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from tr
+                $.ajax({
+                    url: '/Home/EditAbsence/' + getIdFromCell, // The method name + paramater
+                    success: function (data) {
+                        // $('#selectedAbsence').value()
+
+
+                        var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
+                        $('#comments').val(JSON.stringify(data[0]));
+                        //' + data[0].usersID + '      
+                        $('#selectedUserButton').html(userName);
+                        $('#selectedUser').val(data[0].usersID);
+                        $('#guidId').val(data[0].id);
+                        $('#SemesterView').find('input[name="FromDate"]').val(data[0].date);
+                        $('#SemesterView').find('input[name="ToDate"]').val(data[data.length - 1].date);
+                        $('#selectedAbsenceButton').html(data[0].absenceName);
+                        $('#selectedAbsence').val(data[0].absenceName);
+                    }   
+                });
+                $('#SemesterModal').modal();
+              //  $('#Semesterbody').html(getIdFromCell)
+            });
+        });
+        /*
             $(function () {
                 $('#SemesterModal').modal({
                     keyboard: true,
@@ -103,8 +143,9 @@
 
                 }).on('show', function () { //subscribe to show method
                     var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from tr
+                    alert(getIdFromCell);
                     //make your ajax call populate items or what even you need
-                    $(this).find('#SemesterBody').html($('<b> Order Id selected: ' + getIdFromCell + '</b>'))
+                    $(this).find('#SemesterBody').html($(getIdFromCell))
                 });
-            });
+            }); */
 </script>

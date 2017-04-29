@@ -4,19 +4,18 @@
     ViewData["Title"] = "Semester";
 }
 
-<form asp-controller="Home" asp-action="CreateAbsence">
+<form id="SemesterView" asp-controller="Home" asp-action="CreateAbsence">
     <div class="form-horizontal">
-
+        <input type="hidden" name="guid" id="guidId" value="" />
         <div class="dropdown">
             <button type="button" id ="selectedUserButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose User <span class="caret"></span></button>
             <input type="hidden" name="UsersID" id="selectedUser" value="" />
             <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">           
                 @foreach (var user in Model.users)
                 {
+                    
                     <li>
-                        <a href="#" class="small" data-value="@user.ID" tabIndex="-1">
-                            @Html.DisplayFor(model => user.FullName)
-                        </a>
+                        <a href="#" class="small" data-value="@user.ID" tabIndex="-1">@Html.DisplayFor(model => user.FullName)</a>
                     </li>
                 }
             </ul>
@@ -63,9 +62,9 @@
                 <input type="hidden" name="CommentField" id="selectedComment" value="" />
                 <textarea class="form-control" id="comments" rows="3"></textarea>
             </div>
-            <input type="submit" value="Create" class="btn btn-default" />
-            <button type="button" value="Submit" class="btn btn-default">Submit</button>
-            <button type="button" value="Delete" class="btn btn-danger">Delete</button>
+            <input type="submit" id="SubmitButton" value="Submit" class="btn btn-default" />
+           <!-- <button type="button" value="Submit" class="btn btn-default">Submit</button>-->
+            <button type="button" value="Delete" class="btn btn-danger" asp-controller="Home" asp-action="DeleteAbsence">Delete</button>
 </div>
 
     <script type="text/javascript">
@@ -92,7 +91,9 @@
               daysOfWeekHighlighted: "0,6",
               calendarWeeks: true,
               todayHighlight: true
-          });
+        });
+
+     
     </script>
 
 </form>
