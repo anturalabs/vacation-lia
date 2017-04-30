@@ -63,6 +63,7 @@ namespace AnturaSemester.Controllers
                 Day.weekEnd = result;
                 Day.highLight = result1;
                 Day.Month = month;
+                Day.Year = year;
                 int GetWeekNum = culture.Calendar.GetWeekOfYear(iDay, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
                 Day.weekNumber = GetWeekNum;
                 bool result2 = MondayTest(iDay);

@@ -74,7 +74,7 @@
                         else
                         {
                             bool HasAddedCell = false;
-                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month))
+                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month && c.Date.Year == x.Year))
                             {
                                 <td data-id="@cell.ID" data-toggle="modal" class="editAbsence">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
                                 HasAddedCell = true;
@@ -109,6 +109,7 @@
             });
         } 
 
+       
         $(function () {
             $("td.editAbsence").click(function () {
                 var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from tr
@@ -116,7 +117,10 @@
                     url: '/Home/EditAbsence/' + getIdFromCell, // The method name + paramater
                     success: function (data) {
                         // $('#selectedAbsence').value()
-
+                        
+                        $('#selectedUserButton').prop('disabled', true);
+                        $('#DeleteButton').removeClass('hidden');
+                        $('#SubmitButton').val('Edit');
 
                         var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
                         $('#comments').val(JSON.stringify(data[0]));
@@ -124,8 +128,9 @@
                         $('#selectedUserButton').html(userName);
                         $('#selectedUser').val(data[0].usersID);
                         $('#guidId').val(data[0].id);
-                        $('#SemesterView').find('input[name="FromDate"]').val(data[0].date);
-                        $('#SemesterView').find('input[name="ToDate"]').val(data[data.length - 1].date);
+
+                        $('#SemesterView').find('input[name="FromDate"]').datepicker('update', new Date(data[0].date));
+                        $('#SemesterView').find('input[name="ToDate"]').datepicker('update', new Date(data[data.length - 1].date).toISOString().slice(0,10));
                         $('#selectedAbsenceButton').html(data[0].absenceName);
                         $('#selectedAbsence').val(data[0].absenceName);
                     }   

@@ -16,31 +16,31 @@
         <h3>A-Team</h3>
 
         <!--Fick ändra från ViewBags till DateTime.-->
-            @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
+        @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
 
 
-            <!-- Button trigger for modal -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal">Create New</button>
+        <!-- Button trigger for modal -->
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal" onclick="createNew()">Create New</button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="SemesterModal" tabindex="-1" role="dialog" aria-labelledby="SemesterModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="SemesterModalLabel">Absence Planner</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="SemesterBody">
-                            @await Component.InvokeAsync("Semester")
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="SemesterModal" tabindex="-1" role="dialog" aria-labelledby="SemesterModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="SemesterModalLabel">Absence Planner</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="SemesterBody">
+                        @await Component.InvokeAsync("Semester")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
 
@@ -59,15 +59,13 @@
         <p>Här kommer sprint-planering, tjolahopp tjolahej tjolahoppsan-sa</p>
     </div>
 
+    <script type="text/javascript">
+        function createNew () {
+            var container = $("#SemesterBody");        
+            $.get("/Home/GetSemesterViewComponent/", function (data) { container.html(data); });
+        }
+    </script>
 </div>
-
-
-
-
-
-
-
-
 
 
 

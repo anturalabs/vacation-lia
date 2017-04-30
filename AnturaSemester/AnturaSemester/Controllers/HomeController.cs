@@ -28,13 +28,17 @@ namespace AnturaSemester.Controllers
 
         }
 
-
+        public IActionResult GetSemesterViewComponent()
+        {
+            return ViewComponent("Semester");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAbsence(Guid guid, string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate)
         {
-            if (guid != null) {
+            if (guid != null)
+            {
                 await DeleteAbsence(guid);
             }
 
@@ -70,11 +74,11 @@ namespace AnturaSemester.Controllers
 
             if (id != null)
             {
-                var cell =  _context.Calendar.Where(m => m.ID == id).ToList();
+                var cell = _context.Calendar.Where(m => m.ID == id).ToList();
 
                 if (cell == null)
                 {
-              //      return NotFound();
+                    //      return NotFound();
                 }
                 return Json(cell);
             }
@@ -103,7 +107,7 @@ namespace AnturaSemester.Controllers
                 s => s.UsersID, s => s.Date, s => s.AbsenceName, s => s.Approval, s => s.CommentField))
             {
 
-                
+
 
                 try
                 {
@@ -120,19 +124,16 @@ namespace AnturaSemester.Controllers
             }
             return View(absenceToUpdate);
         }
-        
+
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("DeleteAbsence")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteAbsence(Guid id)
+        public async Task<IActionResult> DeleteAbsence(Guid guid)
         {
             var calendar = await _context.Calendar
-               .Include(r => r.Date)
-                .Include(d => d.UsersID)
-                .Include(t => t.AbsenceName)
                 .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .Where(x => x.ID == guid).ToListAsync();
             if (calendar == null)
             {
                 return RedirectToAction("Index");
@@ -140,14 +141,14 @@ namespace AnturaSemester.Controllers
 
             try
             {
-                _context.Calendar.Remove(calendar);
+                _context.Calendar.RemoveRange(calendar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             catch (DbUpdateException /* ex */)
             {
                 //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+                return RedirectToAction("Delete", new { id = guid, saveChangesError = true });
             }
         }
 
