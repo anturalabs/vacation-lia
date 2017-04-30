@@ -35,7 +35,7 @@ namespace AnturaSemester.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAbsence(Guid guid, string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate)
+        public async Task<IActionResult> CreateAbsence(Guid guid, string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate, string CommentField)
         {
             if (guid != null)
             {
@@ -45,13 +45,12 @@ namespace AnturaSemester.Controllers
             guid = Guid.NewGuid();
             for (DateTime date = FromDate; date <= ToDate; date = date.AddDays(1))
             {
-                var newcell = new CalendarCell { ID = guid, AbsenceName = Absencetype, UsersID = UsersID, Date = date };
+                var newcell = new CalendarCell { ID = guid, AbsenceName = Absencetype, UsersID = UsersID, Date = date, CommentField = CommentField };
 
                 if (_context.Calendar.ToList().Any(item => (item.Date == newcell.Date && item.UsersID == newcell.UsersID)))
                 {
-                    //modal and/or method needs to check and stop if error is true
-                    ViewBag.error = "Not allowed, try again!";
-
+                    //Not necessary with current fix, may want this later
+                    ViewBag.error = "No duplicate absences allowed, please try again!";
                 }
                 else
                 {
@@ -59,11 +58,7 @@ namespace AnturaSemester.Controllers
                 }
             }
             await _context.SaveChangesAsync();
-
-
             return RedirectToAction("/");
-
-
         }
 
 
@@ -98,7 +93,7 @@ namespace AnturaSemester.Controllers
             var absenceToUpdate = await _context.Calendar
                 .Include(r => r.Date)
                 .Include(r => r.UsersID)
-
+                .Include(r => r.AbsenceName)
                 .SingleOrDefaultAsync(s => s.ID == id);
 
             if (await TryUpdateModelAsync<CalendarCell>(
@@ -106,9 +101,6 @@ namespace AnturaSemester.Controllers
                 "",
                 s => s.UsersID, s => s.Date, s => s.AbsenceName, s => s.Approval, s => s.CommentField))
             {
-
-
-
                 try
                 {
                     await _context.SaveChangesAsync();

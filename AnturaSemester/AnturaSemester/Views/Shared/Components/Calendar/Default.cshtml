@@ -112,9 +112,9 @@
        
         $(function () {
             $("td.editAbsence").click(function () {
-                var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from tr
+                var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from td
                 $.ajax({
-                    url: '/Home/EditAbsence/' + getIdFromCell, // The method name + paramater
+                    url: '/Home/EditAbsence/' + getIdFromCell, // The method name + parameter
                     success: function (data) {
                         // $('#selectedAbsence').value()
                         
@@ -125,14 +125,15 @@
                         var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
                         $('#comments').val(JSON.stringify(data[0]));
                         //' + data[0].usersID + '      
-                        $('#selectedUserButton').html(userName);
+                        $('#selectedUserButton').html(userName + ' <span class="caret"></span>');
                         $('#selectedUser').val(data[0].usersID);
                         $('#guidId').val(data[0].id);
 
                         $('#SemesterView').find('input[name="FromDate"]').datepicker('update', new Date(data[0].date));
                         $('#SemesterView').find('input[name="ToDate"]').datepicker('update', new Date(data[data.length - 1].date).toISOString().slice(0,10));
-                        $('#selectedAbsenceButton').html(data[0].absenceName);
+                        $('#selectedAbsenceButton').html(data[0].absenceName + ' <span class="caret"></span>');
                         $('#selectedAbsence').val(data[0].absenceName);
+                       // $('#SemesterView').find('textarea[name="commentField"]').html('update', new Comment().toISOString());//probably wrong
                     }   
                 });
                 $('#SemesterModal').modal();

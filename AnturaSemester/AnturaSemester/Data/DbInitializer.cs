@@ -40,7 +40,7 @@ namespace AnturaSemester.Data
 
             var calendars = new CalendarCell[]
           {
-             
+             //Removed test data because of GUID ID change
           };
             foreach (CalendarCell c in calendars)
             {
@@ -83,10 +83,6 @@ namespace AnturaSemester.Data
 
             context.SaveChanges();
 
-
-
-
-
             var department = new Department[]
            {
                 new Department{DepartmentName="ProductDevelopment"},
@@ -123,11 +119,11 @@ namespace AnturaSemester.Data
 
 
             var teams = new Team[]
-    {
+          {
             new Team{TeamName="A-Team"},
             new Team{TeamName="GoldTeam"},
             new Team{TeamName="Wombats"},
-    };
+          };
             foreach (Team t in teams)
             {
                 context.Team.Add(t);
@@ -156,19 +152,9 @@ namespace AnturaSemester.Data
                     context.UserTeam.Add(ut);
                 }
             }
-
             context.SaveChanges();
-
-           
-
-
-
         }
     }
-
-
-
-
 }
 
 
