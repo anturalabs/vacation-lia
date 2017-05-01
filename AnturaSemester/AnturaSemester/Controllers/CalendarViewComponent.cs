@@ -88,6 +88,7 @@ namespace AnturaSemester.Controllers
        
         }
 
+
         // Retunerar helg (lördag & söndag) om resultat är true
         bool IsThisWeekend(DateTime date)
         {

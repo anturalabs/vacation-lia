@@ -77,11 +77,23 @@
                             foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month))
                             {
                                 <td data-id="@cell.ID" data-toggle="modal" data-target="#SemesterModal">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
+                                
                                 HasAddedCell = true;
+                            
+                                 
+                                
+                               
+                            {
+
+
                             }
 
-                            if (HasAddedCell == false)
-                            {
+
+                            // ("cell.AbsenceName = " + cell.AbsenceName);
+                        }
+
+                        if (HasAddedCell == false)
+                        {
                                 <td></td>
                             }
                         }
