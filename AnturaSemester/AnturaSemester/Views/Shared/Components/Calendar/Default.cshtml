@@ -36,14 +36,14 @@
                 {
                     if (x.highLight == true)
                     {
-                    <td bgcolor="#3D85C6">@x.Day </td>
+                    <td bgcolor="#bababa" > <strong>@x.Day</strong></td>
                     }
 
                     else
 
                      if (x.weekEnd == true)
                     {
-                        <td bgcolor="#e2dede"><font color="red">@x.Day</font></td>
+                        <td bgcolor="#eadada"><font color="red">@x.Day</font></td>
                     }
 
                     else
@@ -58,6 +58,13 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(model => user.FullName)
+                        <style>
+                            table tr:nth-child(even) {
+                                background-color: #fcf9f9
+                            }
+                        </style>
+
+
                     </td>
                     @foreach (var x in ViewBag.Column)
                     {
@@ -77,19 +84,19 @@
 
                                 if (cell.AbsenceName.Equals("Holiday"))
                                 {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#eae672"></td>}
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f4df53"></td>}
                                 else if (cell.AbsenceName.Equals("Sick"))
                                 {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f42c2c"></td>}
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e05555"></td>}
                                 else if (cell.AbsenceName.Equals("VAB"))
                                 {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#efa7e7"></td>}
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e899ae"></td>}
                                 else if (cell.AbsenceName.Equals("ParentalLeave"))
                                 {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#73efd0"></td>}
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#85dbcd"></td>}
                                 else if (cell.AbsenceName.Equals("Other"))
                                 {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#edaf6d"></td>}
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#4e80ad"></td>}
                                 HasAddedCell = true;
 
                                 HasAddedCell = true;
@@ -109,6 +116,69 @@
 
         </tbody>
     </table>
+
+
+<div class='my-legend'>
+    <div class='legend-title'>Poop</div>
+    <div class='legend-scale'>
+        <ul class='legend-labels'>
+            <li><span style='background:#f4df53;'></span>Holiday</li>
+            <li><span style='background:#e05555;'></span>Sick</li>
+            <li><span style='background:#e899ae;'></span>VAB</li>
+            <li><span style='background:#85dbcd;'></span>Parental Leave</li>
+            <li><span style='background:#4e80ad;'></span>Other</li>
+        </ul>
+    </div>
+    <div class='legend-source'><a href="#"></a></div>
+</div>
+
+
+<style type='text/css'>
+    .my-legend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 90%;
+    }
+
+    .my-legend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 5px;
+        padding: 0;
+        float: left;
+        list-style: none;
+    }
+
+        .my-legend .legend-scale ul li {
+            font-size: 80%;
+            list-style: none;
+            margin-left: 0;
+            line-height: 18px;
+            margin-bottom: 2px;
+        }
+
+    .my-legend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 16px;
+        width: 30px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 1px solid #999;
+    }
+
+    .my-legend .legend-source {
+        font-size: 70%;
+        color: #999;
+        clear: both;
+    }
+
+    .my-legend a {
+        color: #777;
+    }
+</style> 
+
+
     <script type="text/javascript">
         /*
         $(function () {
