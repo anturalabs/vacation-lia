@@ -62,6 +62,7 @@
                         }
 
                     </ul>
+                    <span class="label label-info"></span>
                 </div>
             </div>
         </div>
@@ -95,7 +96,9 @@
 
                             }
                         }
+                      
                     </ul>
+                    <span class="label label-info"></span>
                 </div>
             </div>
         </div>
@@ -133,6 +136,7 @@
                             }
                         }
                     </ul>
+                    <span class="label label-info"></span>
                 </div>
             </div>
         </div>
@@ -147,13 +151,18 @@
 
         </div>
         <script type="text/javascript">
-            $(".dropdown-menu li a").click(function () {
-                $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-                $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+           
+            $(".dropdown-menu li a label").click(function () {
+                var value = [];
+                $(this).parents(".button-group").find(":checkbox:checked").each(function () {
+                    value.push($(this).parent().text());
+                });
+                //var test = $(".button-group").find('input[type="checkbox"]').val(); //filter(":checked").text();
+
+                $(this).parents(".button-group").find('.label').html(value.join()); //$(this).text()
+              // $(this).parents(".button-group").find('.label').val($(this).data('value'));
             });
-            $("#team-select li a").click(function () {
-                document.getElementById('selectTeam').value = document.getElementById('selectedTeamButton').value;
-            });
+         
     </script>
     </div>
 </form>
