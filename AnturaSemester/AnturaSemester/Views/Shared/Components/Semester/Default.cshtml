@@ -4,74 +4,82 @@
     ViewData["Title"] = "Semester";
 }
 
-<form asp-controller="Home" asp-action="CreateAbsence">
+<form id="SemesterView" asp-controller="Home" asp-action="CreateAbsence">
     <div class="form-horizontal">
+        <div class="form-group col-md-10">
+            <input type="hidden" name="guid" id="guidId" value="" />
+            <div class="dropdown">
+                <button type="button" id="selectedUserButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose User <span class="caret"></span></button>
+                <input type="hidden" name="UsersID" id="selectedUser" value="" />
+                <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach (var user in Model.users)
+                    {
 
-        <div class="dropdown">
-            <button type="button" id ="selectedUserButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose User <span class="caret"></span></button>
-            <input type="hidden" name="UsersID" id="selectedUser" value="" />
-            <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">           
-                @foreach (var user in Model.users)
-                {
-                    <li>
-                        <a href="#" class="small" data-value="@user.ID" tabIndex="-1">
-                            @Html.DisplayFor(model => user.FullName)
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
-        <br />
-
-        <!--Datepicker start-->
-        <div id="sandbox-container">
-            <div class="input-daterange input-group" id="datepicker">
-                <input type="text" class="input-sm form-control" name="FromDate" />
-                <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="ToDate" />
+                        <li>
+                            <a href="#" class="small" data-value="@user.ID" tabIndex="-1">@Html.DisplayFor(model => user.FullName)</a>
+                        </li>
+                    }
+                </ul>
             </div>
-        </div>     
-        <!--DatePicker End-->
-        <br />
-        @ViewBag.error
-        <div class="dropdown">
-            <button type="button" id ="selectedAbsenceButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
-            <input type="hidden" name="Absencetype" id="selectedAbsence" value="" />
-            <ul id="absence-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @foreach (var absence in ViewBag.Absences)
-                {
-                    <li>
-                        <a href="#" class="small" data-value="@absence" tabIndex="-1">
-                            
-                            @absence
-                        </a>
-                    </li>
-                }
-            </ul>
         </div>
-        <br />
 
-        <div class="form-check">
+
+        <div class="form-group col-md-10">
+            <!--Datepicker start-->
+            <div id="sandbox-container">
+                <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="input-sm form-control" name="FromDate" />
+                    <span class="input-group-addon">to</span>
+                    <input type="text" class="input-sm form-control" name="ToDate" />
+                </div>
+            </div>
+            <!--DatePicker End-->
+        </div>
+
+        @ViewBag.error <!--Not currently in use-->
+        <div class="form-group col-md-10">
+            <div class="dropdown">
+                <button type="button" id="selectedAbsenceButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Absence Type <span class="caret"></span></button>
+                <input type="hidden" name="Absencetype" id="selectedAbsence" value="" />
+                <ul id="absence-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach (var absence in ViewBag.Absences)
+                    {
+                        <li>
+                            <a href="#" class="small" data-value="@absence" tabIndex="-1">
+
+                                @absence
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-check col-md-10">
             <label class="form-check-label">
                 <input type="checkbox" class="form-check-input">
                 Repeat Absence?
             </label>
         </div>
 
-            <div class="form-group">
-                <label for="comments">Comments</label>
-                <input type="hidden" name="CommentField" id="selectedComment" value="" />
-                <textarea class="form-control" id="comments" rows="3"></textarea>
+        <div class="form-group">
+            <div class="col-lg-offset-0 col-lg-10">
+                <textarea class="form-control" placeholder="Message" rows="3" id="CommentField" name="commentField"></textarea>
             </div>
-            <input type="submit" value="Create" class="btn btn-default" />
-            <button type="button" value="Submit" class="btn btn-default">Submit</button>
-            <button type="button" value="Delete" class="btn btn-danger">Delete</button>
-</div>
+        </div>
 
+        <div class="form-group">
+            <div class="col-sm-offset-0 col-md-10">
+                <input type="submit" id="SubmitButton" value="Submit" class="btn btn-default" />
+                <input type="submit" id="DeleteButton" value="Delete" class="btn btn-danger hidden" asp-controller="Home" asp-action="DeleteAbsence" />
+            </div>
+
+        </div>
+    </div>
     <script type="text/javascript">
-          $(".dropdown-menu li a").click(function () {
-              $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-              $(this).parents(".dropdown").find('.btn').val($(this).data('value'));            
+        $(".dropdown-menu li a").click(function () {
+            $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+            $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
         });
 
         $("#user-select li a").click(function () {
@@ -82,17 +90,20 @@
             document.getElementById('selectedAbsence').value = document.getElementById('selectedAbsenceButton').value;
         });
 
-       
 
-       
 
-          $('#sandbox-container .input-daterange').datepicker({
-              startView: 1,
-              forceParse: false,
-              daysOfWeekHighlighted: "0,6",
-              calendarWeeks: true,
-              todayHighlight: true
-          });
+
+
+        $('#sandbox-container .input-daterange').datepicker({
+            startView: 1,
+            format: "yyyy-mm-dd",
+            forceParse: false,
+            daysOfWeekHighlighted: "0,6",
+            calendarWeeks: true,
+            todayHighlight: true
+        });
+
+
     </script>
 
 </form>

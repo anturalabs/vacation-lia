@@ -63,7 +63,8 @@ namespace AnturaSemester.Controllers
                 Day.weekEnd = result;
                 Day.highLight = result1;
                 Day.Month = month;
-                int GetWeekNum = GetIso8601WeekOfYear(iDay);
+                Day.Year = year;
+                int GetWeekNum = culture.Calendar.GetWeekOfYear(iDay, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
                 Day.weekNumber = GetWeekNum;
                 bool result2 = MondayTest(iDay);
                 Day.getMonday = result2;
@@ -78,9 +79,9 @@ namespace AnturaSemester.Controllers
             ViewBag.year = year;
             ViewBag.month = month;
 
-            ViewBag.GroupedWeeks = Darray.GroupBy(day => day.weekNumber).Select( group => new Tuple<int,int>(group.Key, group.Count())); // LINQ contains funktion för att ta fram veckonummer och skapa en lista av dem. 
+            ViewBag.GroupedWeeks = Darray.GroupBy(day => day.weekNumber).Select( group => new Tuple<int,int>(group.Key, group.Count()));
 
-            //Retrieves saved holidays and returns them in calendar SH
+            
             var calendar = new CalendarViewModel { };
             calendar.users = _context.Users.ToList();
             calendar.calendar = _context.Calendar.ToList();
@@ -117,41 +118,29 @@ namespace AnturaSemester.Controllers
             return false;
         }
 
-        List<DateTime> GetHolidaysRedDays(int year) // Lista med "alla" röda dagar som förekommer under ett år och som är på samma datum
-        {
+            List<DateTime> GetHolidaysRedDays(int year) // Lista med "alla" röda dagar som förekommer under ett år och som är på samma datum
+           {
 
-            List<DateTime> holidays = new List<DateTime>();
+               List<DateTime> holidays = new List<DateTime>();
 
-            DateTime newYearsDate = (new DateTime(year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
-            holidays.Add(newYearsDate);
+               DateTime newYearsDate = (new DateTime(year, 1, 1).Date); // Skriver ut nyår, alltid förekommer 1:a jan
+               holidays.Add(newYearsDate);
 
 
-            DateTime valborgEve = (new DateTime(year, 5, 1).Date); // skriver ut Valborg, alltid förekommer 1:a maj
-            holidays.Add(valborgEve);
+               DateTime valborgEve = (new DateTime(year, 5, 1).Date); // skriver ut Valborg, alltid förekommer 1:a maj
+               holidays.Add(valborgEve);
 
-            DateTime nationalDay = (new DateTime(year, 6, 6).Date); // National dagen, alltid förekommer 6:e juni
-            holidays.Add(nationalDay);
+               DateTime nationalDay = (new DateTime(year, 6, 6).Date); // National dagen, alltid förekommer 6:e juni
+               holidays.Add(nationalDay);
 
-            DateTime christmasDay = (new DateTime(year, 12, 25).Date); // Juldagen, alltid förekommer 25:e dec
-            holidays.Add(christmasDay);
+               DateTime christmasDay = (new DateTime(year, 12, 25).Date); // Juldagen, alltid förekommer 25:e dec
+               holidays.Add(christmasDay);
 
-            DateTime secondDayChristmas = (new DateTime(year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
-            holidays.Add(secondDayChristmas);
+               DateTime secondDayChristmas = (new DateTime(year, 12, 26).Date); // Annandagsjul, alltid förekommer 26:e dec
+               holidays.Add(secondDayChristmas);
 
-            return holidays;
-        }
-
-        public static int GetIso8601WeekOfYear(DateTime time)
-        {
-
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
-            {
-                time = time.AddDays(3);
-            }
-
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-        }
+               return holidays;
+           } 
     }
 
 }

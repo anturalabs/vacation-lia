@@ -9,13 +9,12 @@ namespace AnturaSemester.Models
 {
     public class CalendarCell
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public DateTime Date { get; set; }
-        
         public int UsersID { get; set; }
-
         public string AbsenceName { get; set; }
         public enum AbsenceType { Holiday, VAB, Sick, ParentalLeave, Other }
+        [StringLength(250, ErrorMessage = "Comment cannot be longer than 250 characters.")]
         public string CommentField { get; set; }
         public string Approval { get; set; }
         public enum ApprovalState { Approved, Denied, Ongoing }

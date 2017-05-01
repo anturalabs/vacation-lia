@@ -18,23 +18,20 @@
         </li>
     </ul>
 </nav>
-<table class=" table table-bordered table-hover">
+<table id="calendartable" class="table table-bordered table-hover">
     <tbody>
         <tr>
-            <td>
-
-            </td>
+            <td></td>
             @foreach (var x in ViewBag.GroupedWeeks)
             {
-                
+
                 <td colspan="@x.Item2"><font bgcolor="#edf6ff"><strong>V:@x.Item1</strong></font></td>
-               
+
 
             }
         </tr>
         <tr>
             <th>
-
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
                     if (x.highLight == true)
@@ -74,26 +71,33 @@
                         else
                         {
                             bool HasAddedCell = false;
-                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month))
-                            {
-                                <td data-id="@cell.ID" data-toggle="modal" data-target="#SemesterModal">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
-                                
-                                HasAddedCell = true;
-                            
-                                 
-                                
-                               
+                            foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month && c.Date.Year == x.Year))
+
                             {
 
+                                if (cell.AbsenceName.Equals("Holiday"))
+                                {
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#eae672"></td>}
+                                else if (cell.AbsenceName.Equals("Sick"))
+                                {
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f42c2c"></td>}
+                                else if (cell.AbsenceName.Equals("VAB"))
+                                {
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#efa7e7"></td>}
+                                else if (cell.AbsenceName.Equals("ParentalLeave"))
+                                {
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#73efd0"></td>}
+                                else if (cell.AbsenceName.Equals("Other"))
+                                {
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#edaf6d"></td>}
+                                HasAddedCell = true;
+
+                                HasAddedCell = true;
 
                             }
 
-
-                            // ("cell.AbsenceName = " + cell.AbsenceName);
-                        }
-
-                        if (HasAddedCell == false)
-                        {
+                            if (HasAddedCell == false)
+                            {
                                 <td></td>
                             }
                         }
@@ -103,10 +107,55 @@
                 </tr>
             }
 
-        
         </tbody>
     </table>
     <script type="text/javascript">
+        /*
+        $(function () {
+            $('.editModal').modal();
+        });
+        */
+        function editAbsence(absenceId) {
+            $.ajax({
+                url: '/Home/EditAbsence/' + absenceId, // The method name + paramater
+                success: function (data) {
+                    $('#SemesterModal').html(data); // This should be an empty div where you can inject your new html (the partial view)
+                }
+            });
+        }
+
+
+        $(function () {
+            $("td.editAbsence").click(function () {
+                var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from td
+                $.ajax({
+                    url: '/Home/EditAbsence/' + getIdFromCell, // The method name + parameter
+                    success: function (data) {
+                        // $('#selectedAbsence').value()
+
+                        $('#selectedUserButton').prop('disabled', true);
+                        $('#DeleteButton').removeClass('hidden');
+                        $('#SubmitButton').val('Edit');
+
+                        var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
+                        $('#comments').val(JSON.stringify(data[0]));
+                        //' + data[0].usersID + '
+                        $('#selectedUserButton').html(userName + ' <span class="caret"></span>');
+                        $('#selectedUser').val(data[0].usersID);
+                        $('#guidId').val(data[0].id);
+
+                        $('#SemesterView').find('input[name="FromDate"]').datepicker('update', new Date(data[0].date));
+                        $('#SemesterView').find('input[name="ToDate"]').datepicker('update', new Date(data[data.length - 1].date).toISOString().slice(0, 10));
+                        $('#selectedAbsenceButton').html(data[0].absenceName + ' <span class="caret"></span>');
+                        $('#selectedAbsence').val(data[0].absenceName);
+                        // $('#SemesterView').find('textarea[name="commentField"]').html('update', new Comment().toISOString());//probably wrong
+                    }
+                });
+                $('#SemesterModal').modal();
+                //  $('#Semesterbody').html(getIdFromCell)
+            });
+        });
+        /*
             $(function () {
                 $('#SemesterModal').modal({
                     keyboard: true,
@@ -115,8 +164,9 @@
 
                 }).on('show', function () { //subscribe to show method
                     var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from tr
+                    alert(getIdFromCell);
                     //make your ajax call populate items or what even you need
-                    $(this).find('#SemesterBody').html($('<b> Order Id selected: ' + getIdFromCell + '</b>'))
+                    $(this).find('#SemesterBody').html($(getIdFromCell))
                 });
-            });
-</script>
+            }); */
+    </script>
