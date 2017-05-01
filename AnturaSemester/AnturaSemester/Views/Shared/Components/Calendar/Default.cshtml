@@ -76,7 +76,18 @@
                             bool HasAddedCell = false;
                             foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month && c.Date.Year == x.Year))
                             {
-                                <td data-id="@cell.ID" data-toggle="modal" class="editAbsence">@Html.DisplayFor(modelItem => cell.AbsenceName)</td>
+                                
+                                
+                                if (cell.AbsenceName.Equals("Holiday"))
+                                {<td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#eae672"></td>}
+                                else if (cell.AbsenceName.Equals("Sick"))
+                                {<td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f42c2c"></td>}
+                                else if (cell.AbsenceName.Equals("VAB"))
+                                {<td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#efa7e7"></td>}
+                                else if (cell.AbsenceName.Equals("ParentalLeave"))
+                                {<td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#73efd0"></td>}
+                                else if (cell.AbsenceName.Equals("Other"))
+                                {<td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#edaf6d"></td>}
                                 HasAddedCell = true;
                             }
 

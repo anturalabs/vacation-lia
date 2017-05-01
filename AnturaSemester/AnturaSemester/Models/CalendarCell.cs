@@ -14,6 +14,7 @@ namespace AnturaSemester.Models
         public int UsersID { get; set; }
         public string AbsenceName { get; set; }
         public enum AbsenceType { Holiday, VAB, Sick, ParentalLeave, Other }
+
         [StringLength(250, ErrorMessage = "Comment cannot be longer than 250 characters.")]
         public string CommentField { get; set; }
         public string Approval { get; set; }

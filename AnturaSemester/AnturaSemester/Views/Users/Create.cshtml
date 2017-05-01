@@ -105,8 +105,8 @@
             <label asp-for="UsersTeam" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <div class="button-group">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Team <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
+                    <button type="button" id="selectedTeamButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Choose Team <span class="caret"></span></button>
+                    <ul id="team-select" class="dropdown-menu">
 
                         @{
 
@@ -123,6 +123,7 @@
                                         <label>
                                             <input type="checkbox"
                                                    name="selectedTeam"
+                                                   id="selectTeam"
                                                    value="@teams.TeamID" />
                                             @teams.Teams.TeamName
                                         </label>
@@ -146,7 +147,13 @@
 
         </div>
         <script type="text/javascript">
-           
+            $(".dropdown-menu li a").click(function () {
+                $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+            });
+            $("#team-select li a").click(function () {
+                document.getElementById('selectTeam').value = document.getElementById('selectedTeamButton').value;
+            });
     </script>
     </div>
 </form>
