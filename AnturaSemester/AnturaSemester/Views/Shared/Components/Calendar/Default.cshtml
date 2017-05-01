@@ -123,7 +123,7 @@
                         $('#SubmitButton').val('Edit');
 
                         var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
-                        $('#comments').val(JSON.stringify(data[0]));
+                        $('#CommentField').val(data[0].commentField);
                         //' + data[0].usersID + '      
                         $('#selectedUserButton').html(userName + ' <span class="caret"></span>');
                         $('#selectedUser').val(data[0].usersID);

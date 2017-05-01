@@ -49,12 +49,12 @@
 
                                 <li>
                                     <a href="#" class="small" data-value="option1" tabIndex="-1">
-
-                                        <input type="checkbox"
-                                               name="selectedRoles"
-                                               value="@role.RolesID"/>
-                                        @role.Role.RoleName
-
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="selectedRoles"
+                                                   value="@role.RolesID" />
+                                            @role.Role.RoleName
+                                        </label>
                                     </a>
                                 </li>
 
@@ -84,12 +84,12 @@
 
                                 <li>
                                     <a href="#" class="small" data-value="option1" tabIndex="-1">
-
-                                        <input type="checkbox"
-                                               name="selectedDepartment"
-                                               value="@departments.DepartmentID"/>
-                                        @departments.Departments.DepartmentName
-
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="selectedDepartment"
+                                                   value="@departments.DepartmentID" />
+                                            @departments.Departments.DepartmentName
+                                        </label>
                                     </a>
                                 </li>
 
@@ -120,11 +120,12 @@
                                 <li>
                                     <a href="#" class="small" data-value="option1" tabIndex="-1">
 
-                                        <input type="checkbox"
-                                               name="selectedTeam"
-                                               value="@teams.TeamID"/>
-                                        @teams.Teams.TeamName
-
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="selectedTeam"
+                                                   value="@teams.TeamID" />
+                                            @teams.Teams.TeamName
+                                        </label>
                                     </a>
                                 </li>
 
@@ -144,6 +145,9 @@
             </div>
 
         </div>
+        <script type="text/javascript">
+           
+    </script>
     </div>
 </form>
 
