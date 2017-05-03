@@ -58,13 +58,31 @@
         <div class="form-check col-md-10">
             <label class="form-check-label">
                 <input type="checkbox" class="form-check-input">
-                Repeat Absence?
+                Repeat Absence Placeholder (not functional)
             </label>
         </div>
 
         <div class="form-group">
             <div class="col-lg-offset-0 col-lg-10">
                 <textarea class="form-control" placeholder="Message" rows="3" id="CommentField" name="commentField"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-10">
+            <div class="dropdown">
+                <button type="button" id="selectedApprovalButton" class="btn btn-default btn-sm dropdown-toggle hidden" data-toggle="dropdown">Set Approval State<span class="caret"></span></button>
+                <input type="hidden" name="ApprovalState" id="selectedApproval" value="" />
+                <ul id="approval-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach (var approval in ViewBag.Approvals)
+                    {
+                        <li>
+                            <a href="#" class="small" data-value="@approval" tabIndex="-1">
+
+                                @approval
+                            </a>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
 
@@ -90,6 +108,9 @@
             document.getElementById('selectedAbsence').value = document.getElementById('selectedAbsenceButton').value;
         });
 
+        $("#approval-select li a").click(function () {
+            document.getElementById('selectedApproval').value = document.getElementById('selectedApprovalButton').value;
+        });
 
 
 
