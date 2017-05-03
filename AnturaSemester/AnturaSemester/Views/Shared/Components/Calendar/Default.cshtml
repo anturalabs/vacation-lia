@@ -36,7 +36,7 @@
                 {
                     if (x.highLight == true)
                     {
-                    <td bgcolor="#bababa" > <strong>@x.Day</strong></td>
+                    <td bgcolor="#bababa"> <strong>@x.Day</strong></td>
                     }
 
                     else
@@ -84,102 +84,137 @@
 
                                 if (cell.AbsenceName.Equals("Holiday"))
                                 {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f4df53"></td>}
-                                else if (cell.AbsenceName.Equals("Sick"))
-                                {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e05555"></td>}
-                                else if (cell.AbsenceName.Equals("VAB"))
-                                {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e899ae"></td>}
-                                else if (cell.AbsenceName.Equals("ParentalLeave"))
-                                {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#85dbcd"></td>}
-                                else if (cell.AbsenceName.Equals("Other"))
-                                {
-                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#4e80ad"></td>}
-                                HasAddedCell = true;
+                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f4df53">
+                                        @{
+                                            if (cell.Approval == "Approved")
+                                            {<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>}
+                                            else if (cell.Approval == "Denied")
+                                            {<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>}
+                                            else if (cell.Approval == "Ongoing")
+                                            {<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>}
+                                        }
 
-                                HasAddedCell = true;
+                                        @{
+                                            if (cell.CommentField != null)
+                                            {<span class="glyphicon glyphicon-comment"></span>}
+                                        }
 
-                            }
+                                    </td>}
 
-                            if (HasAddedCell == false)
-                            {
-                                <td></td>
-                            }
-                        }
+                                            else if (cell.AbsenceName.Equals("Sick"))
+                                            {
+                                                <td data - id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e05555">
+                                                    @{
+                                                        if (cell.CommentField != null)
+                                                        {<span class="glyphicon glyphicon-comment"></span>}
+                                                    }
+                                                </td>}
+                                                        else if (cell.AbsenceName.Equals("VAB"))
+                                                        {
+                                                            <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e899ae">
+                                                                @{
+                                                                    if (cell.CommentField != null)
+                                                                    {<span class="glyphicon glyphicon-comment"></span>}
+                                                                }
+                                                            </td>}
+                                                                    else if (cell.AbsenceName.Equals("ParentalLeave"))
+                                                                    {
+                                                                        <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#85dbcd">
+                                                                            @{
+                                                                                if (cell.CommentField != null)
+                                                                                {<span class="glyphicon glyphicon-comment"></span>}
+                                                                            }
+                                                                        </td>}
+                                                                                else if (cell.AbsenceName.Equals("Other"))
+                                                                                {
+                                                                                    <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#4e80ad">
+                                                                                        @{
+                                                                                            if (cell.CommentField != null)
+                                                                                            {<span class="glyphicon glyphicon-comment"></span>}
+                                                                                        }
+                                                                                    </td>}
+                                                                                                HasAddedCell = true;
+
+                                                                                            }
+
+                                                                                            if (HasAddedCell == false)
+                                                                                            {
+                                                                                                <td></td>
+                                                                                                    }
+                                                                                                }
 
 
-                    }
+                                                                                            }
                 </tr>
-            }
+                                                                                            }
 
         </tbody>
     </table>
 
 
-<div class='my-legend'>
-    <div class='legend-title'>Poop</div>
-    <div class='legend-scale'>
-        <ul class='legend-labels'>
-            <li><span style='background:#f4df53;'></span>Holiday</li>
-            <li><span style='background:#e05555;'></span>Sick</li>
-            <li><span style='background:#e899ae;'></span>VAB</li>
-            <li><span style='background:#85dbcd;'></span>Parental Leave</li>
-            <li><span style='background:#4e80ad;'></span>Other</li>
-        </ul>
+    <div class='my-legend'>
+        <div class='legend-title'>Poop</div>
+        <div class='legend-scale'>
+            <ul class='legend-labels'>
+                <li><span style='background:#f4df53;'></span>Holiday</li>
+                <li><span style='background:#e05555;'></span>Sick</li>
+                <li><span style='background:#e899ae;'></span>VAB</li>
+                <li><span style='background:#85dbcd;'></span>Parental Leave</li>
+                <li><span style='background:#4e80ad;'></span>Other</li>
+            </ul>
+        </div>
+        <div class='legend-source'><a href="#"></a></div>
     </div>
-    <div class='legend-source'><a href="#"></a></div>
-</div>
 
 
-<style type='text/css'>
-    .my-legend .legend-title {
-        text-align: left;
-        margin-bottom: 5px;
-        font-weight: bold;
-        font-size: 90%;
-    }
-
-    .my-legend .legend-scale ul {
-        margin: 0;
-        margin-bottom: 5px;
-        padding: 0;
-        float: left;
-        list-style: none;
-    }
-
-        .my-legend .legend-scale ul li {
-            font-size: 80%;
-            list-style: none;
-            margin-left: 0;
-            line-height: 18px;
-            margin-bottom: 2px;
+    <style type='text/css'>
+        .my-legend .legend-title {
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 90%;
         }
 
-    .my-legend ul.legend-labels li span {
-        display: block;
-        float: left;
-        height: 16px;
-        width: 30px;
-        margin-right: 5px;
-        margin-left: 0;
-        border: 1px solid #999;
-    }
+        .my-legend .legend-scale ul {
+            margin: 0;
+            margin-bottom: 5px;
+            padding: 0;
+            float: left;
+            list-style: none;
+        }
 
-    .my-legend .legend-source {
-        font-size: 70%;
-        color: #999;
-        clear: both;
-    }
+            .my-legend .legend-scale ul li {
+                font-size: 80%;
+                list-style: none;
+                margin-left: 0;
+                line-height: 18px;
+                margin-bottom: 2px;
+            }
 
-    .my-legend a {
-        color: #777;
-    }
-</style> 
+        .my-legend ul.legend-labels li span {
+            display: block;
+            float: left;
+            height: 16px;
+            width: 30px;
+            margin-right: 5px;
+            margin-left: 0;
+            border: 1px solid #999;
+        }
+
+        .my-legend .legend-source {
+            font-size: 70%;
+            color: #999;
+            clear: both;
+        }
+
+        .my-legend a {
+            color: #777;
+        }
+    </style>
 
 
     <script type="text/javascript">
+        
         /*
         $(function () {
             $('.editModal').modal();
@@ -198,6 +233,7 @@
         $(function () {
             $("td.editAbsence").click(function () {
                 var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from td
+                //går fel här^
                 $.ajax({
                     url: '/Home/EditAbsence/' + getIdFromCell, // The method name + parameter
                     success: function (data) {
@@ -205,21 +241,28 @@
 
                         $('#selectedUserButton').prop('disabled', true);
                         $('#DeleteButton').removeClass('hidden');
+                        $('#selectedApprovalButton').removeClass('hidden');
                         $('#SubmitButton').val('Edit');
 
                         var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
                         $('#comments').val(JSON.stringify(data[0]));
+                        $('#CommentField').val(data[0].commentField);
                         //' + data[0].usersID + '
                         $('#selectedUserButton').html(userName + ' <span class="caret"></span>');
                         $('#selectedUser').val(data[0].usersID);
                         $('#guidId').val(data[0].id);
 
+                        $("#approval-select li a").click(function () {
+                            document.getElementById('selectedApproval').value = document.getElementById('selectedApprovalButton').value;
+                        });
+
                         $('#SemesterView').find('input[name="FromDate"]').datepicker('update', new Date(data[0].date));
                         $('#SemesterView').find('input[name="ToDate"]').datepicker('update', new Date(data[data.length - 1].date).toISOString().slice(0, 10));
                         $('#selectedAbsenceButton').html(data[0].absenceName + ' <span class="caret"></span>');
                         $('#selectedAbsence').val(data[0].absenceName);
-                        // $('#SemesterView').find('textarea[name="commentField"]').html('update', new Comment().toISOString());//probably wrong
-                    }
+                        $('#selectedApprovalButton').html(data[0].approval + ' <span class="caret"></span>');
+                        $('#selectedApproval').val(data[0].approval);
+                        }
                 });
                 $('#SemesterModal').modal();
                 //  $('#Semesterbody').html(getIdFromCell)

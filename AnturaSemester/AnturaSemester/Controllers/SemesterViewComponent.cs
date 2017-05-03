@@ -24,7 +24,10 @@ namespace AnturaSemester.Controllers
             var allAbsenceTypeValues = (AbsenceType[])Enum.GetValues(typeof(AbsenceType));
             ViewBag.Absences = allAbsenceTypeValues;
 
-            
+            var allApprovalValues = (ApprovalState[])Enum.GetValues(typeof(ApprovalState));
+            ViewBag.Approvals = allApprovalValues;
+
+
 
             var semester = new SemesterViewModel { };
             semester.users = _context.Users.ToList();

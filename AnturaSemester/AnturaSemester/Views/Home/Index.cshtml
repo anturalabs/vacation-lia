@@ -6,21 +6,20 @@
 
 
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a class="navbar-link active" data-toggle="tab" href="#home">A-Team</a></li>
+    <li role="presentation" class="active"><a class="navbar-link active" data-toggle="tab" href="#home">Calendar</a></li>
     <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu1">PD</a></li>
-    <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu2">Sprintplanering</a></li>
+    <li role="presentation"><a class="navbar-link active" data-toggle="tab" href="#menu2">Sprintplanner</a></li>
 </ul>
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-        <h3>A-Team</h3>
+        <h3>Calendar</h3>
 
-        <!--Fick ändra från ViewBags till DateTime.-->
+        <!--Calendartable-->
         @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
 
-
         <!-- Button trigger for modal -->
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal" onclick="createNew()">Create New</button>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal" onclick="createNew()">Create New Absence</button>
 
         <!-- Modal -->
         <div class="modal fade" id="SemesterModal" tabindex="-1" role="dialog" aria-labelledby="SemesterModalLabel" aria-hidden="true">
@@ -43,29 +42,23 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
     <div id="menu1" class="tab-pane fade in">
         <h3>Product Development</h3>
         <p>En sorteringsdemonstration så småningom</p>
     </div>
     <div id="menu2" class="tab-pane fade in">
-        <h3>Sprintplanering</h3>
+        <h3>Sprintplanner</h3>
         <p>Här kommer sprint-planering, tjolahopp tjolahej tjolahoppsan-sa</p>
     </div>
-
-    <script type="text/javascript">
-        function createNew () {
-            var container = $("#SemesterBody");        
-            $.get("/Home/GetSemesterViewComponent/", function (data) { container.html(data); });
-        }
-    </script>
 </div>
+
+<script type="text/javascript">
+    function createNew() {
+        var container = $("#SemesterBody");
+        $.get("/Home/GetSemesterViewComponent/", function (data) { container.html(data); });
+    }
+</script>
+
 
 
 
