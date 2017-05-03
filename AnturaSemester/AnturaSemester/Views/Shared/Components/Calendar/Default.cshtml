@@ -3,7 +3,7 @@
     ViewData["Title"] = "Calendar";
 }
 <nav aria-label="Page navigation">
-    <ul class="pagination-sm">
+    <ul class="pagination pagination-sm">
         <li class="active">
         <li>
             <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous-sm">
@@ -21,7 +21,19 @@
 <table id="calendartable" class="table table-bordered table-hover">
     <tbody>
         <tr>
-            <td></td>
+            <td>                                             
+
+                    <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous-middle pagination-sm">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+
+                    <a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a>
+
+                    <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next-middle pagination-sm ">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+            </td>
+
             @foreach (var x in ViewBag.GroupedWeeks)
             {
 
@@ -36,7 +48,8 @@
                 {
                     if (x.highLight == true)
                     {
-                    <td bgcolor="#bababa" > <strong>@x.Day</strong></td>
+
+                    <td bgcolor="#bababa"> <strong>@x.Day</strong></td>
                     }
 
                     else
@@ -99,7 +112,6 @@
                                     <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#4e80ad"></td>}
                                 HasAddedCell = true;
 
-                                HasAddedCell = true;
 
                             }
 
