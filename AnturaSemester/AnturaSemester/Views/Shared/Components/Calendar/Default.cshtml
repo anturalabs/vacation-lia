@@ -31,24 +31,24 @@
             }
         </tr>
         <tr>
-            <th>
+            <th class="col-md-10">
                 @foreach (var x in ViewBag.Column) // Only numbers are highlighted red
                 {
                     if (x.highLight == true)
                     {
-                    <td bgcolor="#bababa"> <strong>@x.Day</strong></td>
+                    <td bgcolor="#bababa" class="col-md-1"><strong>@x.Day</strong></td>
                     }
 
                     else
 
                      if (x.weekEnd == true)
                     {
-                        <td bgcolor="#eadada"><font color="red">@x.Day</font></td>
+                        <td bgcolor="#eadada" class="col-md-1"><font color="red">@x.Day</font></td>
                     }
 
                     else
                     {
-                        <td>@x.Day</td>
+                        <td class="col-md-1">@x.Day</td>
 
                     }
                 }
@@ -103,12 +103,13 @@
 
                                             else if (cell.AbsenceName.Equals("Sick"))
                                             {
-                                                <td data - id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e05555">
+                                                <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e05555">
                                                     @{
                                                         if (cell.CommentField != null)
                                                         {<span class="glyphicon glyphicon-comment"></span>}
                                                     }
-                                                </td>}
+                                                </td>
+                                                        }
                                                         else if (cell.AbsenceName.Equals("VAB"))
                                                         {
                                                             <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e899ae">
@@ -153,7 +154,7 @@
 
 
     <div class='my-legend'>
-        <div class='legend-title'>Poop</div>
+        <div class='legend-title'>Absence Color Legend</div>
         <div class='legend-scale'>
             <ul class='legend-labels'>
                 <li><span style='background:#f4df53;'></span>Holiday</li>
@@ -214,7 +215,7 @@
 
 
     <script type="text/javascript">
-        
+
         /*
         $(function () {
             $('.editModal').modal();
@@ -262,7 +263,7 @@
                         $('#selectedAbsence').val(data[0].absenceName);
                         $('#selectedApprovalButton').html(data[0].approval + ' <span class="caret"></span>');
                         $('#selectedApproval').val(data[0].approval);
-                        }
+                    }
                 });
                 $('#SemesterModal').modal();
                 //  $('#Semesterbody').html(getIdFromCell)
