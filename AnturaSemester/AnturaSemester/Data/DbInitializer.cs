@@ -22,15 +22,13 @@ namespace AnturaSemester.Data
 
             var users = new Users[]
             {
-            new Users{FirstName="Awe",LastName="Godis"},
-            new Users{FirstName="Test",LastName="Testson"},
-            new Users{FirstName="Sofie",LastName="Choklad"},
-            new Users{FirstName="Robin",LastName="Kandetmesta"},
-            new Users{FirstName="Amadeus",LastName="Mozart"},
-            new Users{FirstName="Varför",LastName="Inte"},
-            new Users{FirstName="Awe",LastName="Risk"},
-            new Users{FirstName="Anton",LastName="Äter"},
-            new Users{FirstName="Klar",LastName="Av"},
+            new Users{FirstName="Johan",LastName="Stenberg"},
+            new Users{FirstName="August",LastName="Gustavsson"},
+            new Users{FirstName="Robin",LastName="Iderström"},
+            new Users{FirstName="Amadeus",LastName="Hein"},
+            new Users{FirstName="Korp",LastName="Thidrandir"},
+            new Users{FirstName="Nils",LastName="Eriksson"},
+            new Users{FirstName="Anton",LastName="Östnell"},
  };
             foreach (Users s in users)
             {
@@ -64,10 +62,7 @@ namespace AnturaSemester.Data
 
             var userRoles = new UserRoles[]
          {
-            new UserRoles{RolesID=1,UsersID=1},
-            new UserRoles{RolesID=2,UsersID=2},
-            new UserRoles{RolesID=4,UsersID=3},
-            new UserRoles{RolesID=3,UsersID=3},
+            
          };
             foreach (UserRoles ur in userRoles)
             {
@@ -99,10 +94,7 @@ namespace AnturaSemester.Data
 
             var userDepartment = new UserDepartment[]
             {
-            new UserDepartment{UsersID=1, DepartmentID=2},
-            new UserDepartment{UsersID=2, DepartmentID=1},
-            new UserDepartment{UsersID=3, DepartmentID=3},
-            new UserDepartment{UsersID=4, DepartmentID=1},
+           
             };
             foreach (UserDepartment ud in userDepartment)
             {
@@ -132,14 +124,7 @@ namespace AnturaSemester.Data
 
             var userTeam = new UserTeam[]
          {
-            new UserTeam{UsersID=1, TeamID=3},
-            new UserTeam{UsersID=2, TeamID=2},
-            new UserTeam{UsersID=3, TeamID=1},
-            new UserTeam{UsersID=4, TeamID=1},
-            new UserTeam{UsersID=5, TeamID=2},
-            new UserTeam{UsersID=6, TeamID=3},
-            new UserTeam{UsersID=7, TeamID=2},
-
+            
          };
             foreach (UserTeam ut in userTeam)
             {
