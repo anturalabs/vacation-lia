@@ -35,7 +35,7 @@ namespace AnturaSemester.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAbsence(Guid guid, string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate, string CommentField, string Approval)
+        public async Task<IActionResult> CreateAbsence(Guid guid, string Absencetype, int UsersID, DateTime FromDate, DateTime ToDate, string CommentField, string ApprovalState)
         {
             if (guid != null)
             {
@@ -45,7 +45,7 @@ namespace AnturaSemester.Controllers
             guid = Guid.NewGuid();
             for (DateTime date = FromDate; date <= ToDate; date = date.AddDays(1))
             {
-                var newcell = new CalendarCell { ID = guid, AbsenceName = Absencetype, UsersID = UsersID, Date = date, CommentField = CommentField, Approval = Approval };
+                var newcell = new CalendarCell { ID = guid, AbsenceName = Absencetype, UsersID = UsersID, Date = date, CommentField = CommentField, Approval = ApprovalState };
 
                 if (_context.Calendar.ToList().Any(item => (item.Date == newcell.Date && item.UsersID == newcell.UsersID)))
                 {
