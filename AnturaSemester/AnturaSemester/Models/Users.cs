@@ -13,7 +13,7 @@ namespace AnturaSemester.Models
 
         [Required]
         [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters.")]
-        [RegularExpression(@"^[A-Z]+[a-zåäöA-ZÅÄÖ''-'\s]*$")]
+        [RegularExpression(@"^[A-ZÅÄÖ]+[a-zåäöA-ZÅÄÖ''-'\s]*$")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
@@ -26,7 +26,7 @@ namespace AnturaSemester.Models
         [Display(Name = "Full Name")]
         public string FullName
         {
-            get { return LastName + ", " + FirstName; }
+            get { return FirstName + ", " + LastName; }
         }
 
         [Display(Name = "Role(s)")]
