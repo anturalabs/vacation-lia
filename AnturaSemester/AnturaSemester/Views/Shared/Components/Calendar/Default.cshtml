@@ -2,46 +2,25 @@
 @{
     ViewData["Title"] = "Calendar";
 }
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        <li class="active">
-        <li>
-            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li><a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a></li>
-        <li>
-            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+
 <table id="calendartable" class="table table-bordered table-hover">
     <tbody>
         <tr>
             <td>
-                    <ul>
+                <div class="pagination-sm" align="center">
 
-                        <li>
-                            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous-sm">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
+                        <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
 
-                            <a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a>
+                        <a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a>
 
-                            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next-sm">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-
-                
-
-                </td>
+                        <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                </div>
+            </td>
             
-
 
             @foreach (var x in ViewBag.GroupedWeeks)
             {
@@ -174,78 +153,74 @@
 
     </table>
 
-<style type='text/css'>
-    FIXA PAGINATION OUTLOOK HÄR INNE!
-
-</style>
 
 
-<div class='my-legend'>
-    <div class='legend-title'>Legend</div>
-    <div class='legend-scale'>
-        <ul class='legend-labels'>
-            <li><span style='background:#f4df53;'></span>Holiday</li>
-            <li><span style='background:#e05555;'></span>Sick</li>
-            <li><span style='background:#e899ae;'></span>VAB</li>
-            <li><span style='background:#85dbcd;'></span>Parental Leave</li>
-            <li><span style='background:#4e80ad;'></span>Other</li>
-        </ul>
-                <ul>
-                    <li><span class="glyphicon glyphicon-ok"></span> = Approved</li>
-                    <li><span class="glyphicon glyphicon-remove"></span> = Denied</li>
-                    <li><span class="glyphicon glyphicon-option-horizontal"></span> = Ongoing</li>
-                    <li><span class="glyphicon glyphicon-comment"></span> = Comment</li>
-                </ul>
-            </div>
+    <div class='my-legend'>
+        <div class='legend-title'>Absence Legend</div>
+        <div class='legend-scale'>
+            <ul class='legend-labels'>
+                <li><span style='background:#f4df53;'></span>Holiday</li>
+                <li><span style='background:#e05555;'></span>Sick</li>
+                <li><span style='background:#e899ae;'></span>VAB</li>
+                <li><span style='background:#85dbcd;'></span>Parental Leave</li>
+                <li><span style='background:#4e80ad;'></span>Other</li>
+            </ul>
+            <ul>
+                <li><span class="glyphicon glyphicon-ok"></span> = Approved</li>
+                <li><span class="glyphicon glyphicon-remove"></span> = Denied</li>
+                <li><span class="glyphicon glyphicon-option-horizontal"></span> = Ongoing</li>
+                <li><span class="glyphicon glyphicon-comment"></span> = Comment</li>
+            </ul>
         </div>
+    </div>
 
-<style type='text/css'>
-    .my-legend .legend-title {
-        text-align: left;
-        margin-bottom: 5px;
-        font-weight: bold;
-        font-size: 90%;
-    }
+    <style type='text/css'>
+        .my-legend .legend-title {
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 90%;
+        }
 
-    .my-legend .legend-scale ul li {
-        font-size: 80%;
-        list-style: none;
-        line-height: 18px;
-        margin-bottom: 2px;
-        border: 1px solid #999; 
-    }
+        .my-legend .legend-scale ul li {
+            font-size: 80%;
+            list-style: none;
+            line-height: 18px;
+            margin-bottom: 2px;
+            
+        }
 
-    .my-legend ul.legend-labels li span {
-        display: block;
-        float: left;
-        height: 16px;
-        width: 30px;
-        margin-right: 5px;
-        margin-left: 0;
-        border: 1px solid #999;
-    }
+        .my-legend ul.legend-labels li span {
+            display: block;
+            float: left;
+            height: 16px;
+            width: 30px;
+            margin-right: 5px;
+            margin-left: 0;
+            border: 1px solid #999;
+        }
 
-    .my-legend .legend-source {
-        font-size: 70%;
-        color: #999;
-        clear: both;
-        border: 1px solid #999;  <--ta bort om ser dåligt-->
-    }
+        .my-legend .legend-source {
+            font-size: 70%;
+            color: #999;
+            clear: both;
+            
+        }
 
-    ul {
-        padding: 5px;
-        display: inline-table;
-    }
-</style>
-
-
-
-   
+        ul {
+            padding: 5px;
+            display: inline-table;
+        }
+    </style>
 
 
-    
 
- <script type="text/javascript">
+
+
+
+
+
+    <script type="text/javascript">
                 /*
                     $(function () {
                         $('.editModal').modal();
@@ -313,4 +288,4 @@
                     $(this).find('#SemesterBody').html($(getIdFromCell))
                 });
             }); */
-</script>
+    </script>
