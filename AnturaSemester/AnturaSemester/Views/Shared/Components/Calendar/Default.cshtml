@@ -21,7 +21,28 @@
 <table id="calendartable" class="table table-bordered table-hover">
     <tbody>
         <tr>
-            <td></td>
+            <td>
+                    <ul>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous-sm">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+
+                            <a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a>
+
+                            <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next-sm">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                
+
+                </td>
+            
+
+
             @foreach (var x in ViewBag.GroupedWeeks)
             {
 
@@ -62,7 +83,7 @@
                             table tr:nth-child(even) {
                                 background-color: #fcf9f9
                             }
-                        </style>
+            </style>
 
 
                     </td>
@@ -149,126 +170,136 @@
                                                                                             }
 
         </tbody>
+
+
     </table>
 
+<style type='text/css'>
+    FIXA PAGINATION OUTLOOK HÄR INNE!
 
-    <div class='my-legend'>
-        <div class='legend-title'>Poop</div>
-        <div class='legend-scale'>
-            <ul class='legend-labels'>
-                <li><span style='background:#f4df53;'></span>Holiday</li>
-                <li><span style='background:#e05555;'></span>Sick</li>
-                <li><span style='background:#e899ae;'></span>VAB</li>
-                <li><span style='background:#85dbcd;'></span>Parental Leave</li>
-                <li><span style='background:#4e80ad;'></span>Other</li>
-            </ul>
+</style>
+
+
+<div class='my-legend'>
+    <div class='legend-title'>Legend</div>
+    <div class='legend-scale'>
+        <ul class='legend-labels'>
+            <li><span style='background:#f4df53;'></span>Holiday</li>
+            <li><span style='background:#e05555;'></span>Sick</li>
+            <li><span style='background:#e899ae;'></span>VAB</li>
+            <li><span style='background:#85dbcd;'></span>Parental Leave</li>
+            <li><span style='background:#4e80ad;'></span>Other</li>
+        </ul>
+                <ul>
+                    <li><span class="glyphicon glyphicon-ok"></span> = Approved</li>
+                    <li><span class="glyphicon glyphicon-remove"></span> = Denied</li>
+                    <li><span class="glyphicon glyphicon-option-horizontal"></span> = Ongoing</li>
+                    <li><span class="glyphicon glyphicon-comment"></span> = Comment</li>
+                </ul>
+            </div>
         </div>
-        <div class='legend-source'><a href="#"></a></div>
-    </div>
+
+<style type='text/css'>
+    .my-legend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 90%;
+    }
+
+    .my-legend .legend-scale ul li {
+        font-size: 80%;
+        list-style: none;
+        line-height: 18px;
+        margin-bottom: 2px;
+        border: 1px solid #999; 
+    }
+
+    .my-legend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 16px;
+        width: 30px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 1px solid #999;
+    }
+
+    .my-legend .legend-source {
+        font-size: 70%;
+        color: #999;
+        clear: both;
+        border: 1px solid #999;  <--ta bort om ser dåligt-->
+    }
+
+    ul {
+        padding: 5px;
+        display: inline-table;
+    }
+</style>
 
 
-    <style type='text/css'>
-        .my-legend .legend-title {
-            text-align: left;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 90%;
-        }
 
-        .my-legend .legend-scale ul {
-            margin: 0;
-            margin-bottom: 5px;
-            padding: 0;
-            float: left;
-            list-style: none;
-        }
-
-            .my-legend .legend-scale ul li {
-                font-size: 80%;
-                list-style: none;
-                margin-left: 0;
-                line-height: 18px;
-                margin-bottom: 2px;
-            }
-
-        .my-legend ul.legend-labels li span {
-            display: block;
-            float: left;
-            height: 16px;
-            width: 30px;
-            margin-right: 5px;
-            margin-left: 0;
-            border: 1px solid #999;
-        }
-
-        .my-legend .legend-source {
-            font-size: 70%;
-            color: #999;
-            clear: both;
-        }
-
-        .my-legend a {
-            color: #777;
-        }
-    </style>
+   
 
 
-    <script type="text/javascript">
-        
-        /*
-        $(function () {
-            $('.editModal').modal();
-        });
-        */
-        function editAbsence(absenceId) {
-            $.ajax({
-                url: '/Home/EditAbsence/' + absenceId, // The method name + paramater
-                success: function (data) {
-                    $('#SemesterModal').html(data); // This should be an empty div where you can inject your new html (the partial view)
-                }
-            });
-        }
+    
 
-
-        $(function () {
-            $("td.editAbsence").click(function () {
-                var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from td
-                //går fel här^
-                $.ajax({
-                    url: '/Home/EditAbsence/' + getIdFromCell, // The method name + parameter
-                    success: function (data) {
-                        // $('#selectedAbsence').value()
-
-                        $('#selectedUserButton').prop('disabled', true);
-                        $('#DeleteButton').removeClass('hidden');
-                        $('#selectedApprovalButton').removeClass('hidden');
-                        $('#SubmitButton').val('Edit');
-
-                        var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
-                        $('#comments').val(JSON.stringify(data[0]));
-                        $('#CommentField').val(data[0].commentField);
-                        //' + data[0].usersID + '
-                        $('#selectedUserButton').html(userName + ' <span class="caret"></span>');
-                        $('#selectedUser').val(data[0].usersID);
-                        $('#guidId').val(data[0].id);
-
-                        $("#approval-select li a").click(function () {
-                            document.getElementById('selectedApproval').value = document.getElementById('selectedApprovalButton').value;
-                        });
-
-                        $('#SemesterView').find('input[name="FromDate"]').datepicker('update', new Date(data[0].date));
-                        $('#SemesterView').find('input[name="ToDate"]').datepicker('update', new Date(data[data.length - 1].date).toISOString().slice(0, 10));
-                        $('#selectedAbsenceButton').html(data[0].absenceName + ' <span class="caret"></span>');
-                        $('#selectedAbsence').val(data[0].absenceName);
-                        $('#selectedApprovalButton').html(data[0].approval + ' <span class="caret"></span>');
-                        $('#selectedApproval').val(data[0].approval);
+ <script type="text/javascript">
+                /*
+                    $(function () {
+                        $('.editModal').modal();
+                    });
+                    */
+                function editAbsence(absenceId) {
+                    $.ajax({
+                        url: '/Home/EditAbsence/' + absenceId, // The method name + paramater
+                        success: function (data) {
+                            $('#SemesterModal').html(data); // This should be an empty div where you can inject your new html (the partial view)
                         }
+                    });
+                }
+
+
+                $(function () {
+                    $("td.editAbsence").click(function () {
+                        var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from td
+                        //går fel här^
+                        $.ajax({
+                            url: '/Home/EditAbsence/' + getIdFromCell, // The method name + parameter
+                            success: function (data) {
+                                // $('#selectedAbsence').value()
+
+                                $('#selectedUserButton').prop('disabled', true);
+                                $('#DeleteButton').removeClass('hidden');
+                                $('#selectedApprovalButton').removeClass('hidden');
+                                $('#SubmitButton').val('Edit');
+
+                                var userName = $('#user-select').find('.small[data-value="' + data[0].usersID + '"]').html().trim();
+                                $('#comments').val(JSON.stringify(data[0]));
+                                $('#CommentField').val(data[0].commentField);
+                                //' + data[0].usersID + '
+                                $('#selectedUserButton').html(userName + ' <span class="caret"></span>');
+                                $('#selectedUser').val(data[0].usersID);
+                                $('#guidId').val(data[0].id);
+
+                                $("#approval-select li a").click(function () {
+                                    document.getElementById('selectedApproval').value = document.getElementById('selectedApprovalButton').value;
+                                });
+
+                                $('#SemesterView').find('input[name="FromDate"]').datepicker('update', new Date(data[0].date));
+                                $('#SemesterView').find('input[name="ToDate"]').datepicker('update', new Date(data[data.length - 1].date).toISOString().slice(0, 10));
+                                $('#selectedAbsenceButton').html(data[0].absenceName + ' <span class="caret"></span>');
+                                $('#selectedAbsence').val(data[0].absenceName);
+                                $('#selectedApprovalButton').html(data[0].approval + ' <span class="caret"></span>');
+                                $('#selectedApproval').val(data[0].approval);
+                            }
+                        });
+                        $('#SemesterModal').modal();
+                        //  $('#Semesterbody').html(getIdFromCell)
+                    });
                 });
-                $('#SemesterModal').modal();
-                //  $('#Semesterbody').html(getIdFromCell)
-            });
-        });
-        /*
+    /*
             $(function () {
                 $('#SemesterModal').modal({
                     keyboard: true,
@@ -282,4 +313,4 @@
                     $(this).find('#SemesterBody').html($(getIdFromCell))
                 });
             }); */
-    </script>
+</script>
