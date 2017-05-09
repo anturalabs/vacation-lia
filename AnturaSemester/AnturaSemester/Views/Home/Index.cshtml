@@ -16,13 +16,13 @@
     <div id="home" class="tab-pane fade in active">
         <h3>Calendar</h3>
         <!-- Button trigger for modal -->
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#SemesterModal" onclick="createNew()">Create New Absence</button>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#SemesterModal" onclick="createNew()">Create Absence</button>
        
 
 
         <!--Calendartable-->
         @await Component.InvokeAsync("Calendar", new { year = ViewBag.Year, month = ViewBag.Month })
-
+       
 
             <!-- Modal -->
             <div class="modal fade" id="SemesterModal" tabindex="-1" role="dialog" aria-labelledby="SemesterModalLabel" aria-hidden="true">
