@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Antura Semesterplanering</title>
+    <title>@ViewData["Title"] - Antura Absence Planner</title>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -20,6 +20,7 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/datepicker/dist/css/bootstrap-datepicker.standalone.min.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/Custom/AnturaStyleSheet.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
@@ -59,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - Antura Semesterplanering</p>
+            <p>&copy; 2017 - Antura</p>
         </footer>
     </div>
 
