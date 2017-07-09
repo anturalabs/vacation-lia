@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="wwwroot\lib\Custom\AnturaJavaScript.js" />
 	  <Content Include="wwwroot\lib\Custom\AnturaStyleSheet.css" />
 	</ItemGroup>
 	<ItemGroup>
