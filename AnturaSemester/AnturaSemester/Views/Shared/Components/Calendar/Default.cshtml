@@ -8,26 +8,18 @@
         <tr>
             <td>
                 <div class="pagination-sm" align="center">
-
-                        <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-
-                        <a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a>
-
-                        <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
+                    <a href="@Url.Action("Index", "Home", new { year = ViewBag.year, month = (ViewBag.month - 1) })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    <a href="@Url.Action("Index", "Home", new { ViewBag.currentMonth })">@ViewBag.currentMonth</></a>
+                    <a href="@Url.Action("Index", "Home", new { year = ViewBag.year , month = (ViewBag.month + 1) })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
                 </div>
             </td>
-            
-
             @foreach (var x in ViewBag.GroupedWeeks)
             {
-
                 <td colspan="@x.Item2"><font bgcolor="#edf6ff"><strong>V:@x.Item1</strong></font></td>
-
-
             }
         </tr>
         <tr>
@@ -38,18 +30,13 @@
                     {
                     <td bgcolor="#bababa"> <strong>@x.Day</strong></td>
                     }
-
-                    else
-
-                     if (x.weekEnd == true)
+                    else if (x.weekEnd == true)
                     {
                         <td bgcolor="#eadada"><font color="red">@x.Day</font></td>
                     }
-
                     else
                     {
                         <td>@x.Day</td>
-
                     }
                 }
             </tr>
@@ -62,26 +49,19 @@
                             table tr:nth-child(even) {
                                 background-color: #fcf9f9
                             }
-            </style>
-
-
+                        </style>
                     </td>
                     @foreach (var x in ViewBag.Column)
                     {
-
                         if (x.weekEnd == true)
                         {
                             <td bgcolor="#F8F6F6"></td>
-
                         }
-
                         else
                         {
                             bool HasAddedCell = false;
                             foreach (var cell in Model.calendar.Where(c => c.UsersID == user.ID && c.Date.Day == x.Day && c.Date.Month == x.Month && c.Date.Year == x.Year))
-
                             {
-
                                 if (cell.AbsenceName.Equals("Holiday"))
                                 {
                                     <td data-id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#f4df53">
@@ -93,14 +73,11 @@
                                             else if (cell.Approval == "Ongoing")
                                             {<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>}
                                         }
-
                                         @{
                                             if (cell.CommentField != null)
                                             {<span class="glyphicon glyphicon-comment"></span>}
                                         }
-
                                     </td>}
-
                                             else if (cell.AbsenceName.Equals("Sick"))
                                             {
                                                 <td data - id="@cell.ID" data-toggle="modal" class="editAbsence" bgcolor="#e05555">
@@ -134,27 +111,17 @@
                                                                                         }
                                                                                     </td>}
                                                                                                 HasAddedCell = true;
-
                                                                                             }
-
                                                                                             if (HasAddedCell == false)
                                                                                             {
                                                                                                 <td></td>
                                                                                                     }
                                                                                                 }
-
-
                                                                                             }
                 </tr>
                                                                                             }
-
         </tbody>
-
-
     </table>
-
-
-
     <div class='my-legend'>
         <div class='legend-title'>Absence Legend</div>
         <div class='legend-scale'>
@@ -174,7 +141,6 @@
         </div>
     </div>
 
-   
 
 
 
@@ -183,6 +149,5 @@
 
 
 
-    <script type="text/javascript">
-                
-    </script>
+
+

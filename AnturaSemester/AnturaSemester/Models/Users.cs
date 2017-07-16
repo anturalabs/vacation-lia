@@ -26,7 +26,7 @@ namespace AnturaSemester.Models
         [Display(Name = "Full Name")]
         public string FullName
         {
-            get { return FirstName + ", " + LastName; }
+            get { return FirstName + " " + LastName; }
         }
 
         [Display(Name = "Role(s)")]
