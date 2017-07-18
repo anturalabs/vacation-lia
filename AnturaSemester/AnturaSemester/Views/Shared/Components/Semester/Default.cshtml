@@ -23,6 +23,23 @@
             </div>
         </div>
 
+      <!-- stuff for login based user interaction, needs proper userID in db, ask during workshop how it should be done
+          <button type="button" id="selectedUserButton" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Model.users.FirstOrDefault(x => x.FirstName.Equals(User.Identity.Name.Split('\\').Last())).FullName</button>
+        <input type="hidden" name="UsersID" id="selectedUser" value="User.Identity.Name.Split('\\').Last()" />
+
+       
+    <ul id="user-select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        foreach (var user in Model.users)
+        {
+            //User.Identity.Name.Split('\\').Last()
+            //
+            <li>
+                <a href="#" class="small" data-value="user.ID" tabIndex="-1">Html.DisplayFor(model => user.FullName)</a>
+            </li>
+        }
+    </ul>-->
+
+
 
         <div class="form-group col-md-10">
             <!--Datepicker start-->

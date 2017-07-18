@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AnturaSemester.Data;
 using AnturaSemester.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnturaSemester.Controllers
 {
+    [Authorize(Roles = @"Sofie-Laptop\Sofie")]
     public class UsersController : Controller
     {
         private readonly UsersContext _context;

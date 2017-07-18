@@ -16,7 +16,7 @@ function editAbsence(absenceId) {
 $(function () {
     $("td.editAbsence").click(function () {
         var getIdFromCell = $(event.target).closest('td').data('id'); //get the id from td
-        //går fel här^
+        
         $.ajax({
             url: '/Home/EditAbsence/' + getIdFromCell, // The method name + parameter
             success: function (data) {
