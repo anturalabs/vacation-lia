@@ -14,8 +14,8 @@ namespace AnturaSemester.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any users.
-            if (context.Users.Any())
+            // Look for any roles.
+            if (context.Roles.Any())
             {
                 return;   // DB has been seeded
             }
@@ -49,10 +49,10 @@ namespace AnturaSemester.Data
 
             var roles = new Roles[]
             {
-            new Roles{RoleName="Developer" },
-            new Roles{RoleName="ProductOwner"},
-            new Roles{RoleName="Tester" },
-            new Roles{RoleName="Architect" },
+            new Roles{RoleID="Antura Developers", RoleName="Developer" },
+            new Roles{RoleID="Antura Development Architects", RoleName="Development Architect"},
+            new Roles{RoleID="Antura Testers",RoleName="Tester" },
+            new Roles{RoleID="Antura Support Engineers",RoleName="Support Engineer" },
             };
             foreach (Roles r in roles)
             {

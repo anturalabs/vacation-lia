@@ -12,6 +12,7 @@ namespace AnturaSemester.Models
     {
         [Key]
         public int ID { get; set; }
+        public string RoleID { get; set; }
         [Display(Name = "Role's Name")]
         public string RoleName { get; set; }
        

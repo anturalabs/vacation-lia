@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace AnturaSemester.Data
 {
-    public class UsersContext: DbContext
+    public class UsersContext : DbContext
     {
         public UsersContext(DbContextOptions<UsersContext> options) : base(options)
         {
@@ -25,7 +25,7 @@ namespace AnturaSemester.Data
         public DbSet<UserTeam> UserTeam { get; set; }
         public DbSet<CalendarCell> Calendar { get; set; }
 
-        
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,7 +36,9 @@ namespace AnturaSemester.Data
             modelBuilder.Entity<Department>().ToTable("Department");
             modelBuilder.Entity<Team>().ToTable("Team");
             modelBuilder.Entity<CalendarCell>().ToTable("Calendar");
-            
+
+            modelBuilder.Entity<Roles>()
+               .HasAlternateKey(c => c.RoleID);
 
             modelBuilder.Entity<UserRoles>()
               .HasKey(c => new { c.UsersID, c.RolesID });
@@ -46,7 +48,7 @@ namespace AnturaSemester.Data
               .HasKey(c => new { c.UsersID, c.TeamID });
             modelBuilder.Entity<CalendarCell>()
                 .HasKey(c => new { c.Date, c.UsersID });
-                
+
         }
         /*
         protected override DbEntityValidationResult ValidateEntity(

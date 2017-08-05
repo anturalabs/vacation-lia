@@ -193,21 +193,37 @@ namespace AnturaSemester.Controllers
                     user.UserID = userId;
                     user.FirstName = entry.getAttribute("givenName").StringValue;
                     user.LastName = entry.getAttribute("sn").StringValue;
+                    var memberOf = entry.getAttribute("memberOf").StringValueArray.ToList();
+                    var roleLookup = _context.Roles.ToDictionary(x => x.RoleID, y => y.ID);
+                    var userRoles = new List<string>();
 
+                    foreach (string memberRole in memberOf)
+                    {
+                        var testrole = memberRole.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+                        if (testrole != null)
+                        {
+                            var shortrole = testrole.Substring(3);
+
+                            if (roleLookup.TryGetValue(shortrole, out int value))
+                            {
+                                userRoles.Add(value.ToString());
+                            }
+                        }
+
+
+
+                        //Looks up memberRole (Antura Testers) in roleLookup dictionary which contains mapping between AD groups/roles and DB table roles. 
+
+                    }
                     //user.Email = entry.getAttribute("Mail").StringValue;
-                    /* Is member of group? 
-                     * Antura Testers
-                    Antura Developers
-                    Antura BackOffice Users (Admins?)
-                    Antura Development Architects
-                    */
+
                     if (newUser)
                     {
-                        await Create(user, null, null, null);
+                        await Create(user, userRoles.ToArray(), null, null);
                     }
                     else
                     {
-                        await Edit(user.ID, null, null, null);
+                        await Edit(user.ID, userRoles.ToArray(), null, null);
                     }
 
                     //userList.Add(entry);
