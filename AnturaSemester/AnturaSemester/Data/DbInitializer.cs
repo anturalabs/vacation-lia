@@ -22,13 +22,13 @@ namespace AnturaSemester.Data
 
             var users = new Users[]
             {
-            new Users{FirstName="Johan",LastName="Stenberg"},
+            /*new Users{FirstName="Johan",LastName="Stenberg"},
             new Users{FirstName="August",LastName="Gustavsson"},
             new Users{FirstName="Robin",LastName="Iderström"},
             new Users{FirstName="Amadeus",LastName="Hein"},
             new Users{FirstName="Korp",LastName="Thidrandir"},
             new Users{FirstName="Nils",LastName="Eriksson"},
-            new Users{FirstName="Anton",LastName="Östnell"},
+            new Users{FirstName="Anton",LastName="Östnell"},*/
  };
             foreach (Users s in users)
             {

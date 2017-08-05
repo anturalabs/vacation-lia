@@ -9,17 +9,18 @@ namespace AnturaSemester.Models
     {
         [Key]
         public int ID { get; set; }
+        public string UserID { get; set; }
 
 
         [Required]
         [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters.")]
-        [RegularExpression(@"^[A-ZÅÄÖ]+[a-zåäöA-ZÅÄÖ''-'\s]*$")]
+        [RegularExpression(@"^[A-ZÅÄÖ]+[a-zåäöA-ZÅÄÖ'\-'\s]*$")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
-        [RegularExpression(@"^[A-ZÅÄÖ]+[a-zåäöA-ZÅÄÖ''-'\s]*$")]
+        [RegularExpression(@"^[A-ZÅÄÖ]+[a-zåäöA-ZÅÄÖ'\-'\s]*$")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 

@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using AnturaSemester.Data;
 using AnturaSemester.Models;
 using Microsoft.AspNetCore.Authorization;
+using Novell.Directory.Ldap;
 
 namespace AnturaSemester.Controllers
 {
-    [Authorize(Roles = @"Sofie-Laptop\Sofie")]
+    [Authorize(Roles = @"Sofie-Laptop\Sofie")] //Antura BackOffice Users ?
     public class UsersController : Controller
     {
         private readonly UsersContext _context;
@@ -150,16 +151,73 @@ namespace AnturaSemester.Controllers
 
 
             if (ModelState.IsValid)
-                {
+            {
 
                 _context.Add(users);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            
-            
-           
+
+
+
             return View(users);
+        }
+
+        public async Task<IActionResult> Import()
+        {
+            var userList = new List<LdapEntry>();
+            using (var cn = new LdapConnection())
+            {
+                //connect
+                cn.Connect("DAGOBAH", 389);
+                //bind with username and password
+                //this is how you can verify the password of a user
+                cn.Bind(@"ANTURA\x_sofhel", "EDi!USKEyKE2");
+                //call ldap op
+                //cn.Delete("<<userdn>>")
+                //cn.Add(<<ldapEntryInstance>>)
+                var anturaDevelopers = cn.Read("CN=Antura Employees,CN=Users,DC=antura,DC=lan");
+                var members = anturaDevelopers.getAttribute("member");
+                foreach (var member in members.StringValueArray)
+                {
+                    var entry = cn.Read(member);
+                    var userId = entry.getAttribute("sAMAccountName").StringValue;
+                    var newUser = false;
+
+                    Users user = getUser(userId);
+                    if (user == null)
+                    {
+                        newUser = true;
+                        user = new Users();
+                    }
+                    user.UserID = userId;
+                    user.FirstName = entry.getAttribute("givenName").StringValue;
+                    user.LastName = entry.getAttribute("sn").StringValue;
+
+                    //user.Email = entry.getAttribute("Mail").StringValue;
+                    /* Is member of group? 
+                     * Antura Testers
+                    Antura Developers
+                    Antura BackOffice Users (Admins?)
+                    Antura Development Architects
+                    */
+                    if (newUser)
+                    {
+                        await Create(user, null, null, null);
+                    }
+                    else
+                    {
+                        await Edit(user.ID, null, null, null);
+                    }
+
+                    //userList.Add(entry);
+                }
+            }
+
+            //ViewBag.UserNameList = userList.Select(ue => ue.getAttribute("CN"));
+            //ViewBag.auth = userList.Any(ue => @"ANTURA\" + ue.getAttribute("sAMAccountName").StringValue == User.Identity.Name);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Users/Edit/5
@@ -204,7 +262,7 @@ namespace AnturaSemester.Controllers
                     RolesID = role.ID,
                     UsersID = users.ID,
                     Role = role,
-                    User = users                   
+                    User = users
                 });
             }
             ViewData["Roles"] = viewModel;
@@ -464,11 +522,14 @@ namespace AnturaSemester.Controllers
             }
         }
 
-
-
-        private bool UsersExists(int id)
+        private Users getUser(string id)
         {
-            return _context.Users.Any(e => e.ID == id);
+            return _context.Users.Where(e => e.UserID == id).FirstOrDefault();
+        }
+
+        private bool UsersExists(string id)
+        {
+            return _context.Users.Any(e => e.UserID == id);
         }
     }
 }

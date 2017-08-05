@@ -151,10 +151,11 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @{ 
-                    if(@User.Identity.Name.Split('\\').Last().Equals(Model.FirstName)) {
+                    //TODO: Match User.Identity.Name (ex: Antura\sofhe) against a new db column in users table for user ID
+                  //  if(@User.Identity.Name.Split('\\').Last().Equals(Model.FirstName)) {
                 <input type="submit" value="Save" class="btn btn-default" />
 
-                    }
+                //    }
 
                 }
             </div>
