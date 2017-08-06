@@ -26,7 +26,7 @@
 
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DepartmentSortParm"]">Department</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["EmailSortParm"]">Email</a>
 
             </th>
             <th></th>
@@ -53,13 +53,9 @@
             </td> 
 
             <td>
-                @foreach (var department in item.UsersDepartment)
-                {
-
-                    <dd>
-                        @Html.DisplayFor(modelItem => department.Departments.DepartmentName)
-                    </dd>
-                }
+                
+                        @Html.DisplayFor(modelItem => item.Email)
+                    
             </td> 
            
             

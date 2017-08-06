@@ -20,16 +20,8 @@ namespace AnturaSemester.Data
                 return;   // DB has been seeded
             }
 
-            var users = new Users[]
-            {
-            /*new Users{FirstName="Johan",LastName="Stenberg"},
-            new Users{FirstName="August",LastName="Gustavsson"},
-            new Users{FirstName="Robin",LastName="Iderström"},
-            new Users{FirstName="Amadeus",LastName="Hein"},
-            new Users{FirstName="Korp",LastName="Thidrandir"},
-            new Users{FirstName="Nils",LastName="Eriksson"},
-            new Users{FirstName="Anton",LastName="Östnell"},*/
- };
+            var users = new Users[]{};
+
             foreach (Users s in users)
             {
                 context.Users.Add(s);
@@ -62,7 +54,7 @@ namespace AnturaSemester.Data
 
             var userRoles = new UserRoles[]
          {
-            
+
          };
             foreach (UserRoles ur in userRoles)
             {
@@ -94,7 +86,7 @@ namespace AnturaSemester.Data
 
             var userDepartment = new UserDepartment[]
             {
-           
+
             };
             foreach (UserDepartment ud in userDepartment)
             {
@@ -124,7 +116,7 @@ namespace AnturaSemester.Data
 
             var userTeam = new UserTeam[]
          {
-            
+
          };
             foreach (UserTeam ut in userTeam)
             {

@@ -33,7 +33,8 @@ namespace AnturaSemester.Controllers
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["FNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "fname_asc" : "";
             ViewData["RoleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Role" : "";
-            ViewData["DepartmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Department" : "";
+            //ViewData["DepartmentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Department" : "";
+            ViewData["EmailSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Email_asc" : "";
 
 
 
@@ -59,6 +60,9 @@ namespace AnturaSemester.Controllers
                     break;
                 case "Department":
                     departments = users.OrderBy(s => s.UsersDepartment);
+                    break;
+                case "Email_asc":
+                    users = users.OrderBy(s => s.Email);
                     break;
                 default:
                     users = users.OrderBy(s => s.LastName);
@@ -193,6 +197,13 @@ namespace AnturaSemester.Controllers
                     user.UserID = userId;
                     user.FirstName = entry.getAttribute("givenName").StringValue;
                     user.LastName = entry.getAttribute("sn").StringValue;
+
+                    LdapAttribute email = entry.getAttribute("mail");
+                    if (email != null)
+                    {  
+                        user.Email = email.StringValue;
+                    }
+                    
                     var memberOf = entry.getAttribute("memberOf").StringValueArray.ToList();
                     var roleLookup = _context.Roles.ToDictionary(x => x.RoleID, y => y.ID);
                     var userRoles = new List<string>();

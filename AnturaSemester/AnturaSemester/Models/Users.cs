@@ -30,6 +30,8 @@ namespace AnturaSemester.Models
             get { return FirstName + " " + LastName; }
         }
 
+        public string Email { get; set; }
+
         [Display(Name = "Role(s)")]
         public ICollection<UserRoles> UsersRole { get; set; }
 
